@@ -92,16 +92,14 @@ public class Niveau {
      * @return
      */
     public int getX() {
-        // TODO implement here
-        return 0;
+        return this.grille.length;
     }
 
     /**
      * @return
      */
     public int getY() {
-        // TODO implement here
-        return 0;
+        return this.grille[0].length;
     }
 
     /**
@@ -145,6 +143,18 @@ public class Niveau {
     public Element get(Position pos) {
         // TODO implement here
         return null;
+    }
+    //Affiche la grille de jeu avec les murs et les cases
+    public void affGrille() {
+    	int x = this.getX();
+    	int y = this.getY();
+    	System.out.println("X "+x+" | Y "+y);
+    	for(int i=0;i<x;i++) {
+    		for(int j=0;j<y;j++) {
+    			System.out.print(this.grille[i][j].getType());
+    		}
+    		System.out.println("");
+    	}
     }
 
 }
