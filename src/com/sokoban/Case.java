@@ -10,6 +10,7 @@ public class Case extends Immobile {
      */
     public Case() {
     	super("Case");
+    	System.out.println("");
     }
 
 }
