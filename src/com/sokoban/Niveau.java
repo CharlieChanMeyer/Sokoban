@@ -101,23 +101,6 @@ public class Niveau {
      * @param Position 
      * @return
      */
-    public boolean addCible(Position pos) {
-        return false;
-    }
-
-    /**
-     * @param Position 
-     * @return
-     */
-    public boolean addMur(Position pos) {
-        // TODO implement here
-        return false;
-    }
-
-    /**
-     * @param Position 
-     * @return
-     */
     public boolean estCible(Position pos) {
         return (this.cibles.contains(pos));
     }
