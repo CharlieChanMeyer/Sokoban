@@ -118,8 +118,16 @@ public class Niveau {
      * @return
      */
     public Element get(Position pos) {
-        // TODO implement here
-        return null;
+        ArrayList<Diamant> diamants = Configuration.this.diamants;
+        for (Diamant diamant : diamants) {
+        	if (diamant.position.equals(pos)) {
+        		return diamant;
+        	}
+        }
+        if (Configuration.this.joueur.position.equals(pos)) {
+        	return Configuration.this.joueur;
+        }
+        
     }
     //Affiche la grille de jeu avec les murs et les cases
     public void affGrille() {
