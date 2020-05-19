@@ -48,33 +48,28 @@ public class Niveau {
         	switch (cmpLigne) {
         	case 0:
         		x = Integer.parseInt(ligne);
-        		System.out.println(x);
         		cmpLigne++;
         		break;
         	case 1:
         		y = Integer.parseInt(ligne);
-        		System.out.println(y);
+        		this.grille = new Immobile[x][y];
         		cmpLigne++;
         		break;
         	case 2:
         		cmpLigne++;
         		break;
         	default:
-        		this.grille = new Immobile[x][y];
         		for (int j=0;j<ligne.length();j++) {
         			char verif = ligne.charAt(j);
         			if (Character.getNumericValue(verif) == 1) {
         				this.grille[i][j] = new Mur();
-        				System.out.print(this.grille[i][j].getType());
         			} else if ((Character.getNumericValue(verif) == 0) || (Character.getNumericValue(verif) == 2) || (Character.getNumericValue(verif) == 3) || (Character.getNumericValue(verif) == 4)){
         				this.grille[i][j] = new Case();
-        				System.out.print(this.grille[i][j].getType());
         				if (Character.getNumericValue(verif) == 2) {
         					this.cibles.add(new Position(i,j));
         				}
         			}
         		}
-        		System.out.println("   -   ligne "+i+"Bon");
         		i++;
         		cmpLigne++;
         	}
@@ -83,20 +78,20 @@ public class Niveau {
     }
     
     /**
-	 * @return the grille
+	 * @return the grid
 	 */
 	public Immobile[][] getGrille() {
 		return grille;
 	}
 	/**
-     * @return
+     * @return length of the grid
      */
     public int getX() {
         return this.grille.length;
     }
 
     /**
-     * @return
+     * @return width of the grid
      */
     public int getY() {
         return this.grille[0].length;
@@ -148,9 +143,14 @@ public class Niveau {
     public void affGrille() {
     	int x = this.getX();
     	int y = this.getY();
+    	int i;
+    	int j;
     	System.out.println("X "+x+" | Y "+y);
-    	for(int i=0;i<x;i++) {
-    		for(int j=0;j<y;j++) {
+    	for(Position cible : this.cibles) {
+    		System.out.println("Cible :"+cible.getX()+"|"+cible.getY());
+    	}
+    	for(i=0;i<x;i++) {
+    		for(j=0;j<y;j++) {
     			System.out.print(this.grille[i][j].getType());
     		}
     		System.out.println("");
