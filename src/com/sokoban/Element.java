@@ -4,7 +4,7 @@ package com.sokoban;
  * 
  */
 public class Element {
-    public String type;
+    private String type;
 
     /**
      * @param type
