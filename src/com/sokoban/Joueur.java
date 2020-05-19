@@ -6,7 +6,7 @@ import java.util.*;
  * 
  */
 public class Joueur extends Mobile {
-    public ArrayList<Direction> histo;
+    private ArrayList<Direction> histo;
 
     /**
      * @param Configuration 
