@@ -110,8 +110,7 @@ public class Niveau {
      * @return
      */
     public boolean estVide(Position pos) {
-        // TODO implement here
-        return false;
+        return (this.cibles.contains(pos) /**&& Configuration.this.diamants.contains(pos)**/);
     }
 
     /**
