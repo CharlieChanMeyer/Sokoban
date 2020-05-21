@@ -3,11 +3,7 @@ package com.sokoban;
 /**
  * 
  */
-public class Mobile extends Element {
-    /**
-     * 
-     */
-    public Configuration config;
+public abstract class Mobile extends Element {
     /**
      * 
      */
@@ -18,37 +14,30 @@ public class Mobile extends Element {
      * @param Configuration 
      * @param Position
      */
-    public Mobile(String type,Configuration conf,Position pos) {
+    public Mobile(String type,Position pos) {
     	super(type);
-    	this.config = conf;
     	this.position = pos;
     }
-    /**
-     * @param Type 
-     * @param Configuration 
-     * @param Joueur
-     */
-    public Mobile(String type,Configuration conf,Joueur joueur) {
-    	super(type);
-    	this.config = conf;
-    	this.position = joueur.position; //ICIIIIIIIIIIIIIIIIIIIIIIIII
-    }
-
+    
     /**
      * @param Position 
      * @return
      */
-    public Boolean setPosition(Position pos) {
-        // TODO implement here
-        return null;
+    public void setPosition(Position pos) {
+        this.position=pos;
     }
 
     /**
      * @return
      */
     public Position getPosition() {
-        // TODO implement here
-        return null;
+        return this.position;
     }
+    
+    /**
+     * @param Direction 
+     * @return
+     */
+    public abstract Boolean bougerVers(Direction dir,Configuration conf);
 
 }

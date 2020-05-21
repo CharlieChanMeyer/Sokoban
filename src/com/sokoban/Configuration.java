@@ -9,6 +9,7 @@ public class Configuration {
     public ArrayList<Diamant> diamants;
     public Joueur joueur;
     public Niveau niveau;
+    public ArrayList<Policier> listePolicier;
 
     /**
      * @param Niveau 
@@ -34,6 +35,13 @@ public class Configuration {
         return false;
     }
 
+    /**
+     * @return
+     */
+    public ArrayList<Policier> getListePolicier() {
+        return this.listePolicier;
+    }
+    
     /**
      * @return
      */

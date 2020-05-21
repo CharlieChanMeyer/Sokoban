@@ -3,7 +3,7 @@ package com.sokoban;
 /**
  * 
  */
-public class Element {
+public abstract class Element {
     private String type;
 
     /**
@@ -14,20 +14,10 @@ public class Element {
     }
 
     /**
-     * @param Direction 
-     * @return
-     */
-    public Boolean bougerVers(Direction dir) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
      * @return
      */
     public String getType() {
-        // TODO implement here
-        return "";
+        return this.type;
     }
 
 }

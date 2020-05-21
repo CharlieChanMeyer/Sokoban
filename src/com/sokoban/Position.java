@@ -24,6 +24,14 @@ public class Position {
         this.x = x;
         this.y = y;
     }
+    
+    public int getX() {
+    	return this.x;
+    }
+    
+    public int getY() {
+    	return this.y;
+    }
 
     /**
      * @param Position
@@ -38,8 +46,10 @@ public class Position {
      * @return
      */
     public Position add(Direction dir) {
-        // TODO implement here
-        return null;
+        int x=this.x+dir.getDx();
+        int y=this.y+dir.getDx();
+        Position pos = new Position(x,y);
+        return(pos);
     }
 
     /**
@@ -55,9 +65,12 @@ public class Position {
      * @param Object 
      * @return
      */
-    public boolean equals(Object o) {
-        // TODO implement here
-        return false;
+    public boolean equals(Mobile m) {
+        if ((m.getPosition().getX()==this.x) && (m.getPosition().getY()==this.y)) {
+        	return true;
+        } else {
+        	return false;
+        }
     }
 
 }

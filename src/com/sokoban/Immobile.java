@@ -3,7 +3,7 @@ package com.sokoban;
 /**
  * 
  */
-public class Immobile extends Element {
+public abstract class Immobile extends Element {
 
     /**
      * @param String

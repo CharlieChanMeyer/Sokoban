@@ -6,8 +6,8 @@ public class Direction {
 
     private static final Direction GAUCHE = new Direction(-1,0);
     private static final Direction DROITE = new Direction(1,0);
-    private static final Direction HAUT = new Direction(0,-1);
-    private static final Direction BAS = new Direction(0,1);
+    private static final Direction HAUT = new Direction(0,1);
+    private static final Direction BAS = new Direction(0,-1);
     private int dx;
     private int dy;
 
