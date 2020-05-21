@@ -61,7 +61,7 @@ public class Configuration {
      */
     public Integer getY() {
     	// retourner la valeur Y de la position du joueur
-        return this.getJoueur().getPosition().getY();
+    	return this.getJoueur().getPosition().getY();
     }
 
     /**
@@ -78,7 +78,7 @@ public class Configuration {
      * @return
      */
     public boolean estVide(Position pos) {
-        return false;
+    	return this.getNiveau().estVide(pos);
     }
 
     /**
@@ -86,7 +86,7 @@ public class Configuration {
      * @return
      */
     public boolean estCible(Position pos) {
-        return false;
+        return this.getNiveau().estCible(pos);
     }
 
     /**
@@ -114,7 +114,13 @@ public class Configuration {
      * @return
      */
     public boolean victoire() {
-        return false;
+    	boolean gagne; //la valeur de retour qui dit si la partie est gagné
+    	//on suppose que la partie est gagné
+    	gagne = true;
+    	for(Diamant diamant : this.getDiamants()) {
+    		//if(diamant.getPosition().getX() == this.getNiveau().get)
+    	}
+        return gagne;
     }
 
 	public ArrayList<Diamant> getDiamants() {
