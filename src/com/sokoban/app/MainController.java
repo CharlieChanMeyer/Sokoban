@@ -23,7 +23,6 @@ public class MainController implements Initializable {
 		Scene scene = new Scene(root);
 		regleStage.setScene(scene);
 		regleStage.show();
-		regleStage.centerOnScreen();
 	}
 
 	@Override
