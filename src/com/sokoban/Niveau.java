@@ -125,35 +125,6 @@ public class Niveau {
     public boolean estCible(Position pos) {
         return (this.cibles.contains(pos));
     }
-
-    /**
-     * @param pos Position de la case a verifier 
-     * @return Vrai si la position contient un diamant et est une cible
-     */
-    public boolean estVide(Position pos) {
-        return (this.cibles.contains(pos) /**&& Configuration.this.diamants.contains(pos)**/);
-    }
-
-    /**
-     * @param pos Position a chercher 
-     * @return l'element contenu a la position donnee
-     */
-    public Element get(Position pos) {
-    	//On recupere la liste des diamants
-        ArrayList<Diamant> diamants = Configuration.this.diamants;
-        //Pour chaque diamant, on verifie sa position
-        for (Diamant diamant : diamants) {
-        	if (diamant.position.equals(pos)) {
-        		//Si la position se trouve a notre emplacement de verification, on le retourne
-        		return diamant;
-        	}
-        }
-        //Si le joueur se trouve a la position verifie, on le retourne
-        if (Configuration.this.joueur.position.equals(pos)) {
-        	return Configuration.this.joueur;
-        }
-        
-    }
     //Affiche la grille de jeu avec les murs et les cases
     public void affGrille() {
     	//Recupere la taille de la grille
