@@ -10,7 +10,7 @@ public class Element {
      * @param type
      */
     public Element(String type) {
-        // TODO implement here
+        this.type = type;
     }
 
     /**
@@ -23,11 +23,10 @@ public class Element {
     }
 
     /**
-     * @return
+     * @return the type
      */
     public String getType() {
-        // TODO implement here
-        return "";
+        return this.type;
     }
 
 }
