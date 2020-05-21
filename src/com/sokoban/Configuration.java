@@ -65,20 +65,38 @@ public class Configuration {
     }
 
     /**
-     * @param Position 
-     * @return
+     * @param pos Position a chercher 
+     * @return l'element contenu a la position donnee
      */
     public Element get(Position pos) {
-        // TODO implement here
+    	//On recupere la liste des diamants
+        ArrayList<Diamant> lesDiamants = this.getDiamants();
+        //Pour chaque diamant, on verifie sa position
+        for (Diamant diamant : lesDiamants) {
+        	if (diamant.getPosition().equals(pos)) {
+        		//Si la position se trouve a notre emplacement de verification, on le retourne
+        		return diamant;
+        	}
+        }
+        //Si le joueur se trouve a la position verifie, on le retourne
+        if (this.getJoueur().getPosition().equals(pos)) {
+        	return this.getJoueur();
+        }
         return null;
     }
 
     /**
-     * @param Position 
-     * @return
+     * @param pos Position de la case a verifier 
+     * @return Vrai si la position contient un diamant et est une cible
      */
     public boolean estVide(Position pos) {
-    	return this.getNiveau().estVide(pos);
+    	for (Diamant diamant : this.getDiamants()) {
+        	if (diamant.getPosition().equals(pos)) {
+        		//Si la position se trouve a notre emplacement de verification, on le retourne
+        		return false;
+        	}
+        }
+        return (this.getNiveau().getCibles().contains(pos) /**&& this.getDiamants().contains(pos)**/);
     }
 
     /**
@@ -114,13 +132,16 @@ public class Configuration {
      * @return
      */
     public boolean victoire() {
-    	boolean gagne; //la valeur de retour qui dit si la partie est gagné
-    	//on suppose que la partie est gagné
-    	gagne = true;
+    	//on parcours tous les diamants
     	for(Diamant diamant : this.getDiamants()) {
-    		//if(diamant.getPosition().getX() == this.getNiveau().get)
+    		//si un diament n'est pas sur une cible
+    		if(!this.estCible(diamant.getPosition())){
+    			//on retourne false
+    			return false;
+    		}
     	}
-        return gagne;
+    	//si tous les diamant sont sur des cibles on retourne true
+        return true;
     }
 
 	public ArrayList<Diamant> getDiamants() {
