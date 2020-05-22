@@ -71,7 +71,7 @@ public class Configuration {
         	//une erreur est survenu, on retourne false
         	valRetour = false;
         }
-        return valRetour;
+        return(valRetour);
     }
 
     /**
@@ -148,19 +148,32 @@ public class Configuration {
      */
     public boolean bougerJoueurVers(Direction direction) {
     	boolean valRetour; //la valeur de retour qui indique si tout c'est bien passé
-    	//on suppose que tout se passera bien
-    	valRetour = true;
+    	//on suppose que l'on a pas pu bouger le joueur
+    	valRetour = false;
     	
-    	Position pos = new Position(this.getJoueur().getPosition().getX()+direction.getDx(), this.getJoueur().getPosition().getY()+direction.getDy());
-    	
-    	try {
-    		this.getJoueur().setPosition(pos);
-    	}
-        catch (IndexOutOfBoundsException e) {
-        	//une erreur est survenu, on retourne false
-        	valRetour = false;
-        }
-        return valRetour;
+        Position newPos = this.getJoueur().position.add(direction);
+		this.getJoueur().setRegard(direction);
+		//si la nouvelle case ne contient rien et n'est pas un mur
+		if (this.estVide(newPos)) {
+			this.getJoueur().setPosition(newPos);
+			valRetour = true;
+		} else {
+			//si la nouvelle case contient un diamant
+			if (this.get(newPos).getType() == "Diamand") {
+				//on défini la nouvelle position du diamant
+				Position newPosDiams = newPos.add(direction);
+				if(this.get(newPos).getType() == "Case") {
+					//on bouge le diamant
+					this.get(newPos).setPosition(newPosDiams);
+					//on bouge le joueur
+					this.getJoueur().setPosition(newPos);
+					valRetour = true;
+				}
+			}
+		}
+		//on retourne la valeur de retour
+		return(valRetour);
+
     }
 
     /**
