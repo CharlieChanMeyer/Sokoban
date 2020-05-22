@@ -82,9 +82,4 @@ public class Niveau extends Application {
 		this.nivSelec = nivSelec;
 	}
 
-	public static void main(String[] args) {
-		// Lance l'application
-		launch(args);
-	}
-
 }

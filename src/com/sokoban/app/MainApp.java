@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class MainApp extends Application{
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) throws IOException {
 		primaryStage.setTitle("Sokoban");	//Change le titre de la fenetre pour Sokoban
 		//Charge le fichier Main.xml dans un parent
 		Parent root = FXMLLoader.load(getClass().getResource("/ressources/fxml/Main.fxml"));  
