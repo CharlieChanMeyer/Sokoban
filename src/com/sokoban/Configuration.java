@@ -1,12 +1,13 @@
 package com.sokoban;
 
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * 
  */
 public class Configuration {
-    private ArrayList<Diamant> diamants;
+	private ArrayList<Diamant> diamants;
+	private ArrayList<Policier> policiers;
     private Joueur joueur;
     private Niveau niveau;
 
@@ -17,6 +18,7 @@ public class Configuration {
     public Configuration(Niveau niv, Position positionJoueur) {
         this.niveau = niv;
         this.diamants = new ArrayList<Diamant>();
+        this.policiers = new ArrayList<Policier>();
         this.joueur = new Joueur(this, positionJoueur);
     }
 
@@ -25,6 +27,7 @@ public class Configuration {
      */
     public Configuration(Configuration config) {
     	this.diamants = config.getDiamants();
+    	this.policiers = config.getPoliciers();
     	this.joueur = config.getJoueur();
     	this.niveau = config.getNiveau();
     }
@@ -40,8 +43,31 @@ public class Configuration {
     	
     	try {
     		this.getDiamants().add(new Diamant(this, pos));
+    		//gerer la position
+    		//throw IllegalArgumentException;
     	}
-        catch (IndexOutOfBoundsException e) {
+        catch (IllegalArgumentException e) {
+        	//une erreur est survenu, on retourne false
+        	valRetour = false;
+        }
+        return valRetour;
+    }
+    
+    /**
+     * @param pos 
+     * @return
+     */
+    public boolean addPolicier(Position pos) {
+    	boolean valRetour; //la valeur de retour qui indique si tout c'est bien passé
+    	//on suppose que tout se passera bien
+    	valRetour = true;
+    	
+    	try {
+    		this.getPoliciers().add(new Policier(this, pos));
+    		//gerer la position
+    		//throw IllegalArgumentException;
+    	}
+        catch (IllegalArgumentException e) {
         	//une erreur est survenu, on retourne false
         	valRetour = false;
         }
@@ -69,20 +95,29 @@ public class Configuration {
      * @return l'element contenu a la position donnee
      */
     public Element get(Position pos) {
-    	//On recupere la liste des diamants
-        ArrayList<Diamant> lesDiamants = this.getDiamants();
         //Pour chaque diamant, on verifie sa position
-        for (Diamant diamant : lesDiamants) {
+        for (Diamant diamant : this.getDiamants()) {
         	if (diamant.getPosition().equals(pos)) {
         		//Si la position se trouve a notre emplacement de verification, on le retourne
         		return diamant;
         	}
         }
+        
+        //Pour chaque diamant, on verifie sa position
+        for (Policier policier : this.getPoliciers()) {
+        	if (policier.getPosition().equals(pos)) {
+        		//Si la position se trouve a notre emplacement de verification, on le retourne
+        		return policier;
+        	}
+        }
+        
         //Si le joueur se trouve a la position verifie, on le retourne
         if (this.getJoueur().getPosition().equals(pos)) {
         	return this.getJoueur();
         }
-        return null;
+        
+        //si aucun "mobile" n'est à la position, on renvoie l'imobille de la grille du niveau, donc "mur" ou "case"
+        return this.getNiveau().getGrille()[pos.getX()][pos.getY()];
     }
 
     /**
@@ -154,6 +189,10 @@ public class Configuration {
 
 	public Niveau getNiveau() {
 		return niveau;
+	}
+
+	public ArrayList<Policier> getPoliciers() {
+		return policiers;
 	}
 
 }
