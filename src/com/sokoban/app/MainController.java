@@ -76,24 +76,16 @@ public class MainController implements Initializable {
 			Niveau niv = new Niveau(nivSelec);
 			niv.start(nivStage);
 		} else { //Sinon
-			Stage erreurSelectionStage = new Stage(); //Cree une nouvelle fenetre
-			erreurSelectionStage.setTitle("Sokoban - Erreur");//Change le titre de la fenetre pour Sokoban - Erreur
-			//Charge la ressource parent à partir du fichier ErreurNiv.fxml
-			Parent root = FXMLLoader.load(getClass().getResource("/ressources/fxml/ErreurNiv.fxml"));
-			//Charge la scene à partir du parent
-			Scene scene = new Scene(root);
-			//Affiche la scene dans la nouvelle fenetre
-			erreurSelectionStage.setScene(scene);
-			//On empeche de redimmenssionner la fenetre
-			erreurSelectionStage.setResizable(false);
-			//Affiche la fenetre au centre de l'ecran
-			erreurSelectionStage.show();
-			erreurSelectionStage.centerOnScreen();
-			
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("ATTENTION");
+			alert.setHeaderText("Problème de selection");
+			alert.setContentText("Vous n'avez sélectionné aucun niveau !");
+			alert.show();
+
 			new Thread(() -> {
 				try {
 					Thread.sleep(2000);
-					Platform.runLater(() -> erreurSelectionStage.hide());
+					Platform.runLater(() -> alert.hide());
 				} catch (InterruptedException error) {
 					error.printStackTrace();
 				}

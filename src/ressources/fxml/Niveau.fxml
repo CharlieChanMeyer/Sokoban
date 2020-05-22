@@ -13,13 +13,10 @@
 		<Label id="gameTitle" alignment="TOP_CENTER" contentDisplay="CENTER" text="Sokoban" textAlignment="CENTER">
 		</Label>
 		<Label id="niveau" alignment="TOP_CENTER" contentDisplay="CENTER" text="" textAlignment="CENTER">
-			<VBox.margin>
-				<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-			</VBox.margin>
 		</Label>
 		<Label text="Nombre de déplacement : 0">
 			<VBox.margin>
-				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+				<Insets bottom="5.0" left="0" right="0" top="0" />
 			</VBox.margin>
 		</Label>
 		<Separator prefWidth="200.0" />
