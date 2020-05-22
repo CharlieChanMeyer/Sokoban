@@ -1,6 +1,9 @@
 package com.sokoban.app;
 
 import java.io.IOException;
+
+import com.sokoban.Configuration;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +16,7 @@ import javafx.stage.Stage;
 
 public class Niveau extends Application {
 	private String nivSelec;
+	private Configuration configNiveau;
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
