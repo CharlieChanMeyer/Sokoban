@@ -16,8 +16,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class MainController implements Initializable {
@@ -65,26 +67,14 @@ public class MainController implements Initializable {
 	}
 
 	@FXML
-	protected void openNiv(ActionEvent e) throws IOException {
+	protected void openNiv(ActionEvent e) throws Exception {
 		//Recupere le niveau selectionner
 		String nivSelec = selecNiv.getValue();
 		//Si un niveau est selectionner
 		if (nivSelec!=null) {
-			Stage niveauStage = new Stage();
-			niveauStage.setTitle("Sokoban - "+nivSelec);//Change le titre de la fenetre pour Sokoban - Erreur
-			//Charge la ressource parent à partir du fichier Niveau.fxml
-			Parent root = FXMLLoader.load(getClass().getResource("/ressources/fxml/Niveau.fxml"));
-			//Charge la scene à partir du parent
-			Scene scene = new Scene(root);
-			//Affiche la scene dans la nouvelle fenetre
-			niveauStage.setScene(scene);
-			//On empeche de redimmenssionner la fenetre
-			niveauStage.setResizable(false);
-			//Affiche la fenetre au centre de l'ecran
-			niveauStage.show();
-			niveauStage.centerOnScreen();
-			
-			
+			Stage nivStage = new Stage();
+			Niveau niv = new Niveau(nivSelec);
+			niv.start(nivStage);
 		} else { //Sinon
 			Stage erreurSelectionStage = new Stage(); //Cree une nouvelle fenetre
 			erreurSelectionStage.setTitle("Sokoban - Erreur");//Change le titre de la fenetre pour Sokoban - Erreur
