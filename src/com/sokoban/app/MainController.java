@@ -28,10 +28,10 @@ public class MainController implements Initializable {
 	@FXML
 	protected void openRegle(ActionEvent e) throws IOException {
 		Stage regleStage = new Stage();	//Cree une nouvelle fenetre
-		regleStage.setTitle("Sokoban - Les règles");	//Change le titre de la fenetre pour Sokoban - Les règles
-		//Charge la ressource parent à partir du fichier Regles.fxml
+		regleStage.setTitle("Sokoban - Les rï¿½gles");	//Change le titre de la fenetre pour Sokoban - Les rï¿½gles
+		//Charge la ressource parent ï¿½ partir du fichier Regles.fxml
 		Parent root = FXMLLoader.load(getClass().getResource("/ressources/fxml/Regles.fxml"));
-		//Charge la scene à partir du parent
+		//Charge la scene ï¿½ partir du parent
 		Scene scene = new Scene(root);
 		//Affiche la scene dans la nouvelle fenetre
 		regleStage.setScene(scene);
@@ -41,21 +41,21 @@ public class MainController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		loadData();//Charge le menu déroulant afin de choisir le niveau
+		loadData();//Charge le menu dï¿½roulant afin de choisir le niveau
 	}
 	
 	@SuppressWarnings("unchecked")
 	private void loadData() {
 		list.removeAll(list);	//Vide la liste
-		//Charge le répertoire
+		//Charge le rï¿½pertoire
 		File monRepertoire=new File("./src/ressources/niveaux");
-		//Charge le contenu du répertoire
+		//Charge le contenu du rï¿½pertoire
 		File[] f = monRepertoire.listFiles();
-		//Pour chaque item contenu dans le répertoire
+		//Pour chaque item contenu dans le rï¿½pertoire
 		for (int i = 0 ; i < f.length ; i++) {
 			//s'il sagit d'un fichier
 		  if (f[i].isFile()) {
-			  //L'ajoute à la liste
+			  //L'ajoute ï¿½ la liste
 		    list.add(new String("Niveau "+(i+1)));
 		  }
 		}
@@ -75,8 +75,8 @@ public class MainController implements Initializable {
 		} else { //Sinon
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("ATTENTION");
-			alert.setHeaderText("Problème de selection");
-			alert.setContentText("Vous n'avez sélectionné aucun niveau !");
+			alert.setHeaderText("Problï¿½me de selection");
+			alert.setContentText("Vous n'avez sï¿½lectionnï¿½ aucun niveau !");
 			alert.show();
 
 			new Thread(() -> {

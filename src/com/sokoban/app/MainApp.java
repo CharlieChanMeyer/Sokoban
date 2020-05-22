@@ -15,7 +15,7 @@ public class MainApp extends Application{
 		primaryStage.setTitle("Sokoban");	//Change le titre de la fenetre pour Sokoban
 		//Charge le fichier Main.xml dans un parent
 		Parent root = FXMLLoader.load(getClass().getResource("/ressources/fxml/Main.fxml"));  
-		//Charge une scene à partir du parent
+		//Charge une scene ï¿½ partir du parent
 		Scene scene = new Scene(root);
 		//Affiche la scene dans la fenetre
 		primaryStage.setScene(scene);

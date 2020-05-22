@@ -21,9 +21,9 @@ public class Niveau extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		primaryStage.setTitle("Sokoban - " + nivSelec);// Change le titre de la fenetre pour Sokoban - Erreur
-		// Charge la ressource parent à partir du fichier Niveau.fxml
+		// Charge la ressource parent ï¿½ partir du fichier Niveau.fxml
 		Parent root = FXMLLoader.load(getClass().getResource("/ressources/fxml/Niveau.fxml"));
-		// Charge la scene à partir du parent
+		// Charge la scene ï¿½ partir du parent
 		Scene scene = new Scene(root);
 
 		// Gestion des events.
@@ -34,28 +34,28 @@ public class Niveau extends Application {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information Event");
 				alert.setHeaderText("Resultat");
-				alert.setContentText("Vous avez appuyez sur la flêche du haut");
+				alert.setContentText("Vous avez appuyez sur la flï¿½che du haut");
 				alert.showAndWait();
 			//S'il sagit de la touche fleche du bas
 			} else if (key.getCode() == KeyCode.DOWN) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information Event");
 				alert.setHeaderText("Resultat");
-				alert.setContentText("Vous avez appuyez sur la flêche du bas");
+				alert.setContentText("Vous avez appuyez sur la flï¿½che du bas");
 				alert.showAndWait();
 			//S'il sagit de la touche fleche de gauche
 			} else if (key.getCode() == KeyCode.LEFT) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information Event");
 				alert.setHeaderText("Resultat");
-				alert.setContentText("Vous avez appuyez sur la flêche de gauche");
+				alert.setContentText("Vous avez appuyez sur la flï¿½che de gauche");
 				alert.showAndWait();
 			//S'il sagit de la touche fleche de droite
 			} else if (key.getCode() == KeyCode.RIGHT) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information Event");
 				alert.setHeaderText("Resultat");
-				alert.setContentText("Vous avez appuyez sur la flêche de droite");
+				alert.setContentText("Vous avez appuyez sur la flï¿½che de droite");
 				alert.showAndWait();
 			//S'il sagit de la touche espace
 			} else if (key.getCode() == KeyCode.SPACE) {

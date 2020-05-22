@@ -1,6 +1,10 @@
 package com.sokoban;
 
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * 
@@ -148,9 +152,9 @@ public class Niveau {
         // TODO implement here
         return false;
     }
-<<<<<<< HEAD
 
     /**
+<<<<<<< HEAD
      * @param Position 
      * @return
      */
@@ -166,8 +170,9 @@ public class Niveau {
     public Element get(Position pos) {
         // TODO implement here
         return null;
-=======
-    //Affiche la grille de jeu avec les murs et les cases
+    }
+
+    //Affiche la grille de jeu avec les murs et les cases =======
     public void affGrille() {
     	//Recupere la taille de la grille
     	int x = this.getX();
@@ -185,7 +190,7 @@ public class Niveau {
     		//Retour a la ligne
     		System.out.println("");
     	}
->>>>>>> refs/remotes/origin/charlie
+//>>>>>>> refs/remotes/origin/charlie
     }
 
 }
