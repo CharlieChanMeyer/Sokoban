@@ -7,5 +7,5 @@ module com.sokoban {
 	opens com.sokoban to javafx.fxml;
 	opens com.sokoban.app to javafx.fxml;
 	exports com.sokoban to javafx.graphics;
-	exports com.sokoban.app;
+	exports com.sokoban.app to javafx.graphics;
 }
