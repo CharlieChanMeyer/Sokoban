@@ -19,15 +19,6 @@ public class Niveau {
      */
     private ArrayList<Position> cibles;
 
-
-    /**
-     * @param x 
-     * @param y
-     */
-    public Niveau(int x, int y) {
-        this.grille = new Immobile[x][y];
-    }
-
     /**
      * @return
      * @param n numero du niveau a charger
@@ -111,34 +102,14 @@ public class Niveau {
      * @return length of the grid
      */
     public int getX() {
-        // TODO implement here
-        return 0;
+        return this.getGrille().length;
     }
 
     /**
-     * @return
+     * @return width of the grid
      */
     public int getY() {
-        // TODO implement here
-        return 0;
-    }
-
-    /**
-     * @param Position 
-     * @return
-     */
-    public boolean addCible(Position pos) {
-        // TODO implement here
-        return false;
-    }
-
-    /**
-     * @param Position 
-     * @return
-     */
-    public boolean addMur(Position pos) {
-        // TODO implement here
-        return false;
+        return this.getGrille()[0].length;
     }
 
     /**
@@ -146,26 +117,14 @@ public class Niveau {
      * @return Vrai si la position est une cible, Faux sinon
      */
     public boolean estCible(Position pos) {
-        // TODO implement here
-        return false;
-    }
-
-    /**
-     * @param Position 
-     * @return
-     */
-    public boolean estVide(Position pos) {
-        // TODO implement here
-        return false;
-    }
-
-    /**
-     * @param Position 
-     * @return
-     */
-    public Element get(Position pos) {
-        // TODO implement here
-        return null;
+        boolean res = false;
+        int i = 0;
+        while (!res || (i>=this.getCibles().size())) {
+        	if (this.getCibles().get(i).equals(pos)) {
+        		res = true;
+        	}
+        }
+        return res;
     }
 
     //Affiche la grille de jeu avec les murs et les cases
