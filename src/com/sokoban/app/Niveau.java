@@ -56,32 +56,20 @@ public class Niveau extends Application {
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
 			//S'il sagit de la touche fleche du haut
 			if (key.getCode() == KeyCode.UP) {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Information Event");
-				alert.setHeaderText("Resultat");
-				alert.setContentText("Vous avez appuyez sur la fl�che du haut");
-				alert.showAndWait();
+				config.bougerJoueurVers(Direction.GAUCHE);
+				updateGrille();
 			//S'il sagit de la touche fleche du bas
 			} else if (key.getCode() == KeyCode.DOWN) {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Information Event");
-				alert.setHeaderText("Resultat");
-				alert.setContentText("Vous avez appuyez sur la fl�che du bas");
-				alert.showAndWait();
+				config.bougerJoueurVers(Direction.DROITE);
+				updateGrille();
 			//S'il sagit de la touche fleche de gauche
 			} else if (key.getCode() == KeyCode.LEFT) {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Information Event");
-				alert.setHeaderText("Resultat");
-				alert.setContentText("Vous avez appuyez sur la fl�che de gauche");
-				alert.showAndWait();
+				config.bougerJoueurVers(Direction.HAUT);
+				updateGrille();
 			//S'il sagit de la touche fleche de droite
 			} else if (key.getCode() == KeyCode.RIGHT) {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Information Event");
-				alert.setHeaderText("Resultat");
-				alert.setContentText("Vous avez appuyez sur la fl�che de droite");
-				alert.showAndWait();
+				config.bougerJoueurVers(Direction.BAS);
+				updateGrille();
 			//S'il sagit de la touche espace
 			} else if (key.getCode() == KeyCode.SPACE) {
 				Alert alert = new Alert(AlertType.INFORMATION);

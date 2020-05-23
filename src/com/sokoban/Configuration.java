@@ -170,29 +170,38 @@ public class Configuration {
      * @param Direction 
      * @return
      */
-    public boolean bougerJoueurVers(Direction direction) {
-    	boolean valRetour; //la valeur de retour qui indique si tout c'est bien passé
-    	//on suppose que l'on a pas pu bouger le joueur
-    	valRetour = false;
-    	
-        Position newPos = this.getJoueur().getPosition().add(direction);
-		//si la nouvelle case ne contient rien et n'est pas un mur
-		if (this.estVide(newPos)) {
-			valRetour = this.getJoueur().setPosition(newPos);
-		} else {
-			//si la nouvelle case contient un diamant
-			if (this.get(newPos).getType().equals(Type.DIAMANT)) {
-				//on défini la nouvelle position du diamant
-				Position newPosDiams = newPos.add(direction);
-				if(this.get(newPos).getType().equals(Type.CASE)) {
-					//on bouge le diamant et le joueur
-					valRetour = (this.get(newPos).setPosition(newPosDiams) && this.getJoueur().setPosition(newPos));
-				}
-			}
-		}
-		//on retourne la valeur de retour
-		return(valRetour);
-
+    public boolean bougerJoueurVers(Direction dir) {
+    	boolean res = this.joueur.bougerVers(dir);
+    	System.out.println("1: "+res);
+    	Position newPos = joueur.getPosition().add(dir);
+    	if (res) {
+    		res = this.joueur.setPosition(newPos);
+    		System.out.println("2: "+res);
+    	}else if (this.get(newPos).getType().equals(Type.DIAMANT)) {
+    		if (this.get(newPos).bougerVers(dir)) {
+    			
+    			System.out.println("Ancienne Position Diamant :"+newPos.toString());
+    			Position newPos1 = newPos.add(dir);
+    			System.out.println("Nouvelle Position Diamant :"+newPos1.toString());
+    			
+    		    System.out.println("Liste Diamants:");
+    		    for(int i = 0 ; i < this.diamants.size(); i++)
+    		    System.out.println(this.diamants.get(i).getPosition().toString());
+    		    
+    			this.diamants.remove(this.diamants.get(diamants.indexOf(this.get(newPos))));
+    			this.diamants.add(new Diamant(this,newPos1));
+    			
+    			System.out.println("Nouvelle Liste Diamants:");
+    		    for(int i = 0 ; i < this.diamants.size(); i++)
+    		    System.out.println(this.diamants.get(i).getPosition().toString());
+    		    
+    			System.out.println("Insertion joueur");
+    			res = this.joueur.setPosition(newPos);
+    			System.out.println("4: "+res);
+    		}
+    	}
+    	System.out.println("3: "+res);
+    	return res;
     }
 
     /**
