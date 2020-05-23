@@ -28,7 +28,7 @@ public class MainController implements Initializable {
 	@FXML
 	protected void openRegle(ActionEvent e) throws IOException {
 		Stage regleStage = new Stage();	//Cree une nouvelle fenetre
-		regleStage.setTitle("Sokoban - Les r�gles");	//Change le titre de la fenetre pour Sokoban - Les r�gles
+		regleStage.setTitle("Sokoban - Les regles");	//Change le titre de la fenetre pour Sokoban - Les r�gles
 		//Charge la ressource parent � partir du fichier Regles.fxml
 		Parent root = FXMLLoader.load(getClass().getResource("/ressources/fxml/Regles.fxml"));
 		//Charge la scene � partir du parent
@@ -76,8 +76,8 @@ public class MainController implements Initializable {
 		} else { //Sinon
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("ATTENTION");
-			alert.setHeaderText("Probl�me de selection");
-			alert.setContentText("Vous n'avez s�lectionn� aucun niveau !");
+			alert.setHeaderText("Probleme de selection");
+			alert.setContentText("Vous n'avez selectionne aucun niveau !");
 			alert.show();
 
 			new Thread(() -> {
