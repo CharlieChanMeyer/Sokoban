@@ -17,6 +17,7 @@ public class Joueur extends Mobile {
     public Joueur(Configuration conf, Position position, int balles) {
     	super(Type.JOUEUR,conf,position);
     	this.balles = balles;
+    	this.histo = new ArrayList<Direction>();
     }
 
     /**
@@ -80,6 +81,10 @@ public class Joueur extends Mobile {
         	res = this.histo.get(this.histo.size()-1);
         }
         return res;
+    }
+    
+    public void addHisto(Direction dir) {
+    	this.histo.add(dir);
     }
     
 

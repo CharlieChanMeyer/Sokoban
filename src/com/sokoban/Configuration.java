@@ -178,6 +178,7 @@ public class Configuration {
     	if (res) {
     		res = this.joueur.setPosition(newPos);
     		System.out.println("2: "+res);
+        	this.joueur.addHisto(dir);
     	}else if (this.get(newPos).getType().equals(Type.DIAMANT)) {
     		if (this.get(newPos).bougerVers(dir)) {
     			
@@ -199,6 +200,7 @@ public class Configuration {
     			System.out.println("Insertion joueur");
     			res = this.joueur.setPosition(newPos);
     			System.out.println("4: "+res);
+    	    	this.joueur.addHisto(dir);
     		}
     	}
     	System.out.println("3: "+res);

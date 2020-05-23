@@ -117,7 +117,7 @@ public class Niveau extends Application {
 	}
 	
 	private void updateNbDeplacement() {
-		this.nbDeplacement.setText("Vous avez effectue "+0+" deplacements."); //this.config.getJoueur().getHisto().size()
+		this.nbDeplacement.setText("Vous avez effectue "+this.config.getJoueur().getHisto().size()+" deplacements."); //this.config.getJoueur().getHisto().size()
 	}
 	
 	private void updateGrille() {
@@ -158,6 +158,7 @@ public class Niveau extends Application {
 				this.affGrille.add(tmpGrille[i][j], j, i);
 			}
 		}
+		updateNbDeplacement();
 	}
 	
 }
