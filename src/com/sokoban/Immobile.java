@@ -3,13 +3,20 @@ package com.sokoban;
 /**
  * 
  */
-public class Immobile extends Element {
+public abstract class Immobile extends Element {
 
     /**
      * @param String
      */
-    public Immobile(String type) {
+    public Immobile(Type type) {
         super(type);
     }
-
+    
+    public Boolean bougerVers(Direction dir) {
+    	return false;
+    }
+    
+    public Boolean setPosition(Position pos) {
+    	return false;
+    }
 }

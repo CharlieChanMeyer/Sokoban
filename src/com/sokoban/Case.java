@@ -9,7 +9,7 @@ public class Case extends Immobile {
      * Default constructor
      */
     public Case() {
-    	super("Case");
+    	super(Type.CASE);
     }
 
 }

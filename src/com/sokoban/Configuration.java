@@ -1,95 +1,142 @@
 package com.sokoban;
 
-import java.util.*;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * 
  */
 public class Configuration {
-    public ArrayList<Diamant> diamants;
-    public Joueur joueur;
-    public Niveau niveau;
+	private ArrayList<Diamant> diamants;
+	private ArrayList<Policier> policiers;
+    private Joueur joueur;
+    private Niveau niveau;
 
     /**
-     * @param Niveau 
+     * @param niv 
      * @param positionJoueur
      */
-    public Configuration(Niveau niv, Position positionJoueur) {
-        // TODO implement here
+    public Configuration(int numNiv) {
+        try {
+			this.niveau = new Niveau(numNiv);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        this.diamants = new ArrayList<Diamant>();
+        this.policiers = new ArrayList<Policier>();
+        //this.joueur = new Joueur(this, , 3);
     }
 
     /**
-     * @param Configuration
+     * @param config
      */
     public Configuration(Configuration config) {
-        // TODO implement here
+    	this.diamants = config.getDiamants();
+    	this.policiers = config.getPoliciers();
+    	this.joueur = config.getJoueur();
+    	this.niveau = config.getNiveau();
     }
 
     /**
-     * @param Position 
+     * @param pos 
      * @return
      */
     public boolean addDiamant(Position pos) {
-        // TODO implement here
-        return false;
+    	boolean valRetour; //la valeur de retour qui indique si tout c'est bien passé
+    	//on suppose que tout se passera bien
+    	valRetour = true;
+    	
+    	try {
+    		this.getDiamants().add(new Diamant(this, pos));
+    		//gerer la position
+    		//throw IllegalArgumentException;
+    	}
+        catch (IllegalArgumentException e) {
+        	//une erreur est survenu, on retourne false
+        	valRetour = false;
+        }
+        return valRetour;
+    }
+    
+    /**
+     * @param pos 
+     * @return
+     */
+    public boolean addPolicier(Position pos) {
+    	boolean valRetour; //la valeur de retour qui indique si tout c'est bien passé
+    	//on suppose que tout se passera bien
+    	valRetour = true;
+    	
+    	try {
+    		this.getPoliciers().add(new Policier(this, pos));
+    		//gerer la position
+    		//throw IllegalArgumentException;
+    	}
+        catch (IllegalArgumentException e) {
+        	//une erreur est survenu, on retourne false
+        	valRetour = false;
+        }
+        return(valRetour);
     }
 
     /**
      * @return
      */
     public Integer getX() {
-        // TODO implement here
-        return null;
+        // retourner la valeur X de la position du joueur
+        return this.getJoueur().getPosition().getX();
     }
 
     /**
      * @return
      */
     public Integer getY() {
-        // TODO implement here
-        return null;
+    	// retourner la valeur Y de la position du joueur
+    	return this.getJoueur().getPosition().getY();
     }
 
     /**
-     * @return
-     */
-    public Niveau getNiveau() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param Position 
-     * @return
+     * @param pos Position a chercher 
+     * @return l'element contenu a la position donnee
      */
     public Element get(Position pos) {
-        // TODO implement here
-        return null;
+        //Pour chaque diamant, on verifie sa position
+        for (Diamant diamant : this.getDiamants()) {
+        	if (diamant.getPosition().equals(pos)) {
+        		//Si la position se trouve a notre emplacement de verification, on le retourne
+        		return diamant;
+        	}
+        }
+        
+        //Pour chaque diamant, on verifie sa position
+        for (Policier policier : this.getPoliciers()) {
+        	if (policier.getPosition().equals(pos)) {
+        		//Si la position se trouve a notre emplacement de verification, on le retourne
+        		return policier;
+        	}
+        }
+        
+        //Si le joueur se trouve a la position verifie, on le retourne
+        if (this.getJoueur().getPosition().equals(pos)) {
+        	return this.getJoueur();
+        }
+        
+        //si aucun "mobile" n'est à la position, on renvoie l'imobille de la grille du niveau, donc "mur" ou "case"
+        return this.getNiveau().getGrille()[pos.getX()][pos.getY()];
     }
 
     /**
-     * @return
-     */
-    public Joueur getJoueur() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public ArrayList<Diamant> getDiamants() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param Position 
-     * @return
+     * @param pos Position de la case a verifier 
+     * @return Vrai si la position contient un diamant et est une cible
      */
     public boolean estVide(Position pos) {
-        // TODO implement here
-        return false;
+    	for (Diamant diamant : this.getDiamants()) {
+        	if (diamant.getPosition().equals(pos)) {
+        		//Si la position se trouve a notre emplacement de verification, on le retourne
+        		return false;
+        	}
+        }
+        return (this.getNiveau().getCibles().contains(pos) /**&& this.getDiamants().contains(pos)**/);
     }
 
     /**
@@ -97,8 +144,7 @@ public class Configuration {
      * @return
      */
     public boolean estCible(Position pos) {
-        // TODO implement here
-        return false;
+        return this.getNiveau().estCible(pos);
     }
 
     /**
@@ -106,16 +152,60 @@ public class Configuration {
      * @return
      */
     public boolean bougerJoueurVers(Direction direction) {
-        // TODO implement here
-        return false;
+    	boolean valRetour; //la valeur de retour qui indique si tout c'est bien passé
+    	//on suppose que l'on a pas pu bouger le joueur
+    	valRetour = false;
+    	
+        Position newPos = this.getJoueur().getPosition().add(direction);
+		//si la nouvelle case ne contient rien et n'est pas un mur
+		if (this.estVide(newPos)) {
+			valRetour = this.getJoueur().setPosition(newPos);
+		} else {
+			//si la nouvelle case contient un diamant
+			if (this.get(newPos).getType().equals(Type.DIAMANT)) {
+				//on défini la nouvelle position du diamant
+				Position newPosDiams = newPos.add(direction);
+				if(this.get(newPos).getType().equals(Type.CASE)) {
+					//on bouge le diamant et le joueur
+					valRetour = (this.get(newPos).setPosition(newPosDiams) && this.getJoueur().setPosition(newPos));
+				}
+			}
+		}
+		//on retourne la valeur de retour
+		return(valRetour);
+
     }
 
     /**
      * @return
      */
     public boolean victoire() {
-        // TODO implement here
-        return false;
+    	//on parcours tous les diamants
+    	for(Diamant diamant : this.getDiamants()) {
+    		//si un diament n'est pas sur une cible
+    		if(!this.estCible(diamant.getPosition())){
+    			//on retourne false
+    			return false;
+    		}
+    	}
+    	//si tous les diamant sont sur des cibles on retourne true
+        return true;
     }
+
+	public ArrayList<Diamant> getDiamants() {
+		return diamants;
+	}
+
+	public Joueur getJoueur() {
+		return joueur;
+	}
+
+	public Niveau getNiveau() {
+		return niveau;
+	}
+
+	public ArrayList<Policier> getPoliciers() {
+		return policiers;
+	}
 
 }

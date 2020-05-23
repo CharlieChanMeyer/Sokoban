@@ -8,8 +8,8 @@ public class Diamant extends Mobile {
      * @param Configuration 
      * @param Position
      */
-    public Diamant(Configuration conf, Position pos) {
-        super("Diamant",conf,pos);
+    public Diamant(Configuration config,Position position) {
+        super(Type.DIAMANT,config,position);
     }
 
 }

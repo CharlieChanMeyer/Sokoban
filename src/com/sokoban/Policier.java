@@ -1,6 +1,6 @@
 package com.sokoban;
 
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * 
@@ -15,26 +15,35 @@ public class Policier extends Mobile {
      * @param Configuration 
      * @param Position
      */
-    public Policier(Configuration conf, Position pos) {
-        super("Policier",conf,pos);
+    public Policier(Configuration conf, Position position) {
+        super(Type.POLICIER,conf,position);
         this.histo = new ArrayList<Direction>();
     }
-
-    /**
-     * @param Direction 
-     * @return
-     */
-    public boolean verifVision(Direction dir) {
-        // TODO implement here
-        return false;
-    }
+    
+//		A CODER AILLEURS A MON AVIS
+//    /**
+//     * @param Direction 
+//     * @return
+//     */
+//    public boolean verifVision() {
+//    	Boolean res = false;
+//        Configuration conf = this.config;
+//        Direction dir = getRegard();
+//        
+//        Position pos = this.position.add(dir);
+//        
+//        return false;
+//    }
 
     /**
      * @return
      */
     public Direction getRegard() {
-        // TODO implement here
-        return null;
+    	Direction res = Direction.DROITE;
+        if (!this.histo.isEmpty()) {
+        	res = this.histo.get(this.histo.size()-1);
+        }
+        return res;
     }
 
 }

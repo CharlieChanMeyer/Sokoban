@@ -3,30 +3,24 @@ package com.sokoban;
 /**
  * 
  */
-public class Element {
-    private String type;
+public abstract class Element {
+    private Type type;
 
     /**
      * @param type
      */
-    public Element(String type) {
+    public Element(Type type) {
         this.type = type;
     }
 
     /**
-     * @param Direction 
-     * @return
+     * @return Type
      */
-    public Boolean bougerVers(Direction dir) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return the type
-     */
-    public String getType() {
+    public Type getType() {
         return this.type;
     }
+    
+    abstract Boolean bougerVers(Direction dir);
+    abstract Boolean setPosition(Position pos);
 
 }
