@@ -119,7 +119,7 @@ public class Niveau {
     public boolean estCible(Position pos) {
         boolean res = false;
         int i = 0;
-        while (!res || (i>=this.getCibles().size())) {
+        while (!res && (i<this.getCibles().size())) {
         	if (this.getCibles().get(i).equals(pos)) {
         		res = true;
         	}
