@@ -4,42 +4,23 @@ package com.sokoban;
  * 
  */
 public class Position {
-    /**
-     * 
-     */
+ 
     private int x;
-
-    /**
-     * 
-     */
     private int y;
 
-    
-    
-    /**
-	 * @return the x
-	 */
-	public int getX() {
+	//GETTER AND SETTER//
+    public int getX() {
 		return x;
 	}
 
-	/**
-	 * @param x the x to set
-	 */
 	public void setX(int x) {
 		this.x = x;
 	}
 
-	/**
-	 * @return the y
-	 */
 	public int getY() {
 		return y;
 	}
 
-	/**
-	 * @param y the y to set
-	 */
 	public void setY(int y) {
 		this.y = y;
 	}
@@ -66,8 +47,8 @@ public class Position {
      * @return
      */
     public Position add(Direction dir) {
-        // TODO implement here
-        return null;
+        Position res = new Position(this.x + dir.getDx(), this.y + dir.getDy());
+        return res;
     }
 
     /**
@@ -75,17 +56,34 @@ public class Position {
      * @return
      */
     public Position sub(Direction dir) {
-        // TODO implement here
-        return null;
-    }
-
+    	Position res = new Position(this.x - dir.getDx(), this.y - dir.getDy());
+        return res;
+   }
+    
     /**
      * @param Object 
      * @return
      */
-    public boolean equals(Object o) {
-        // TODO implement here
-        return false;
-    }
+    @Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Position other = (Position) obj;
+		if (x != other.x)
+			return false;
+		if (y != other.y)
+			return false;
+		return true;
+	}
+    
+    //TOSTRING//
+    @Override
+	public String toString() {
+		return "Position [x=" + x + ", y=" + y + "]";
+	}
 
 }

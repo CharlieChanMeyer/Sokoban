@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css?family=Pacifico");
+
+.root{
+	-fx-background-color: #F0F4F8;
+	-fx-alignment: center;
+	-fx-padding: 15px;
+}
+
+#gameTitle{
+	-fx-font: bold 28px Pacifico;
+	-fx-text-fill: #044E54;
+	-fx-padding: 0 0 40px 0;
+	-fx-font-weight: bold;
+}
+
+#regleButton{
+	-fx-font: 16px "Comic Sans MS";
+	-fx-background-color: #E66A6A;
+	-fx-background-radius: 5px;
+	-fx-text-fill: #fff;
+	-fx-padding: 8px;
+	-fx-font-weight: bold;
+}
+
+#nivStart{
+	-fx-font: 16px "Comic Sans MS";
+	-fx-background-color: #34C924;
+	-fx-background-radius: 5px;
+	-fx-text-fill: #fff;
+	-fx-padding: 8px;
+	-fx-font-weight: bold;
+}

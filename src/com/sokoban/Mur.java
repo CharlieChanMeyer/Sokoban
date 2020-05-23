@@ -9,7 +9,7 @@ public class Mur extends Immobile {
      * Default constructor
      */
     public Mur() {
-        super("Mur");
+        super(Type.MUR);
     }
 
 }

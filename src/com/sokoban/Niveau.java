@@ -19,14 +19,17 @@ public class Niveau {
      */
     private ArrayList<Position> cibles;
 
+
     /**
-     * @param x nb de ligne de la grille
-     * @param y nb de colonne de la grille
+     * @param x 
+     * @param y
      */
     public Niveau(int x, int y) {
         this.grille = new Immobile[x][y];
     }
+
     /**
+     * @return
      * @param n numero du niveau a charger
      * @throws IOException 
      */
@@ -108,14 +111,34 @@ public class Niveau {
      * @return length of the grid
      */
     public int getX() {
-        return this.grille.length;
+        // TODO implement here
+        return 0;
     }
 
     /**
-     * @return width of the grid
+     * @return
      */
     public int getY() {
-        return this.grille[0].length;
+        // TODO implement here
+        return 0;
+    }
+
+    /**
+     * @param Position 
+     * @return
+     */
+    public boolean addCible(Position pos) {
+        // TODO implement here
+        return false;
+    }
+
+    /**
+     * @param Position 
+     * @return
+     */
+    public boolean addMur(Position pos) {
+        // TODO implement here
+        return false;
     }
 
     /**
@@ -123,7 +146,26 @@ public class Niveau {
      * @return Vrai si la position est une cible, Faux sinon
      */
     public boolean estCible(Position pos) {
-        return (this.cibles.contains(pos));
+        // TODO implement here
+        return false;
+    }
+
+    /**
+     * @param Position 
+     * @return
+     */
+    public boolean estVide(Position pos) {
+        // TODO implement here
+        return false;
+    }
+
+    /**
+     * @param Position 
+     * @return
+     */
+    public Element get(Position pos) {
+        // TODO implement here
+        return null;
     }
 
     //Affiche la grille de jeu avec les murs et les cases

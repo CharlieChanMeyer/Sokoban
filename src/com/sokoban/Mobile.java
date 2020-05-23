@@ -3,35 +3,25 @@ package com.sokoban;
 /**
  * 
  */
-public class Mobile extends Element {
+public abstract class Mobile extends Element {
     /**
      * 
      */
-    public Configuration config;
+    private Configuration config;
     /**
      * 
      */
-    public Position position;
+    private Position position;
 
     /**
      * @param Type 
      * @param Configuration 
      * @param Position
      */
-    public Mobile(String type,Configuration conf,Position pos) {
+    public Mobile(Type type,Configuration conf,Position pos) {
     	super(type);
     	this.config = conf;
     	this.position = pos;
-    }
-    /**
-     * @param Type 
-     * @param Configuration 
-     * @param Joueur
-     */
-    public Mobile(String type,Configuration conf,Joueur joueur) {
-    	super(type);
-    	this.config = conf;
-    	this.position = joueur.position; //ICIIIIIIIIIIIIIIIIIIIIIIIII
     }
 
     /**
@@ -39,16 +29,29 @@ public class Mobile extends Element {
      * @return
      */
     public Boolean setPosition(Position pos) {
-        // TODO implement here
-        return null;
+    	Boolean res = false;
+    	if (this.config.get(pos).getType().equals(Type.CASE)){
+    		this.position = pos;
+    		res = true;
+    	}
+        return res;
     }
 
     /**
      * @return
      */
     public Position getPosition() {
-        // TODO implement here
-        return null;
+        return this.position;
     }
-
+    
+    public Boolean bougerVers(Direction dir) {
+    	Boolean res = false;
+    	Position nPos = this.position.add(dir);
+    	if (this.config.get(nPos).getType().equals(Type.CASE)){
+    		this.position = nPos;
+    		res = true;
+    	}
+    	return res;
+    }
+    
 }
