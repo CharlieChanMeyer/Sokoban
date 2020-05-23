@@ -15,4 +15,8 @@ public abstract class Immobile extends Element {
     public Boolean bougerVers(Direction dir) {
     	return false;
     }
+    
+    public Boolean setPosition(Position pos) {
+    	return false;
+    }
 }

@@ -21,5 +21,6 @@ public abstract class Element {
     }
     
     abstract Boolean bougerVers(Direction dir);
+    abstract Boolean setPosition(Position pos);
 
 }

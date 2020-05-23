@@ -1,5 +1,6 @@
 package com.sokoban;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -15,11 +16,15 @@ public class Configuration {
      * @param niv 
      * @param positionJoueur
      */
-    public Configuration(Niveau niv, Position positionJoueur) {
-        this.niveau = niv;
+    public Configuration(int numNiv) {
+        try {
+			this.niveau = new Niveau(numNiv);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         this.diamants = new ArrayList<Diamant>();
         this.policiers = new ArrayList<Policier>();
-        this.joueur = new Joueur(this, positionJoueur);
+        //this.joueur = new Joueur(this, , 3);
     }
 
     /**
@@ -151,23 +156,18 @@ public class Configuration {
     	//on suppose que l'on a pas pu bouger le joueur
     	valRetour = false;
     	
-        Position newPos = this.getJoueur().position.add(direction);
-		this.getJoueur().setRegard(direction);
+        Position newPos = this.getJoueur().getPosition().add(direction);
 		//si la nouvelle case ne contient rien et n'est pas un mur
 		if (this.estVide(newPos)) {
-			this.getJoueur().setPosition(newPos);
-			valRetour = true;
+			valRetour = this.getJoueur().setPosition(newPos);
 		} else {
 			//si la nouvelle case contient un diamant
-			if (this.get(newPos).getType() == "Diamand") {
+			if (this.get(newPos).getType().equals(Type.DIAMANT)) {
 				//on défini la nouvelle position du diamant
 				Position newPosDiams = newPos.add(direction);
-				if(this.get(newPos).getType() == "Case") {
-					//on bouge le diamant
-					this.get(newPos).setPosition(newPosDiams);
-					//on bouge le joueur
-					this.getJoueur().setPosition(newPos);
-					valRetour = true;
+				if(this.get(newPos).getType().equals(Type.CASE)) {
+					//on bouge le diamant et le joueur
+					valRetour = (this.get(newPos).setPosition(newPosDiams) && this.getJoueur().setPosition(newPos));
 				}
 			}
 		}
