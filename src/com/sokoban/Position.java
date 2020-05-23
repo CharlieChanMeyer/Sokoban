@@ -1,5 +1,8 @@
 package com.sokoban;
 
+/**
+ * 
+ */
 public class Position {
  
     private int x;

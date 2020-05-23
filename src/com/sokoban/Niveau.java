@@ -29,9 +29,7 @@ public class Niveau {
     }
 
     /**
-<<<<<<< HEAD
      * @return
-=======
      * @param n numero du niveau a charger
      * @throws IOException 
      */
@@ -111,7 +109,6 @@ public class Niveau {
 	}
 	/**
      * @return length of the grid
->>>>>>> refs/remotes/origin/charlie
      */
     public int getX() {
         // TODO implement here
@@ -154,7 +151,6 @@ public class Niveau {
     }
 
     /**
-<<<<<<< HEAD
      * @param Position 
      * @return
      */
@@ -172,7 +168,7 @@ public class Niveau {
         return null;
     }
 
-    //Affiche la grille de jeu avec les murs et les cases =======
+    //Affiche la grille de jeu avec les murs et les cases
     public void affGrille() {
     	//Recupere la taille de la grille
     	int x = this.getX();
@@ -190,7 +186,9 @@ public class Niveau {
     		//Retour a la ligne
     		System.out.println("");
     	}
-//>>>>>>> refs/remotes/origin/charlie
     }
+	public ArrayList<Position> getCibles() {
+		return cibles;
+	}
 
 }
