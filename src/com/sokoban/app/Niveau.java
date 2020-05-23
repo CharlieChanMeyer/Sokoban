@@ -142,12 +142,12 @@ public class Niveau extends Application {
 				if (this.config.get(new Position(i,j)).getType().equals(Type.MUR)) {
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("mur");
-				} else if (this.config.get(new Position(i,j)).getType().equals(Type.CASE)) {
-					tmpGrille[i][j].getStyleClass().clear();
-					tmpGrille[i][j].getStyleClass().add("case");
 				} else if (this.config.get(new Position(i,j)).getType().equals(Type.DIAMANT)) {
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("diamant");
+				} else if (this.config.get(new Position(i,j)).getType().equals(Type.CASE)) {
+					tmpGrille[i][j].getStyleClass().clear();
+					tmpGrille[i][j].getStyleClass().add("case");	
 				} else if (this.config.get(new Position(i,j)).getType().equals(Type.JOUEUR)) {
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("joueur");
@@ -155,6 +155,13 @@ public class Niveau extends Application {
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("policier");
 				}
+			}
+		}
+		ArrayList<Position> cibles = this.config.getNiveau().getCibles();
+		for (Position cible : cibles) {
+			if (!this.config.get(cible).getType().equals(Type.DIAMANT)) {
+				tmpGrille[cible.getX()][cible.getY()].getStyleClass().clear();
+				tmpGrille[cible.getX()][cible.getY()].getStyleClass().add("entrepot");
 			}
 		}
 		this.affGrille.getChildren().clear();

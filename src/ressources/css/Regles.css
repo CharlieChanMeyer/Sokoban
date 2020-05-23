@@ -31,3 +31,27 @@
 	-fx-font: bold 20px "Comic Sans MS";
 	-fx-text-fill: #cc0000;
 }
+
+#affMur {
+	-fx-graphic: url("../img/mur.png");
+}
+
+#affDiamant {
+	-fx-graphic: url("../img/diamant.png");
+}
+
+#affGardien {
+	-fx-graphic: url("../img/policier.png");
+}
+
+#affJoueur {
+	-fx-graphic: url("../img/joueur.png");
+}
+
+#affCase {
+	-fx-graphic: url("../img/sol.png");
+}
+
+#affEntrepot {
+	-fx-graphic: url("../img/entrepot.png");
+}
