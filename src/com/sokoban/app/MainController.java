@@ -70,7 +70,8 @@ public class MainController implements Initializable {
 		//Si un niveau est selectionner
 		if (nivSelec!=null) {
 			Stage nivStage = new Stage();
-			Niveau niv = new Niveau(nivSelec);
+			char nivSelect = nivSelec.charAt(nivSelec.length()-1);
+			Niveau niv = new Niveau(Character.getNumericValue(nivSelect));
 			niv.start(nivStage);
 		} else { //Sinon
 			Alert alert = new Alert(AlertType.WARNING);
