@@ -62,6 +62,7 @@ public class Configuration {
         		int x = Integer.parseInt(position[0]);
         		//Stock la position y du joueur
         		int y = Integer.parseInt(position[1]);
+        		//Création du joueur
         		this.joueur = new Joueur(this, new Position(x, y) , 3);
         		//Incremente le nombre de ligne lu
         		cmpLigne++;
@@ -72,12 +73,12 @@ public class Configuration {
         		for (int j=0;j<ligne.length();j++) {
         			//Stock le caractere
         			char verif = ligne.charAt(j);
-        			//S'il sagit d'un 1, creer un mur
+        			//S'il sagit d'un 3, creer un diamant
         			if (Character.getNumericValue(verif) == 3) {
-        				this.getDiamants().add(new Diamant(this, new Position(j, cmpLigne-3)));
-        			//Sinon, s'il sagit d'un 0,2,3 ou 4, cree une case
+        				this.getDiamants().add(new Diamant(this, new Position(cmpLigne-3, j)));
+        			//Sinon, s'il sagit d'un 4, créer un policier
         			} else if (Character.getNumericValue(verif) == 4){
-        				this.getPoliciers().add(new Policier(this, new Position(j, cmpLigne-3)));
+        				this.getPoliciers().add(new Policier(this, new Position(cmpLigne-3, j)));
         			}
         		}
         		//Incremente le nombre de ligne lu
