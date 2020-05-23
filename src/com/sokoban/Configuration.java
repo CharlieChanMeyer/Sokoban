@@ -99,48 +99,6 @@ public class Configuration {
     }
 
     /**
-     * @param pos 
-     * @return
-     */
-    public boolean addDiamant(Position pos) {
-    	boolean valRetour; //la valeur de retour qui indique si tout c'est bien passé
-    	//on suppose que tout se passera bien
-    	valRetour = true;
-    	
-    	try {
-    		this.getDiamants().add(new Diamant(this, pos));
-    		//gerer la position
-    		//throw IllegalArgumentException;
-    	}
-        catch (IllegalArgumentException e) {
-        	//une erreur est survenu, on retourne false
-        	valRetour = false;
-        }
-        return valRetour;
-    }
-    
-    /**
-     * @param pos 
-     * @return
-     */
-    public boolean addPolicier(Position pos) {
-    	boolean valRetour; //la valeur de retour qui indique si tout c'est bien passé
-    	//on suppose que tout se passera bien
-    	valRetour = true;
-    	
-    	try {
-    		this.getPoliciers().add(new Policier(this, pos));
-    		//gerer la position
-    		//throw IllegalArgumentException;
-    	}
-        catch (IllegalArgumentException e) {
-        	//une erreur est survenu, on retourne false
-        	valRetour = false;
-        }
-        return(valRetour);
-    }
-
-    /**
      * @return
      */
     public Integer getX() {
