@@ -12,3 +12,27 @@
 	-fx-padding: 0 0 40px 0;
 	-fx-font-weight: bold;
 }
+
+.mur {
+	-fx-graphic: url("../img/mur.png");
+}
+
+.diamant {
+	-fx-graphic: url("../img/diamant.png");
+}
+
+.policier {
+	-fx-graphic: url("../img/policier.png");
+}
+
+.joueur {
+	-fx-graphic: url("../img/joueur.png");
+}
+
+.case {
+	-fx-graphic: url("../img/sol.png");
+}
+
+.entrepot {
+	-fx-graphic: url("../img/entrepot.png");
+}
