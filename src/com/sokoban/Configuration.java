@@ -1,5 +1,8 @@
 package com.sokoban;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -16,7 +19,11 @@ public class Configuration {
      * @param niv 
      * @param positionJoueur
      */
-    public Configuration(int numNiv) {
+    public Configuration(int numNiv) throws IOException{
+    	BufferedReader lecteur = null; //Lecteur du fichier
+    	String ligne; //Variable d'une ligne			
+        Integer cmpLigne = 0; //Compteur de ligne lu
+        
         try {
 			this.niveau = new Niveau(numNiv);
 		} catch (IOException e) {
@@ -24,7 +31,61 @@ public class Configuration {
 		}
         this.diamants = new ArrayList<Diamant>();
         this.policiers = new ArrayList<Policier>();
-        //this.joueur = new Joueur(this, , 3);
+        
+        //lecture des diamants et policiers
+        try {
+        	//Essaye de lire le fichier du niveau
+			lecteur = new BufferedReader(new FileReader("src/ressources/niveaux/"+numNiv+".txt"));
+		} catch (FileNotFoundException e) {
+			//Si erreur, affiche une Erreur d'ouverture
+			System.out.println("Erreur d'ouverture");
+			e.printStackTrace();
+		}
+      //Tant qu'il y a une ligne a lire
+        while ((ligne = lecteur.readLine()) != null) {
+        	switch (cmpLigne) {
+        	//S'il sagit de la premiere ligne
+        	case 0:
+        		//Incremente le nombre de ligne lu
+        		cmpLigne++;
+        		break;
+        	//S'il sagit de la seconde ligne
+        	case 1:
+        		//Increment le nombre de ligne lu
+        		cmpLigne++;
+        		break;
+        	//S'il sagit de la troisieme ligne (ligne de la position de depart du perso)
+        	case 2:
+        		//séparer la ligne en deux
+        		String position[] = ligne.split(",");
+        		//Stock la position x du joueur
+        		int x = Integer.parseInt(position[0]);
+        		//Stock la position y du joueur
+        		int y = Integer.parseInt(position[1]);
+        		this.joueur = new Joueur(this, new Position(x, y) , 3);
+        		//Incremente le nombre de ligne lu
+        		cmpLigne++;
+        		break;
+        	//Dans tous les autres cas
+        	default:
+        		//Pour chaque caractere de la ligne
+        		for (int j=0;j<ligne.length();j++) {
+        			//Stock le caractere
+        			char verif = ligne.charAt(j);
+        			//S'il sagit d'un 1, creer un mur
+        			if (Character.getNumericValue(verif) == 3) {
+        				this.getDiamants().add(new Diamant(this, new Position(j, cmpLigne-3)));
+        			//Sinon, s'il sagit d'un 0,2,3 ou 4, cree une case
+        			} else if (Character.getNumericValue(verif) == 4){
+        				this.getPoliciers().add(new Policier(this, new Position(j, cmpLigne-3)));
+        			}
+        		}
+        		//Incremente le nombre de ligne lu
+        		cmpLigne++;
+        	}
+        }
+        //Ferme le fichier
+        lecteur.close();
     }
 
     /**
