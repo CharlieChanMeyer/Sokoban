@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.sokoban.Configuration;
+import com.sokoban.Direction;
 import com.sokoban.Position;
 import com.sokoban.Type;
 
