@@ -58,38 +58,39 @@ public class Niveau extends Application {
 		// Gestion des events.
 		//Si l'utilisateur appuie sur une touche
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-			//S'il sagit de la touche fleche du haut
+			//S'il sagit de la touche Z, deplacement vers le haut et actualisation de l'affichage
 			if (key.getCode() == KeyCode.Z) {
 				config.bougerJoueurVers(Direction.GAUCHE);
 				updateGrille();
-			//S'il sagit de la touche fleche du bas
+				//S'il sagit de la touche S, deplacement vers le bas et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.S) {
 				config.bougerJoueurVers(Direction.DROITE);
 				updateGrille();
-			//S'il sagit de la touche fleche de gauche
+				//S'il sagit de la touche Q, deplacement vers la gauche et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.Q) {
 				config.bougerJoueurVers(Direction.HAUT);
 				updateGrille();
-			//S'il sagit de la touche fleche de droite
+				//S'il sagit de la touche D, deplacement vers la droite et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.D) {
 				config.bougerJoueurVers(Direction.BAS);
 				updateGrille();
-			//S'il sagit de la touche espace
+			//S'il sagit de la touche fleche du haut, tire vers le haut et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.UP) {
 				config.getJoueur().tirer(Direction.GAUCHE);
 				updateGrille();
-			//S'il sagit de la touche fleche du bas
+			//S'il sagit de la touche fleche du bas, tire vers le bas et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.DOWN) {
 				config.getJoueur().tirer(Direction.DROITE);
 				updateGrille();
-			//S'il sagit de la touche fleche de gauche
+			//S'il sagit de la touche fleche de gauche, tire vers la gauche et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.LEFT) {
 				config.getJoueur().tirer(Direction.HAUT);
 				updateGrille();
-			//S'il sagit de la touche fleche de droite
+			//S'il sagit de la touche fleche de droite, tire vers la droite et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.RIGHT) {
 				config.getJoueur().tirer(Direction.BAS);
 				updateGrille();
+				//S'il sagit de la touche R, reset la configuration du niveau et actualise l'affichage
 			} else if (key.getCode() == KeyCode.R) {
 				try {
 					this.config = new Configuration(this.nivSelec);
@@ -116,29 +117,39 @@ public class Niveau extends Application {
 	 */
 	public Niveau(int nivSelec) {
 		super();
+		//Set le numero du niveau
 		this.nivSelec = nivSelec;
+		//Initialise les labels
 		this.nbDeplacement = new Label();
 		this.nbBalle = new Label();
+		//Initialise la configuration du niveau
 		try {
 			this.config = new Configuration(nivSelec);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		//Variables de deplacement
 		int i;
 		int j;
+		//Variable de limitation de boucle
 		int x = this.config.getNiveau().getX();
 		int y = this.config.getNiveau().getY();
+		//Initialise le tableau de label
 		this.tmpGrille = new Label[x][y];
+		//Initialise tous les labels du tableau
 		for (i=0;i<x;i++) {
 			for (j=0;j<y;j++) {
 				tmpGrille[i][j] = new Label();
 			}
 		}
+		//Initialise la grille d'affichage
 		this.affGrille = new GridPane();
 	}
 	
 	private void updateLabels() {
+		//Met a jour le nombre de deplacement
 		this.nbDeplacement.setText("Vous avez effectue "+this.config.getJoueur().getHisto().size()+" deplacements.");
+		//Met la jour le nombre de balles restantes
 		if (this.config.getJoueur().getBalles() > 0) {
 			this.nbBalle.setText("Vous avez "+this.config.getJoueur().getBalles()+" balles dans votre revolver.");
 		} else {
@@ -147,50 +158,68 @@ public class Niveau extends Application {
 	}
 	
 	private void updateGrille() {
+		//Variables de deplacement
 		int i;
 		int j;
+		//Variable de limitation de boucle
 		int x = this.config.getNiveau().getX();
 		int y = this.config.getNiveau().getY();
+		//Pour chaque label de tmpGrille
 		for (i=0;i<x;i++) {
 			for (j=0;j<y;j++) {
+				//S'il sagit d'un mur, change sa class en mur
 				if (this.config.get(new Position(i,j)).getType().equals(Type.MUR)) {
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("mur");
+				//S'il sagit d'un joueur, change sa class en joueur
 				} else if (this.config.get(new Position(i,j)).getType().equals(Type.JOUEUR)) {
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("joueur");
+				//S'il sagit d'un diamant, change sa class en diamant
 				} else if (this.config.get(new Position(i,j)).getType().equals(Type.DIAMANT)) {
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("diamant");
+				//S'il sagit d'une case, change sa class en case
 				} else if (this.config.get(new Position(i,j)).getType().equals(Type.CASE)) {
 					tmpGrille[i][j].getStyleClass().clear();
-					tmpGrille[i][j].getStyleClass().add("case");	
+					tmpGrille[i][j].getStyleClass().add("case");
+				//S'il sagit d'un policier, change sa class en policier
 				} else if (this.config.get(new Position(i,j)).getType().equals(Type.POLICIER)) {
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("policier");
 				}
 			}
 		}
+		//Variables des cibles
 		ArrayList<Position> cibles = this.config.getNiveau().getCibles();
+		//Compteur de cible remplies
 		int cp = 0;
+		//Pour chaque cible
 		for (Position cible : cibles) {
+			//Si il n'y a pas de diamant, ni de joueur dessus, change sa class en entrepot
 			if (!this.config.get(cible).getType().equals(Type.DIAMANT) && !this.config.get(cible).getType().equals(Type.JOUEUR)) {
 				tmpGrille[cible.getX()][cible.getY()].getStyleClass().clear();
 				tmpGrille[cible.getX()][cible.getY()].getStyleClass().add("entrepot");
+			//S'il y a un diamant dessus, change sa class en diamantEntrepot et increment le compteur
 			} else if (this.config.get(cible).getType().equals(Type.DIAMANT)) {
 				tmpGrille[cible.getX()][cible.getY()].getStyleClass().clear();
 				tmpGrille[cible.getX()][cible.getY()].getStyleClass().add("diamantEntrepot");
 				cp++;
 			}
 		}
+		//Reset la grille d'affichage
 		this.affGrille.getChildren().clear();
+		//Pour chaque case, ajoute le label correspondant
 		for (i=0;i<x;i++) {
 			for (j=0;j<y;j++) {
 				this.affGrille.add(tmpGrille[i][j], j, i);
 			}
 		}
+		//Update les labels d'informations
 		updateLabels();
+		//Si le compteur est egal au nombre de diamant du niveau
 		if (cp == this.config.getDiamants().size()) {
+			//Cree et affiche une alerteBox indiquant la victoire
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Sokoban - Niveau "+this.nivSelec);
 			alert.setHeaderText("Victoire");
