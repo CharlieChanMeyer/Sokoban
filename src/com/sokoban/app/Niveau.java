@@ -156,6 +156,7 @@ public class Niveau extends Application {
 			}
 		}
 		ArrayList<Position> cibles = this.config.getNiveau().getCibles();
+		int cp = 0;
 		for (Position cible : cibles) {
 			if (!this.config.get(cible).getType().equals(Type.DIAMANT) && !this.config.get(cible).getType().equals(Type.JOUEUR)) {
 				tmpGrille[cible.getX()][cible.getY()].getStyleClass().clear();
@@ -163,6 +164,7 @@ public class Niveau extends Application {
 			} else if (this.config.get(cible).getType().equals(Type.DIAMANT)) {
 				tmpGrille[cible.getX()][cible.getY()].getStyleClass().clear();
 				tmpGrille[cible.getX()][cible.getY()].getStyleClass().add("diamantEntrepot");
+				cp++;
 			}
 		}
 		this.affGrille.getChildren().clear();
@@ -172,7 +174,13 @@ public class Niveau extends Application {
 			}
 		}
 		updateNbDeplacement();
-//		verifVictoire();
+		if (cp == this.config.getDiamants().size()) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Sokoban - Niveau "+this.nivSelec);
+			alert.setHeaderText("Victoire");
+			alert.setContentText("Bravo, vous avez gagne le niveau "+this.nivSelec+" en "+this.config.getJoueur().getHisto().size()+" coups !");
+			alert.show();
+		}
 	}
 	
 //	private void verifVictoire() {
