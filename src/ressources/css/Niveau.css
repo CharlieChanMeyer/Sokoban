@@ -36,3 +36,7 @@
 .entrepot {
 	-fx-graphic: url("../img/entrepot.png");
 }
+
+.diamantEntrepot {
+	-fx-graphic: url("../img/diamantEntrepot.png");
+}
