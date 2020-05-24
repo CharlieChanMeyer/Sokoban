@@ -52,20 +52,29 @@ public class Joueur extends Mobile {
     }
     
     /**
-     * 
+     * @param dir Direction du tir
      */
     public void tirer(Direction dir) {
+    	//Si le nombre de balle est superieur a 0
     	if (this.balles > 0) {
+    		//Recupere la position du joueur
             Position pos = this.getPosition();
+            //Recupere la config
             Configuration config = this.getConfig();
+            //Recupere l'element a la position
             Element e = config.get(pos);
+            //Tant que l'element n'est ni un mur, ni un policier, ni un diamant
             while (!e.getType().equals(Type.MUR) && (!e.getType().equals(Type.POLICIER)) && (!e.getType().equals(Type.DIAMANT))){
+            	//Recupere la position suivante dans la direction du tir
             	pos = pos.add(dir);
+            	//Recupere l'element a la position
             	e = config.get(pos);
             }
+            //Si le tir s'est arete sur un policier, le retire de la liste des policier
             if(e.getType().equals(Type.POLICIER)) {
             	config.removePolicier(pos);
             }
+            //Retire une balle au joueur
             this.balles--;
     	}
     }

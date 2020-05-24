@@ -77,7 +77,7 @@ public class MainController implements Initializable {
 			Niveau niv = new Niveau(Character.getNumericValue(nivSelect));
 			//appel la fonction start en indiquant le numero du niveau
 			niv.start(nivStage);
-		} else { //Sinon cree une alerteBox indiquant qu'aucun niveau n'a ete selectionne, et ferme l'alerteBox apres 2 secondes
+		} else { //Sinon cree une alerteBox indiquant qu'aucun niveau n'a ete selectionne, et ferme l'alerteBox apres 2 secondes 
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("ATTENTION");
 			alert.setHeaderText("Probleme de selection");
