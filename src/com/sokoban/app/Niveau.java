@@ -40,12 +40,15 @@ public class Niveau extends Application {
 		Label nivLabel = new Label("Niveau : "+this.nivSelec);
 		//Actualisation du label de deplacement
 		updateNbDeplacement();
-		//Creation du separateur vertical
+		//Creation des separateurs vertical
 		Separator separator = new Separator();
+		Separator separator2 = new Separator();
 		//Actualisation de la grille
 		updateGrille();
+		//Creation du label de reset
+		Label reset = new Label("Vous êtes bloque ? Appuyez sur 'R' pour reset le niveau.");
 		//Ajout des elements
-		root.getChildren().addAll(titleLabel,nivLabel,nbDeplacement,separator,affGrille);
+		root.getChildren().addAll(titleLabel,nivLabel,nbDeplacement,separator,affGrille,separator2,reset);
 		
 		// Charge la scene a partir du parent
 		Scene scene = new Scene(root);
@@ -77,6 +80,13 @@ public class Niveau extends Application {
 				alert.setHeaderText("Resultat");
 				alert.setContentText("Vous avez appuyez sur la barre espace");
 				alert.showAndWait();
+			} else if (key.getCode() == KeyCode.R) {
+				try {
+					this.config = new Configuration(this.nivSelec);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				updateGrille();
 			}
 			;
 		});
@@ -130,15 +140,15 @@ public class Niveau extends Application {
 				if (this.config.get(new Position(i,j)).getType().equals(Type.MUR)) {
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("mur");
+				} else if (this.config.get(new Position(i,j)).getType().equals(Type.JOUEUR)) {
+					tmpGrille[i][j].getStyleClass().clear();
+					tmpGrille[i][j].getStyleClass().add("joueur");
 				} else if (this.config.get(new Position(i,j)).getType().equals(Type.DIAMANT)) {
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("diamant");
 				} else if (this.config.get(new Position(i,j)).getType().equals(Type.CASE)) {
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("case");	
-				} else if (this.config.get(new Position(i,j)).getType().equals(Type.JOUEUR)) {
-					tmpGrille[i][j].getStyleClass().clear();
-					tmpGrille[i][j].getStyleClass().add("joueur");
 				} else if (this.config.get(new Position(i,j)).getType().equals(Type.POLICIER)) {
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("policier");
@@ -147,9 +157,12 @@ public class Niveau extends Application {
 		}
 		ArrayList<Position> cibles = this.config.getNiveau().getCibles();
 		for (Position cible : cibles) {
-			if (!this.config.get(cible).getType().equals(Type.DIAMANT)) {
+			if (!this.config.get(cible).getType().equals(Type.DIAMANT) && !this.config.get(cible).getType().equals(Type.JOUEUR)) {
 				tmpGrille[cible.getX()][cible.getY()].getStyleClass().clear();
 				tmpGrille[cible.getX()][cible.getY()].getStyleClass().add("entrepot");
+			} else if (this.config.get(cible).getType().equals(Type.DIAMANT)) {
+				tmpGrille[cible.getX()][cible.getY()].getStyleClass().clear();
+				tmpGrille[cible.getX()][cible.getY()].getStyleClass().add("diamantEntrepot");
 			}
 		}
 		this.affGrille.getChildren().clear();
@@ -159,6 +172,27 @@ public class Niveau extends Application {
 			}
 		}
 		updateNbDeplacement();
+//		verifVictoire();
 	}
 	
+//	private void verifVictoire() {
+//		if (this.config.victoire()) {
+//			Alert alert = new Alert(AlertType.INFORMATION);
+//			alert.setTitle("Sokoban - Niveau "+this.nivSelec);
+//			alert.setHeaderText("Victoire");
+//			alert.setContentText("Bravo, vous avez gagne le niveau "+this.nivSelec+" en "+this.config.getJoueur().getHisto().size()+" coups !");
+//			alert.show();
+//
+//			new Thread(() -> {
+//				try {
+//					Thread.sleep(6000);
+//					Platform.runLater(() -> {
+//						alert.hide();
+//					});
+//				} catch (InterruptedException error) {
+//					error.printStackTrace();
+//				}
+//			}).start();
+//		}
+//	}
 }
