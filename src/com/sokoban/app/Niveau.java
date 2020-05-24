@@ -24,6 +24,7 @@ public class Niveau extends Application {
 	private int nivSelec;
 	private Configuration config;
 	private Label nbDeplacement;
+	private Label nbBalle;
 	private GridPane affGrille;
 	private Label[][] tmpGrille;
 
@@ -39,7 +40,7 @@ public class Niveau extends Application {
 		//Creation du label du niveau
 		Label nivLabel = new Label("Niveau : "+this.nivSelec);
 		//Actualisation du label de deplacement
-		updateNbDeplacement();
+		updateLabels();
 		//Creation des separateurs vertical
 		Separator separator = new Separator();
 		Separator separator2 = new Separator();
@@ -48,7 +49,7 @@ public class Niveau extends Application {
 		//Creation du label de reset
 		Label reset = new Label("Vous êtes bloque ? Appuyez sur 'R' pour reset le niveau.");
 		//Ajout des elements
-		root.getChildren().addAll(titleLabel,nivLabel,nbDeplacement,separator,affGrille,separator2,reset);
+		root.getChildren().addAll(titleLabel,nivLabel,nbDeplacement,nbBalle,separator,affGrille,separator2,reset);
 		
 		// Charge la scene a partir du parent
 		Scene scene = new Scene(root);
@@ -58,28 +59,37 @@ public class Niveau extends Application {
 		//Si l'utilisateur appuie sur une touche
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
 			//S'il sagit de la touche fleche du haut
-			if (key.getCode() == KeyCode.UP) {
+			if (key.getCode() == KeyCode.Z) {
 				config.bougerJoueurVers(Direction.GAUCHE);
 				updateGrille();
 			//S'il sagit de la touche fleche du bas
-			} else if (key.getCode() == KeyCode.DOWN) {
+			} else if (key.getCode() == KeyCode.S) {
 				config.bougerJoueurVers(Direction.DROITE);
 				updateGrille();
 			//S'il sagit de la touche fleche de gauche
-			} else if (key.getCode() == KeyCode.LEFT) {
+			} else if (key.getCode() == KeyCode.Q) {
 				config.bougerJoueurVers(Direction.HAUT);
 				updateGrille();
 			//S'il sagit de la touche fleche de droite
-			} else if (key.getCode() == KeyCode.RIGHT) {
+			} else if (key.getCode() == KeyCode.D) {
 				config.bougerJoueurVers(Direction.BAS);
 				updateGrille();
 			//S'il sagit de la touche espace
-			} else if (key.getCode() == KeyCode.SPACE) {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Information Event");
-				alert.setHeaderText("Resultat");
-				alert.setContentText("Vous avez appuyez sur la barre espace");
-				alert.showAndWait();
+			} else if (key.getCode() == KeyCode.UP) {
+				config.getJoueur().tirer(Direction.GAUCHE);
+				updateGrille();
+			//S'il sagit de la touche fleche du bas
+			} else if (key.getCode() == KeyCode.DOWN) {
+				config.getJoueur().tirer(Direction.DROITE);
+				updateGrille();
+			//S'il sagit de la touche fleche de gauche
+			} else if (key.getCode() == KeyCode.LEFT) {
+				config.getJoueur().tirer(Direction.HAUT);
+				updateGrille();
+			//S'il sagit de la touche fleche de droite
+			} else if (key.getCode() == KeyCode.RIGHT) {
+				config.getJoueur().tirer(Direction.BAS);
+				updateGrille();
 			} else if (key.getCode() == KeyCode.R) {
 				try {
 					this.config = new Configuration(this.nivSelec);
@@ -108,6 +118,7 @@ public class Niveau extends Application {
 		super();
 		this.nivSelec = nivSelec;
 		this.nbDeplacement = new Label();
+		this.nbBalle = new Label();
 		try {
 			this.config = new Configuration(nivSelec);
 		} catch (IOException e) {
@@ -126,8 +137,13 @@ public class Niveau extends Application {
 		this.affGrille = new GridPane();
 	}
 	
-	private void updateNbDeplacement() {
-		this.nbDeplacement.setText("Vous avez effectue "+this.config.getJoueur().getHisto().size()+" deplacements."); //this.config.getJoueur().getHisto().size()
+	private void updateLabels() {
+		this.nbDeplacement.setText("Vous avez effectue "+this.config.getJoueur().getHisto().size()+" deplacements.");
+		if (this.config.getJoueur().getBalles() > 0) {
+			this.nbBalle.setText("Vous avez "+this.config.getJoueur().getBalles()+" balles dans votre revolver.");
+		} else {
+			this.nbBalle.setText("Vous n'avez plus de balles dans votre revolver.");
+		}
 	}
 	
 	private void updateGrille() {
@@ -173,7 +189,7 @@ public class Niveau extends Application {
 				this.affGrille.add(tmpGrille[i][j], j, i);
 			}
 		}
-		updateNbDeplacement();
+		updateLabels();
 		if (cp == this.config.getDiamants().size()) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Sokoban - Niveau "+this.nivSelec);

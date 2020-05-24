@@ -51,30 +51,24 @@ public class Joueur extends Mobile {
         this.balles = nbBalles;
     }
     
-    public void decrementBalles() {
-    	this.balles--;
+    /**
+     * 
+     */
+    public void tirer(Direction dir) {
+    	if (this.balles > 0) {
+            Position pos = this.getPosition();
+            Configuration config = this.getConfig();
+            Element e = config.get(pos);
+            while (!e.getType().equals(Type.MUR) && (!e.getType().equals(Type.POLICIER)) && (!e.getType().equals(Type.DIAMANT))){
+            	pos = pos.add(dir);
+            	e = config.get(pos);
+            }
+            if(e.getType().equals(Type.POLICIER)) {
+            	config.removePolicier(pos);
+            }
+            this.balles--;
+    	}
     }
-    
-//    /**
-//     * 
-//     */
-//    public void tirer() {
-//        Direction dir = this.getRegard();
-//        Position pos = this.position;
-//        Configuration config = this.config;
-//        Element e = config.get(pos);
-//        while (!e.getType().equals(Type.MUR) || (!e.getType().equals(Type.POLICIER))){
-//        	pos.add(dir);
-//        	e = config.get(pos);
-//        }
-//        if(e.getType().equals(Type.POLICIER)) {
-//        	this.balles--;
-//        	Case c = new Case();
-//
-//        }else{
-//        	this.balles--;
-//        }
-//    }
 
 	/**
      * @return

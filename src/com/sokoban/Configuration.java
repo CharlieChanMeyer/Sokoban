@@ -175,37 +175,22 @@ public class Configuration {
      */
     public boolean bougerJoueurVers(Direction dir) {
     	boolean res = this.joueur.bougerVers(dir);
-    	System.out.println("1: "+res);
     	Position newPos = joueur.getPosition().add(dir);
     	if (res) {
     		res = this.joueur.setPosition(newPos);
-    		System.out.println("2: "+res);
         	this.joueur.addHisto(dir);
     	}else if (this.get(newPos).getType().equals(Type.DIAMANT)) {
     		if (this.get(newPos).bougerVers(dir)) {
-    			
-    			System.out.println("Ancienne Position Diamant :"+newPos.toString());
     			Position newPos1 = newPos.add(dir);
-    			System.out.println("Nouvelle Position Diamant :"+newPos1.toString());
-    			
-    		    System.out.println("Liste Diamants:");
-    		    for(int i = 0 ; i < this.diamants.size(); i++)
-    		    System.out.println(this.diamants.get(i).getPosition().toString());
+
     		    
     			this.diamants.remove(this.diamants.get(diamants.indexOf(this.get(newPos))));
     			this.diamants.add(new Diamant(this,newPos1));
     			
-    			System.out.println("Nouvelle Liste Diamants:");
-    		    for(int i = 0 ; i < this.diamants.size(); i++)
-    		    System.out.println(this.diamants.get(i).getPosition().toString());
-    		    
-    			System.out.println("Insertion joueur");
     			res = this.joueur.setPosition(newPos);
-    			System.out.println("4: "+res);
     	    	this.joueur.addHisto(dir);
     		}
     	}
-    	System.out.println("3: "+res);
     	return res;
     }
 
@@ -239,6 +224,16 @@ public class Configuration {
 
 	public ArrayList<Policier> getPoliciers() {
 		return policiers;
+	}
+	
+	public void removePolicier(Position pos) {
+		Policier remove = null;
+		for (Policier policier : this.policiers) {
+			if (policier.getPosition().equals(pos)) {
+				remove = policier;
+			}
+		}
+		this.policiers.remove(remove);
 	}
 
 }
