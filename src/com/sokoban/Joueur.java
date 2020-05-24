@@ -45,10 +45,14 @@ public class Joueur extends Mobile {
     }
     
     /**
-     * @return histo
+     * @param nbBalles Nombres de balle du joueur
      */
-    public int setBalles() {
-        return this.balles;
+    public void setBalles(int nbBalles) {
+        this.balles = nbBalles;
+    }
+    
+    public void decrementBalles() {
+    	this.balles--;
     }
     
 //    /**
