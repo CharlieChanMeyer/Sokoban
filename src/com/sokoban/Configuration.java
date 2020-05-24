@@ -63,7 +63,7 @@ public class Configuration {
         		//Stock la position y du joueur
         		int y = Integer.parseInt(position[1]);
         		//Création du joueur
-        		this.joueur = new Joueur(this, new Position(x, y) , 3);
+        		this.joueur = new Joueur(this, new Position(x, y) , 0);
         		//Incremente le nombre de ligne lu
         		cmpLigne++;
         		break;
@@ -85,6 +85,8 @@ public class Configuration {
         		cmpLigne++;
         	}
         }
+        //Set le nombre de balle du joueur au nombre exacte de policier
+        this.joueur.setBalles(this.getPoliciers().size());
         //Ferme le fichier
         lecteur.close();
     }
