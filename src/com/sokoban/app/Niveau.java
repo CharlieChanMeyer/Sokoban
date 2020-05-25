@@ -60,35 +60,35 @@ public class Niveau extends Application {
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
 			//S'il sagit de la touche Z, deplacement vers le haut et actualisation de l'affichage
 			if (key.getCode() == KeyCode.Z) {
-				config.bougerJoueurVers(Direction.GAUCHE);
+				config.bougerJoueurVers(Direction.HAUT);
 				updateGrille();
 				//S'il sagit de la touche S, deplacement vers le bas et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.S) {
-				config.bougerJoueurVers(Direction.DROITE);
+				config.bougerJoueurVers(Direction.BAS);
 				updateGrille();
 				//S'il sagit de la touche Q, deplacement vers la gauche et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.Q) {
-				config.bougerJoueurVers(Direction.HAUT);
+				config.bougerJoueurVers(Direction.GAUCHE);
 				updateGrille();
 				//S'il sagit de la touche D, deplacement vers la droite et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.D) {
-				config.bougerJoueurVers(Direction.BAS);
+				config.bougerJoueurVers(Direction.DROITE);
 				updateGrille();
 			//S'il sagit de la touche fleche du haut, tire vers le haut et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.UP) {
-				config.getJoueur().tirer(Direction.GAUCHE);
+				config.getJoueur().tirer(Direction.HAUT);
 				updateGrille();
 			//S'il sagit de la touche fleche du bas, tire vers le bas et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.DOWN) {
-				config.getJoueur().tirer(Direction.DROITE);
+				config.getJoueur().tirer(Direction.BAS);
 				updateGrille();
 			//S'il sagit de la touche fleche de gauche, tire vers la gauche et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.LEFT) {
-				config.getJoueur().tirer(Direction.HAUT);
+				config.getJoueur().tirer(Direction.GAUCHE);
 				updateGrille();
 			//S'il sagit de la touche fleche de droite, tire vers la droite et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.RIGHT) {
-				config.getJoueur().tirer(Direction.BAS);
+				config.getJoueur().tirer(Direction.DROITE);
 				updateGrille();
 				//S'il sagit de la touche R, reset la configuration du niveau et actualise l'affichage
 			} else if (key.getCode() == KeyCode.R) {
