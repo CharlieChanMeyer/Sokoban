@@ -92,43 +92,47 @@ public class CreationNiveau extends Application {
 		if (!erreur) {
 			try {
 				this.longueur = Integer.parseInt(longueurTF.getText());
-				//Initialise la matrice de bouton et mets tous les boutons "mur"
-				this.tmpGrille = new Label[this.longueur][this.largeur];
-				for(i = 0;i<this.longueur;i++) {
-					for (j = 0;j<this.largeur;j++) {
-						this.tmpGrille[i][j] = new Label();
-						this.tmpGrille[i][j].getStyleClass().clear();
-						tmpGrille[i][j].getStyleClass().add("mur");
-						if ((i == 0) || (j == 0) || (i == this.longueur-1) || (j == this.largeur-1)) {
-							tmpGrille[i][j].setDisable(true);
-						} else {
-							int emplacementI = i;
-							int emplacementJ = j;
-							tmpGrille[i][j].setOnMouseClicked(event -> changeClass("mur",emplacementI,emplacementJ));
+				if ((this.largeur < 5) || (this.longueur < 5)) {
+					erreur(4);
+				} else {
+					//Initialise la matrice de bouton et mets tous les boutons "mur"
+					this.tmpGrille = new Label[this.longueur][this.largeur];
+					for(i = 0;i<this.longueur;i++) {
+						for (j = 0;j<this.largeur;j++) {
+							this.tmpGrille[i][j] = new Label();
+							this.tmpGrille[i][j].getStyleClass().clear();
+							tmpGrille[i][j].getStyleClass().add("mur");
+							if ((i == 0) || (j == 0) || (i == this.longueur-1) || (j == this.largeur-1)) {
+								tmpGrille[i][j].setDisable(true);
+							} else {
+								int emplacementI = i;
+								int emplacementJ = j;
+								tmpGrille[i][j].setOnMouseClicked(event -> changeClass("mur",emplacementI,emplacementJ));
+							}
 						}
 					}
-				}
-				//Reset la grille d'affichage
-				this.affGrille.getChildren().clear();
-				//Pour chaque case, ajoute le label correspondant
-				for (i=0;i<this.longueur;i++) {
-					for (j=0;j<this.largeur;j++) {
-						this.affGrille.add(tmpGrille[i][j], j, i);
+					//Reset la grille d'affichage
+					this.affGrille.getChildren().clear();
+					//Pour chaque case, ajoute le label correspondant
+					for (i=0;i<this.longueur;i++) {
+						for (j=0;j<this.largeur;j++) {
+							this.affGrille.add(tmpGrille[i][j], j, i);
+						}
 					}
+					
+					//Creation du boutons de validation
+					Button validation2 = new Button("Validation");
+					validation2.setOnAction(save -> sauvegarde());
+					
+					//Creation des separateurs vertical
+					Separator separator = new Separator();
+					Separator separator2 = new Separator();
+					//Actualisation de la scene
+					root.getChildren().clear();
+					root.getChildren().addAll(titleLabel,nivLabel,separator,affGrille,separator2,validation2);
+					//Actualisation de la taille de la fenetre
+					root.getScene().getWindow().sizeToScene();
 				}
-				
-				//Creation du boutons de validation
-				Button validation2 = new Button("Validation");
-				validation2.setOnAction(save -> sauvegarde());
-				
-				//Creation des separateurs vertical
-				Separator separator = new Separator();
-				Separator separator2 = new Separator();
-				//Actualisation de la scene
-				root.getChildren().clear();
-				root.getChildren().addAll(titleLabel,nivLabel,separator,affGrille,separator2,validation2);
-				//Actualisation de la taille de la fenetre
-				root.getScene().getWindow().sizeToScene();
 			} catch (Exception error) {
 				erreur(0);
 			}
@@ -150,6 +154,10 @@ public class CreationNiveau extends Application {
 			case 2:
 				alert.setHeaderText("Probleme de diamant ou d'entrepot");
 				alert.setContentText("Merci de placer autant de diamant que d'entrepot ( Au minimum un de chaque)");
+				break;
+			case 4:
+				alert.setHeaderText("Probleme de dimensions");
+				alert.setContentText("Un niveau doit avoir une dimension minimum de 5 par 5");
 				break;
 			default:
 				alert.setHeaderText("Erreur creation de fichier");
