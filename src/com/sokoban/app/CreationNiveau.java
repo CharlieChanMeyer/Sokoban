@@ -222,9 +222,12 @@ public class CreationNiveau extends Application {
 					//On reset tmp
 					tmp = "";
 				}
-				for(int i =0;i<lignes.size();i++) {
-					Files.write(fichier,lignes,Charset.forName("UTF-8"));
-				}
+				Files.write(fichier,lignes,Charset.forName("UTF-8"));
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setHeaderText("Succes");
+				alert.setContentText("Le niveau a ete sauvegarde avec succes! A noter que le niveau sera accessible une fois le jeu relance.");
+				alert.setTitle("Sokoban - Niveau "+this.numeroNiveau);
+				alert.show();
 			} catch (IOException e) {
 				erreur(3);
 			}
