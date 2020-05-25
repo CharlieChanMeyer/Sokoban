@@ -19,21 +19,6 @@ public class Policier extends Mobile {
         super(Type.POLICIER,conf,position);
         this.histo = new ArrayList<Direction>();
     }
-    
-//		A CODER AILLEURS A MON AVIS
-//    /**
-//     * @param Direction 
-//     * @return
-//     */
-//    public boolean verifVision() {
-//    	Boolean res = false;
-//        Configuration conf = this.config;
-//        Direction dir = getRegard();
-//        
-//        Position pos = this.position.add(dir);
-//        
-//        return false;
-//    }
 
     /**
      * @return
