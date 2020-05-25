@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Pacifico");
 
-.root{
+.root, .root2{
 	-fx-background-color: #F0F4F8;
 	-fx-alignment: center;
 	-fx-padding: 5px;

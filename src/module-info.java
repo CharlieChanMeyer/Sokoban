@@ -3,6 +3,7 @@ module com.sokoban {
 	requires transitive javafx.graphics;
 	requires transitive javafx.base;
 	requires javafx.fxml;
+	requires java.sql;
 	
 	opens com.sokoban to javafx.fxml;
 	opens com.sokoban.app to javafx.fxml;

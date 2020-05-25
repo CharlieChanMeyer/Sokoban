@@ -1,6 +1,10 @@
 package com.sokoban.app;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.sokoban.Configuration;
@@ -9,7 +13,6 @@ import com.sokoban.Position;
 import com.sokoban.Type;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -18,6 +21,7 @@ import javafx.scene.control.Separator;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -32,8 +36,49 @@ public class Niveau extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		primaryStage.setTitle("Sokoban - Niveau " + nivSelec);// Change le titre de la fenetre pour Sokoban - Niveau + numero du niveau
-		//Creation du conteneur
-		VBox root = new VBox();
+		//Creation des conteneurs
+		HBox root = new HBox();
+		VBox root2 = new VBox();
+		//Creations de la grille d'affichage pour les scores
+		GridPane score = new GridPane();
+		Label[][] scoreLabels = new Label[6][2];
+		scoreLabels[0][0] = new Label("Pseudo");
+		scoreLabels[0][0].getStyleClass().add("entete");
+		scoreLabels[0][1] = new Label("Score");
+		scoreLabels[0][1].getStyleClass().add("entete");
+		for (int i = 1; i < 6; i++) {
+			for (int j = 0; j < 2; j++) {
+				scoreLabels[i][j] = new Label();
+			}
+		}
+		try {
+			//Connection à la BDD des scores
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://db5000450541.hosting-data.io:3306/dbs430915","dbu759661","ProjetGL2$");
+			//Creation de la variable de requete
+			Statement stmt=con.createStatement();
+			//Création de la variable de resultat et recuperation du resultat de la requete
+			ResultSet rs=stmt.executeQuery("SELECT pseudo,nbDeplacement FROM `HighScore` WHERE niveau = "+this.nivSelec+" ORDER BY nbDeplacement ASC LIMIT 5"); 
+			//Creation de la variable de deplacement
+			int i = 1;
+			//Tant qu'il y a un résultat dans rs
+			while (rs.next()) {
+				//on modifie les labels de la ligne
+				scoreLabels[i][0].setText(rs.getString(1));
+				scoreLabels[i][2].setText(rs.getString(2));
+				//On incremente le numero de la ligne
+				i++;
+			}
+			//On ferme la connection à la BDD
+			con.close();
+			for (i = 0; i<6;i++) {
+				for(int j = 0; j<2;j++) {
+					score.add(scoreLabels[i][j],j,i);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		
 		//Creation du label Titre
 		Label titleLabel = new Label("Sokoban");
@@ -50,7 +95,8 @@ public class Niveau extends Application {
 		//Creation du label de reset
 		Label reset = new Label("Vous êtes bloque ? Appuyez sur 'R' pour reset le niveau.");
 		//Ajout des elements
-		root.getChildren().addAll(titleLabel,nivLabel,nbDeplacement,nbBalle,separator,affGrille,separator2,reset);
+		root2.getChildren().addAll(titleLabel,nivLabel,nbDeplacement,nbBalle,separator,affGrille,separator2,reset);
+		root.getChildren().addAll(root2,score);
 		
 		// Charge la scene a partir du parent
 		Scene scene = new Scene(root);
