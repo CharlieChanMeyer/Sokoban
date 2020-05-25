@@ -9,6 +9,7 @@ import com.sokoban.Position;
 import com.sokoban.Type;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -30,7 +31,7 @@ public class Niveau extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		primaryStage.setTitle("Sokoban - Niveau " + nivSelec);// Change le titre de la fenetre pour Sokoban - Erreur
+		primaryStage.setTitle("Sokoban - Niveau " + nivSelec);// Change le titre de la fenetre pour Sokoban - Niveau + numero du niveau
 		//Creation du conteneur
 		VBox root = new VBox();
 		
@@ -164,6 +165,12 @@ public class Niveau extends Application {
 		//Variable de limitation de boucle
 		int x = this.config.getNiveau().getX();
 		int y = this.config.getNiveau().getY();
+		//Variable mort du joueur
+		boolean mort = false;
+		//Variable position du policier
+		Position posP;
+		//Variable direction du policier
+		Direction dirP;
 		//Pour chaque label de tmpGrille
 		for (i=0;i<x;i++) {
 			for (j=0;j<y;j++) {
@@ -215,6 +222,22 @@ public class Niveau extends Application {
 				this.affGrille.add(tmpGrille[i][j], j, i);
 			}
 		}
+		//Pour chaque policier
+		for(i=0;i<this.config.getPoliciers().size();i++) {
+			//On recupere la position et la vision du policier
+			posP = this.config.getPoliciers().get(i).getPosition();
+			dirP = this.config.getPoliciers().get(i).getRegard();
+			//Pour les deux cases devant le policier
+			for (j=0;j<2;j++) {
+				//on actualise la position verifie
+				posP = posP.add(dirP);
+				//Si on est pas déjà mort
+				if (!mort) {
+					//Le booleen mort prend la valeur de l'egalite (positionJoueur == positionVeirifier)
+					mort = this.config.getJoueur().getPosition().equals(posP);
+				}
+			}
+		}
 		//Update les labels d'informations
 		updateLabels();
 		//Si le compteur est egal au nombre de diamant du niveau
@@ -225,6 +248,25 @@ public class Niveau extends Application {
 			alert.setHeaderText("Victoire");
 			alert.setContentText("Bravo, vous avez gagne le niveau "+this.nivSelec+" en "+this.config.getJoueur().getHisto().size()+" coups !");
 			alert.show();
+		//Sinon, si on est mort
+		} else if (mort) {
+			//Cree et affiche une alerteBox indiquant la defaite
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Sokoban - Niveau "+this.nivSelec);
+			alert.setHeaderText("Defaite");
+			alert.setContentText("Dommage, vous avez perdu le niveau "+this.nivSelec+". Vous avez etes reperer par un policier.");
+			alert.show();
+			//Lors de la fermeture de l'alerteBox
+			alert.setOnCloseRequest(e -> {
+				//Reset le niveau
+				try {
+					this.config = new Configuration(this.nivSelec);
+				} catch (IOException error) {
+					error.printStackTrace();
+				}
+				updateGrille();
+			});
+			
 		}
 	}
 	
