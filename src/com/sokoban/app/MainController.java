@@ -97,4 +97,16 @@ public class MainController implements Initializable {
 		
 		
 	}
+	
+	@FXML
+	protected void createNiv(ActionEvent e) throws Exception  {
+		//Cree un stage pour la creation du niveau
+		Stage createNivStage = new Stage();
+		//Recupere le numero du dernier niveau et y ajoute 1.
+		int nouveauNiveau = this.list.size() + 1;
+		//Cree l'instance de niveau
+		CreationNiveau niv = new CreationNiveau(nouveauNiveau);
+		//appel la fonction start en indiquant le numero du niveau
+		niv.start(createNivStage);
+	}
 }
