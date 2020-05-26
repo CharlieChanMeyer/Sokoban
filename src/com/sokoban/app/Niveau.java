@@ -16,8 +16,10 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -32,6 +34,8 @@ public class Niveau extends Application {
 	private Label nbBalle;
 	private GridPane affGrille;
 	private Label[][] tmpGrille;
+	private Label[][] scoreLabels;
+	private GridPane score;
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -39,46 +43,22 @@ public class Niveau extends Application {
 		//Creation des conteneurs
 		HBox root = new HBox();
 		VBox root2 = new VBox();
-		//Creations de la grille d'affichage pour les scores
-		GridPane score = new GridPane();
-		Label[][] scoreLabels = new Label[6][2];
+		VBox scoreBox = new VBox();
+		//Creation du label HighScore et mise en place de son id css
+		Label hsLabel = new Label("HighScore");
+		hsLabel.setId("hsLabel");
+		//Ajouts des entetes et de leur class css
 		scoreLabels[0][0] = new Label("Pseudo");
 		scoreLabels[0][0].getStyleClass().add("entete");
 		scoreLabels[0][1] = new Label("Score");
 		scoreLabels[0][1].getStyleClass().add("entete");
+		//Creations des labels
 		for (int i = 1; i < 6; i++) {
 			for (int j = 0; j < 2; j++) {
 				scoreLabels[i][j] = new Label();
 			}
 		}
-		try {
-			//Connection à la BDD des scores
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://db5000450541.hosting-data.io:3306/dbs430915","dbu759661","ProjetGL2$");
-			//Creation de la variable de requete
-			Statement stmt=con.createStatement();
-			//Création de la variable de resultat et recuperation du resultat de la requete
-			ResultSet rs=stmt.executeQuery("SELECT pseudo,nbDeplacement FROM `HighScore` WHERE niveau = "+this.nivSelec+" ORDER BY nbDeplacement ASC LIMIT 5"); 
-			//Creation de la variable de deplacement
-			int i = 1;
-			//Tant qu'il y a un résultat dans rs
-			while (rs.next()) {
-				//on modifie les labels de la ligne
-				scoreLabels[i][0].setText(rs.getString(1));
-				scoreLabels[i][2].setText(rs.getString(2));
-				//On incremente le numero de la ligne
-				i++;
-			}
-			//On ferme la connection à la BDD
-			con.close();
-			for (i = 0; i<6;i++) {
-				for(int j = 0; j<2;j++) {
-					score.add(scoreLabels[i][j],j,i);
-				}
-			}
-		} catch (Exception e) {
-			System.out.println(e);
-		}
+		updatescore();
 		
 		//Creation du label Titre
 		Label titleLabel = new Label("Sokoban");
@@ -95,8 +75,11 @@ public class Niveau extends Application {
 		//Creation du label de reset
 		Label reset = new Label("Vous êtes bloque ? Appuyez sur 'R' pour reset le niveau.");
 		//Ajout des elements
+		scoreBox.getChildren().addAll(hsLabel,score);
+		scoreBox.setId("scoreBox");
 		root2.getChildren().addAll(titleLabel,nivLabel,nbDeplacement,nbBalle,separator,affGrille,separator2,reset);
-		root.getChildren().addAll(root2,score);
+		root2.setId("niveau");
+		root.getChildren().addAll(root2,scoreBox);
 		
 		// Charge la scene a partir du parent
 		Scene scene = new Scene(root);
@@ -159,6 +142,38 @@ public class Niveau extends Application {
 
 	}
 
+	private void updatescore() {
+		try {
+			//Connection à la BDD des scores
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://e90653-mysql.services.easyname.eu/u143161db7","u143161db7","ProjetGL2");
+			//Creation de la variable de requete
+			Statement stmt=con.createStatement();
+			//Création de la variable de resultat et recuperation du resultat de la requete
+			ResultSet rs=stmt.executeQuery("SELECT pseudo,nbDeplacement FROM `HighScore` WHERE niveau = "+this.nivSelec+" ORDER BY nbDeplacement ASC LIMIT 5"); 
+			//Creation de la variable de deplacement
+			int i = 1;
+			//Tant qu'il y a un résultat dans rs
+			while (rs.next()) {
+				//on modifie les labels de la ligne
+				scoreLabels[i][0].setText(rs.getString(1));
+				scoreLabels[i][1].setText(rs.getString(2));
+				//On incremente le numero de la ligne
+				i++;
+			}
+			//On ferme la connection à la BDD
+			con.close();
+			for (i = 0; i<6;i++) {
+				for(int j = 0; j<2;j++) {
+					score.add(scoreLabels[i][j],j,i);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+
 	/**
 	 * @param nivSelec
 	 */
@@ -191,6 +206,10 @@ public class Niveau extends Application {
 		}
 		//Initialise la grille d'affichage
 		this.affGrille = new GridPane();
+		//Creations de la grille d'affichage pour les scores
+		this.score = new GridPane();
+		this.score.setId("score");
+		this.scoreLabels = new Label[6][2];
 	}
 	
 	private void updateLabels() {
@@ -294,6 +313,8 @@ public class Niveau extends Application {
 			alert.setHeaderText("Victoire");
 			alert.setContentText("Bravo, vous avez gagne le niveau "+this.nivSelec+" en "+this.config.getJoueur().getHisto().size()+" coups !");
 			alert.show();
+			//Sauvegarde le score
+			saveScore();
 		//Sinon, si on est mort
 		} else if (mort) {
 			//Cree et affiche une alerteBox indiquant la defaite
@@ -315,25 +336,74 @@ public class Niveau extends Application {
 			
 		}
 	}
-	
-//	private void verifVictoire() {
-//		if (this.config.victoire()) {
-//			Alert alert = new Alert(AlertType.INFORMATION);
-//			alert.setTitle("Sokoban - Niveau "+this.nivSelec);
-//			alert.setHeaderText("Victoire");
-//			alert.setContentText("Bravo, vous avez gagne le niveau "+this.nivSelec+" en "+this.config.getJoueur().getHisto().size()+" coups !");
-//			alert.show();
-//
-//			new Thread(() -> {
-//				try {
-//					Thread.sleep(6000);
-//					Platform.runLater(() -> {
-//						alert.hide();
-//					});
-//				} catch (InterruptedException error) {
-//					error.printStackTrace();
-//				}
-//			}).start();
-//		}
-//	}
+
+	private void saveScore() {
+		//Creation du stage de sauvegarde de score 
+		Stage save = new Stage();
+		//Mise a jour du titre du stage
+		save.setTitle("Sokoban - Niveau "+this.nivSelec);
+		//Creation du conteneur
+		VBox saveVBox = new VBox();
+		//Creation du label et du champ de texte pour le pseudo
+		Label pseudoLabel = new Label("Pseudo : ");
+		TextField pseudoTF = new TextField();
+		//Creation de la HBox
+		HBox pseudoHBox = new HBox();
+		pseudoHBox.getChildren().addAll(pseudoLabel, pseudoTF);
+		//Creation des boutons
+		Button saveBt = new Button("Sauvegarder le score");
+		Button notSaveBt = new Button("Ne pas sauvegarder");
+		//Ajouts des fonctions des boutons
+		notSaveBt.setOnAction(e -> {
+			save.hide();
+			//Reset le niveau
+			try {
+				this.config = new Configuration(this.nivSelec);
+			} catch (IOException error) {
+				error.printStackTrace();
+			}
+			//Actualise la grille
+			updateGrille();
+			//Actualise le score
+			updatescore();
+		});
+		saveBt.setOnAction(e -> {
+			try {
+				//Connection à la BDD des scores
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con=DriverManager.getConnection("jdbc:mysql://e90653-mysql.services.easyname.eu/u143161db7","u143161db7","ProjetGL2");
+				//Creation de la variable de requete
+				Statement stmt=con.createStatement();
+				//Création de la variable de resultat et recuperation du resultat de la requete
+				int status =stmt.executeUpdate("INSERT INTO HighScore VALUES('"+pseudoTF.getText()+"',"+this.nivSelec+","+this.config.getJoueur().getHisto().size()+")"); 
+				//Creation du label de fin de sauvegarde
+				Label saveLabel = new Label();
+				if (status == 1) {
+					saveLabel.setText("Votre score a bien été sauvegarde!");
+				} else {
+					saveLabel.setText("Desole, il semblerait que l'application n'arrive pas a sauvegarder votre score. Merci de verifier votre connexion internet.");
+				}
+				notSaveBt.setText("Ok");
+				//Actualisation des elements 
+				saveVBox.getChildren().clear();
+				saveVBox.getChildren().addAll(saveLabel,notSaveBt);
+				//On ferme la connection à la BDD
+				con.close();
+		} catch (Exception error) {
+			System.out.println(error);
+		}
+		});
+		//Ajouts des elements dans le conteneur
+		saveVBox.getChildren().addAll(pseudoHBox,saveBt,notSaveBt);
+		//Creation de la scene
+		Scene saveScene = new Scene(saveVBox);
+		//Set la scene
+		save.setScene(saveScene);
+		// On empeche de redimmenssionner la fenetre
+		save.setResizable(false);
+		// Affiche la fenetre au centre de l'ecran
+		save.show();
+		save.centerOnScreen();
+	}
+
 }

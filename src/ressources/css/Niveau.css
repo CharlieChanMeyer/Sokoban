@@ -1,7 +1,17 @@
 @import url("https://fonts.googleapis.com/css?family=Pacifico");
 
-.root, .root2{
+.root{
 	-fx-background-color: #F0F4F8;
+	-fx-alignment: center;
+	-fx-padding: 5px;
+}
+
+#scoreBox {
+	-fx-alignment: center;
+	-fx-padding: 5px;
+}
+
+#niveau {
 	-fx-alignment: center;
 	-fx-padding: 5px;
 }
@@ -9,7 +19,13 @@
 #gameTitle{
 	-fx-font: bold 28px Pacifico;
 	-fx-text-fill: #044E54;
-	-fx-padding: 0 0 40px 0;
+	-fx-padding: 0 0 20px 0;
+	-fx-font-weight: bold;
+}
+#hsLabel {
+	-fx-font: bold 28px Pacifico;
+	-fx-text-fill: #044E54;
+	-fx-padding: 0 0 10px 0;
 	-fx-font-weight: bold;
 }
 
@@ -39,4 +55,16 @@
 
 .diamantEntrepot {
 	-fx-graphic: url("../img/diamantEntrepot.png");
+}
+.entete {
+	-fx-font: bold 18px Pacifico;
+	-fx-font-weight: bold;
+	-fx-padding: 0 10px 0 0;
+}
+#score {
+	-fx-padding: 10;
+	-fx-border-style: solid inside;
+	-fx-border-width: 2;
+	-fx-border-intsets: 5;
+	-fx-border-radius: 5;
 }
