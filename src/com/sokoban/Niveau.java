@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import astar.Matrice;
 
 /**
  * 
@@ -17,6 +18,8 @@ public class Niveau {
     /**
      * 
      */
+    private Matrice matrice;
+    
     private ArrayList<Position> cibles;
 
 
@@ -27,6 +30,14 @@ public class Niveau {
     public Niveau(int x, int y) {
         this.grille = new Immobile[x][y];
     }
+    
+    public void setMatrice() {
+		this.matrice = new Matrice(this.grille);
+	}
+
+    public Matrice getMatrice() {
+		return matrice;
+	}
 
     /**
      * @return

@@ -85,5 +85,21 @@ public class Position {
 	public String toString() {
 		return "Position [x=" + x + ", y=" + y + "]";
 	}
+    
+    public Direction directionVers(Position pos) {
+    	// on regarde si il faut ce deplacer à droite
+    	if (this.x-pos.getX() == 1) {
+    		return Direction.DROITE;
+    	//on regarde si il faut ce deplacer à gauche
+    	} else if (this.x-pos.getX() == -1) {
+    		return Direction.GAUCHE;
+    	//on regarde si il faut ce deplacer en bas
+    	} else if (this.y-pos.getY() == 1) {
+    		return Direction.BAS;
+    	//il faut donc ce deplacer en haut
+    	} else {
+    		return Direction.HAUT;
+    	}
+    }
 
 }
