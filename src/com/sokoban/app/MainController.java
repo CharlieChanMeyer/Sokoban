@@ -28,7 +28,7 @@ public class MainController implements Initializable {
 	@FXML
 	protected void openRegle(ActionEvent e) throws IOException {
 		Stage regleStage = new Stage();	//Cree une nouvelle fenetre
-		regleStage.setTitle("Sokoban - Les r�gles");	//Change le titre de la fenetre pour Sokoban - Les r�gles
+		regleStage.setTitle("Sokoban - Les regles");	//Change le titre de la fenetre pour Sokoban - Les r�gles
 		//Charge la ressource parent � partir du fichier Regles.fxml
 		Parent root = FXMLLoader.load(getClass().getResource("/ressources/fxml/Regles.fxml"));
 		//Charge la scene � partir du parent
@@ -69,14 +69,19 @@ public class MainController implements Initializable {
 		String nivSelec = selecNiv.getValue();
 		//Si un niveau est selectionner
 		if (nivSelec!=null) {
+			//Cree un stage pour le niveau
 			Stage nivStage = new Stage();
-			Niveau niv = new Niveau(nivSelec);
+			//Recupere le numero du niveau selectionne
+			char nivSelect = nivSelec.charAt(nivSelec.length()-1);
+			//Cree l'instance de niveau
+			Niveau niv = new Niveau(Character.getNumericValue(nivSelect));
+			//appel la fonction start en indiquant le numero du niveau
 			niv.start(nivStage);
-		} else { //Sinon
+		} else { //Sinon cree une alerteBox indiquant qu'aucun niveau n'a ete selectionne, et ferme l'alerteBox apres 2 secondes 
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("ATTENTION");
-			alert.setHeaderText("Probl�me de selection");
-			alert.setContentText("Vous n'avez s�lectionn� aucun niveau !");
+			alert.setHeaderText("Probleme de selection");
+			alert.setContentText("Vous n'avez selectionne aucun niveau !");
 			alert.show();
 
 			new Thread(() -> {
@@ -91,5 +96,17 @@ public class MainController implements Initializable {
 		}
 		
 		
+	}
+	
+	@FXML
+	protected void createNiv(ActionEvent e) throws Exception  {
+		//Cree un stage pour la creation du niveau
+		Stage createNivStage = new Stage();
+		//Recupere le numero du dernier niveau et y ajoute 1.
+		int nouveauNiveau = this.list.size() + 1;
+		//Cree l'instance de niveau
+		CreationNiveau niv = new CreationNiveau(nouveauNiveau);
+		//appel la fonction start en indiquant le numero du niveau
+		niv.start(createNivStage);
 	}
 }

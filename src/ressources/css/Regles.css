@@ -31,3 +31,47 @@
 	-fx-font: bold 20px "Comic Sans MS";
 	-fx-text-fill: #cc0000;
 }
+
+#labelTouche{
+	-fx-font: bold 20px "Comic Sans MS";
+	-fx-text-fill: #cc0000;
+}
+
+#affMur {
+	-fx-graphic: url("../img/mur/carre.png");
+}
+
+#affDiamant {
+	-fx-graphic: url("../img/diamant.png");
+}
+
+#affGardien {
+	-fx-graphic: url("../img/joueur.png");
+}
+
+#affJoueur {
+	-fx-graphic: url("../img/joueur.png");
+}
+
+#affCase {
+	-fx-graphic: url("../img/mur/case.png");
+}
+
+#affEntrepot {
+	-fx-graphic: url("../img/case.png");
+}
+
+#ToucheDeplacement{
+	-fx-graphic: url("../img/toucheDeplacement.png");
+	-fx-content-display: bottom;
+}
+
+#ToucheTirer{
+	-fx-graphic: url("../img/toucheTirer.png");
+	-fx-content-display: bottom;
+}
+
+#ToucheReset{
+	-fx-graphic: url("../img/toucheR.png");
+	-fx-content-display: bottom;
+}

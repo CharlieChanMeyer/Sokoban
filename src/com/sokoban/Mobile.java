@@ -44,15 +44,17 @@ public abstract class Mobile extends Element {
         return this.position;
     }
     
-    public Configuration getConfig() {
+    /**
+	 * @return the config
+	 */
+	public Configuration getConfig() {
 		return config;
 	}
-    
-    public Boolean bougerVers(Direction dir) {
-    	Boolean res = false;
+
+	public Boolean bougerVers(Direction dir) {
+		Boolean res = false;
     	Position nPos = this.position.add(dir);
     	if (this.config.get(nPos).getType().equals(Type.CASE)){
-    		this.position = nPos;
     		res = true;
     	}
     	return res;

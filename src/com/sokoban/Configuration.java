@@ -1,5 +1,9 @@
 package com.sokoban;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -15,11 +19,76 @@ public class Configuration {
      * @param niv 
      * @param positionJoueur
      */
-    public Configuration(Niveau niv, Position positionJoueur) {
-        this.niveau = niv;
+    public Configuration(int numNiv) throws IOException{
+    	BufferedReader lecteur = null; //Lecteur du fichier
+    	String ligne; //Variable d'une ligne			
+        Integer cmpLigne = 0; //Compteur de ligne lu
+        
+        try {
+			this.niveau = new Niveau(numNiv);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         this.diamants = new ArrayList<Diamant>();
         this.policiers = new ArrayList<Policier>();
-        this.joueur = new Joueur(this, positionJoueur);
+        
+        //lecture des diamants et policiers
+        try {
+        	//Essaye de lire le fichier du niveau
+			lecteur = new BufferedReader(new FileReader("src/ressources/niveaux/"+numNiv+".txt"));
+		} catch (FileNotFoundException e) {
+			//Si erreur, affiche une Erreur d'ouverture
+			System.out.println("Erreur d'ouverture");
+			e.printStackTrace();
+		}
+      //Tant qu'il y a une ligne a lire
+        while ((ligne = lecteur.readLine()) != null) {
+        	switch (cmpLigne) {
+        	//S'il sagit de la premiere ligne
+        	case 0:
+        		//Incremente le nombre de ligne lu
+        		cmpLigne++;
+        		break;
+        	//S'il sagit de la seconde ligne
+        	case 1:
+        		//Increment le nombre de ligne lu
+        		cmpLigne++;
+        		break;
+        	//S'il sagit de la troisieme ligne (ligne de la position de depart du perso)
+        	case 2:
+        		//séparer la ligne en deux
+        		String position[] = ligne.split(",");
+        		//Stock la position x du joueur
+        		int x = Integer.parseInt(position[0]);
+        		//Stock la position y du joueur
+        		int y = Integer.parseInt(position[1]);
+        		//Création du joueur
+        		this.joueur = new Joueur(this, new Position(x, y) , 0);
+        		//Incremente le nombre de ligne lu
+        		cmpLigne++;
+        		break;
+        	//Dans tous les autres cas
+        	default:
+        		//Pour chaque caractere de la ligne
+        		for (int j=0;j<ligne.length();j++) {
+        			//Stock le caractere
+        			char verif = ligne.charAt(j);
+        			//S'il sagit d'un 3, creer un diamant
+        			if (Character.getNumericValue(verif) == 3) {
+        				this.getDiamants().add(new Diamant(this, new Position(cmpLigne-3, j)));
+        			//Sinon, s'il sagit d'un 4, créer un policier
+        			} else if (Character.getNumericValue(verif) == 4){
+        				this.getPoliciers().add(new Policier(this, new Position(cmpLigne-3, j)));
+        			}
+        		}
+        		//Incremente le nombre de ligne lu
+        		cmpLigne++;
+        	}
+        }
+        //Set le nombre de balle du joueur au nombre exacte de policier
+        this.joueur.setBalles(this.getPoliciers().size());
+        //Ferme le fichier
+        lecteur.close();
     }
 
     /**
@@ -30,48 +99,6 @@ public class Configuration {
     	this.policiers = config.getPoliciers();
     	this.joueur = config.getJoueur();
     	this.niveau = config.getNiveau();
-    }
-
-    /**
-     * @param pos 
-     * @return
-     */
-    public boolean addDiamant(Position pos) {
-    	boolean valRetour; //la valeur de retour qui indique si tout c'est bien passé
-    	//on suppose que tout se passera bien
-    	valRetour = true;
-    	
-    	try {
-    		this.getDiamants().add(new Diamant(this, pos));
-    		//gerer la position
-    		//throw IllegalArgumentException;
-    	}
-        catch (IllegalArgumentException e) {
-        	//une erreur est survenu, on retourne false
-        	valRetour = false;
-        }
-        return valRetour;
-    }
-    
-    /**
-     * @param pos 
-     * @return
-     */
-    public boolean addPolicier(Position pos) {
-    	boolean valRetour; //la valeur de retour qui indique si tout c'est bien passé
-    	//on suppose que tout se passera bien
-    	valRetour = true;
-    	
-    	try {
-    		this.getPoliciers().add(new Policier(this, pos));
-    		//gerer la position
-    		//throw IllegalArgumentException;
-    	}
-        catch (IllegalArgumentException e) {
-        	//une erreur est survenu, on retourne false
-        	valRetour = false;
-        }
-        return(valRetour);
     }
 
     /**
@@ -146,34 +173,25 @@ public class Configuration {
      * @param Direction 
      * @return
      */
-    public boolean bougerJoueurVers(Direction direction) {
-    	boolean valRetour; //la valeur de retour qui indique si tout c'est bien passé
-    	//on suppose que l'on a pas pu bouger le joueur
-    	valRetour = false;
-    	
-        Position newPos = this.getJoueur().position.add(direction);
-		this.getJoueur().setRegard(direction);
-		//si la nouvelle case ne contient rien et n'est pas un mur
-		if (this.estVide(newPos)) {
-			this.getJoueur().setPosition(newPos);
-			valRetour = true;
-		} else {
-			//si la nouvelle case contient un diamant
-			if (this.get(newPos).getType() == "Diamand") {
-				//on défini la nouvelle position du diamant
-				Position newPosDiams = newPos.add(direction);
-				if(this.get(newPos).getType() == "Case") {
-					//on bouge le diamant
-					this.get(newPos).setPosition(newPosDiams);
-					//on bouge le joueur
-					this.getJoueur().setPosition(newPos);
-					valRetour = true;
-				}
-			}
-		}
-		//on retourne la valeur de retour
-		return(valRetour);
+    public boolean bougerJoueurVers(Direction dir) {
+    	boolean res = this.joueur.bougerVers(dir);
+    	Position newPos = joueur.getPosition().add(dir);
+    	if (res) {
+    		res = this.joueur.setPosition(newPos);
+        	this.joueur.addHisto(dir);
+    	}else if (this.get(newPos).getType().equals(Type.DIAMANT)) {
+    		if (this.get(newPos).bougerVers(dir)) {
+    			Position newPos1 = newPos.add(dir);
 
+    		    
+    			this.diamants.remove(this.diamants.get(diamants.indexOf(this.get(newPos))));
+    			this.diamants.add(new Diamant(this,newPos1));
+    			
+    			res = this.joueur.setPosition(newPos);
+    	    	this.joueur.addHisto(dir);
+    		}
+    	}
+    	return res;
     }
 
     /**
@@ -206,6 +224,16 @@ public class Configuration {
 
 	public ArrayList<Policier> getPoliciers() {
 		return policiers;
+	}
+	
+	public void removePolicier(Position pos) {
+		Policier remove = null;
+		for (Policier policier : this.policiers) {
+			if (policier.getPosition().equals(pos)) {
+				remove = policier;
+			}
+		}
+		this.policiers.remove(remove);
 	}
 
 }
