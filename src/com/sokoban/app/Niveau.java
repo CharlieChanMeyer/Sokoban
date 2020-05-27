@@ -73,7 +73,7 @@ public class Niveau extends Application {
 		//Actualisation de la grille
 		updateGrille();
 		//Creation du label de reset
-		Label reset = new Label("Vous êtes bloque ? Appuyez sur 'R' pour reset le niveau.");
+		Label reset = new Label("Vous ï¿½tes bloque ? Appuyez sur 'R' pour reset le niveau.");
 		//Ajout des elements
 		scoreBox.getChildren().addAll(hsLabel,score);
 		scoreBox.setId("scoreBox");
@@ -91,34 +91,42 @@ public class Niveau extends Application {
 			//S'il sagit de la touche Z, deplacement vers le haut et actualisation de l'affichage
 			if (key.getCode() == KeyCode.Z) {
 				config.bougerJoueurVers(Direction.HAUT);
+				config.getJoueur().setRegard(Direction.HAUT);
 				updateGrille();
 				//S'il sagit de la touche S, deplacement vers le bas et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.S) {
 				config.bougerJoueurVers(Direction.BAS);
+				config.getJoueur().setRegard(Direction.BAS);
 				updateGrille();
 				//S'il sagit de la touche Q, deplacement vers la gauche et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.Q) {
 				config.bougerJoueurVers(Direction.GAUCHE);
+				config.getJoueur().setRegard(Direction.GAUCHE);
 				updateGrille();
 				//S'il sagit de la touche D, deplacement vers la droite et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.D) {
 				config.bougerJoueurVers(Direction.DROITE);
+				config.getJoueur().setRegard(Direction.DROITE);
 				updateGrille();
 			//S'il sagit de la touche fleche du haut, tire vers le haut et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.UP) {
 				config.getJoueur().tirer(Direction.HAUT);
+				config.getJoueur().setRegard(Direction.HAUT);
 				updateGrille();
 			//S'il sagit de la touche fleche du bas, tire vers le bas et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.DOWN) {
 				config.getJoueur().tirer(Direction.BAS);
+				config.getJoueur().setRegard(Direction.BAS);
 				updateGrille();
 			//S'il sagit de la touche fleche de gauche, tire vers la gauche et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.LEFT) {
 				config.getJoueur().tirer(Direction.GAUCHE);
+				config.getJoueur().setRegard(Direction.GAUCHE);
 				updateGrille();
 			//S'il sagit de la touche fleche de droite, tire vers la droite et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.RIGHT) {
 				config.getJoueur().tirer(Direction.DROITE);
+				config.getJoueur().setRegard(Direction.DROITE);
 				updateGrille();
 				//S'il sagit de la touche R, reset la configuration du niveau et actualise l'affichage
 			} else if (key.getCode() == KeyCode.R) {
@@ -144,16 +152,16 @@ public class Niveau extends Application {
 
 	private void updatescore() {
 		try {
-			//Connection à la BDD des scores
+			//Connection ï¿½ la BDD des scores
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con=DriverManager.getConnection("jdbc:mysql://e90653-mysql.services.easyname.eu/u143161db7","u143161db7","ProjetGL2");
 			//Creation de la variable de requete
 			Statement stmt=con.createStatement();
-			//Création de la variable de resultat et recuperation du resultat de la requete
+			//Crï¿½ation de la variable de resultat et recuperation du resultat de la requete
 			ResultSet rs=stmt.executeQuery("SELECT pseudo,nbDeplacement FROM `HighScore` WHERE niveau = "+this.nivSelec+" ORDER BY nbDeplacement ASC LIMIT 5"); 
 			//Creation de la variable de deplacement
 			int i = 1;
-			//Tant qu'il y a un résultat dans rs
+			//Tant qu'il y a un rï¿½sultat dans rs
 			while (rs.next()) {
 				//on modifie les labels de la ligne
 				scoreLabels[i][0].setText(rs.getString(1));
@@ -161,7 +169,7 @@ public class Niveau extends Application {
 				//On incremente le numero de la ligne
 				i++;
 			}
-			//On ferme la connection à la BDD
+			//On ferme la connection ï¿½ la BDD
 			con.close();
 			for (i = 0; i<6;i++) {
 				for(int j = 0; j<2;j++) {
@@ -232,6 +240,9 @@ public class Niveau extends Application {
 		int y = this.config.getNiveau().getY();
 		//Variable mort du joueur
 		boolean mort = false;
+		
+		Position tmpPos;
+		
 		//Variable position du policier
 		Position posP;
 		//Variable direction du policier
@@ -239,24 +250,26 @@ public class Niveau extends Application {
 		//Pour chaque label de tmpGrille
 		for (i=0;i<x;i++) {
 			for (j=0;j<y;j++) {
+				tmpPos = new Position(i,j);
 				//S'il sagit d'un mur, change sa class en mur
-				if (this.config.get(new Position(i,j)).getType().equals(Type.MUR)) {
+				if (this.config.get(tmpPos).getType().equals(Type.MUR)) {
 					tmpGrille[i][j].getStyleClass().clear();
-					tmpGrille[i][j].getStyleClass().add("mur");
+					System.out.println(getMur(tmpPos));
+					tmpGrille[i][j].getStyleClass().add(getMur(tmpPos));
 				//S'il sagit d'un joueur, change sa class en joueur
-				} else if (this.config.get(new Position(i,j)).getType().equals(Type.JOUEUR)) {
+				} else if (this.config.get(tmpPos).getType().equals(Type.JOUEUR)) {
 					tmpGrille[i][j].getStyleClass().clear();
-					tmpGrille[i][j].getStyleClass().add("joueur");
+					tmpGrille[i][j].getStyleClass().add(this.getRegard());
 				//S'il sagit d'un diamant, change sa class en diamant
-				} else if (this.config.get(new Position(i,j)).getType().equals(Type.DIAMANT)) {
+				} else if (this.config.get(tmpPos).getType().equals(Type.DIAMANT)) {
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("diamant");
 				//S'il sagit d'une case, change sa class en case
-				} else if (this.config.get(new Position(i,j)).getType().equals(Type.CASE)) {
+				} else if (this.config.get(tmpPos).getType().equals(Type.CASE)) {
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("case");
 				//S'il sagit d'un policier, change sa class en policier
-				} else if (this.config.get(new Position(i,j)).getType().equals(Type.POLICIER)) {
+				} else if (this.config.get(tmpPos).getType().equals(Type.POLICIER)) {
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("policier");
 				}
@@ -296,7 +309,7 @@ public class Niveau extends Application {
 			for (j=0;j<2;j++) {
 				//on actualise la position verifie
 				posP = posP.add(dirP);
-				//Si on est pas déjà mort
+				//Si on est pas dï¿½jï¿½ mort
 				if (!mort) {
 					//Le booleen mort prend la valeur de l'egalite (positionJoueur == positionVeirifier)
 					mort = this.config.getJoueur().getPosition().equals(posP);
@@ -336,6 +349,135 @@ public class Niveau extends Application {
 			
 		}
 	}
+	
+	private String getRegard() {
+		String res = "";
+		if (this.config.getJoueur().getRegard().equals(Direction.DROITE)) {
+			res = "joueur_droite";
+		}else if(this.config.getJoueur().getRegard().equals(Direction.GAUCHE)) {
+			res = "joueur_gauche";
+		}else if(this.config.getJoueur().getRegard().equals(Direction.HAUT)) {
+			res = "joueur_haut";
+		}else if(this.config.getJoueur().getRegard().equals(Direction.BAS)) {
+			res = "joueur_bas";
+		}
+		return res;
+	}
+	
+	private boolean inGrille(Position pos) {
+		int sizeX = this.config.getNiveau().getX();
+		int sizeY = this.config.getNiveau().getY();
+		if (((pos.getX() < sizeX)&&(pos.getX() >= 0)) && ((pos.getY() < sizeY)&&(pos.getY() >= 0))){
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	private String getMur(Position pos) {
+		String res = "";
+		
+		boolean haut = false;
+		boolean bas = false;
+		boolean gauche = false;
+		boolean droite = false;
+		boolean hautDroite = false;
+		boolean hautGauche = false;
+		boolean basGauche = false;
+		boolean basDroite = false;
+		
+		Position tmpPos = new Position(pos);
+		
+		//haut
+		tmpPos = tmpPos.add(Direction.HAUT);
+		if ((inGrille(tmpPos) && (this.config.get(tmpPos).getType().equals(Type.MUR)))){
+			haut = true;
+		}
+		tmpPos = tmpPos.sub(Direction.HAUT);
+		
+		//bas
+		tmpPos = tmpPos.add(Direction.BAS);
+		if ((inGrille(tmpPos) && (this.config.get(tmpPos).getType().equals(Type.MUR)))){
+			bas = true;
+		}
+		tmpPos = tmpPos.sub(Direction.BAS);
+		
+		//droite
+		tmpPos = tmpPos.add(Direction.DROITE);
+		if ((inGrille(tmpPos) && (this.config.get(tmpPos).getType().equals(Type.MUR)))){
+			droite = true;
+		}
+		tmpPos = tmpPos.sub(Direction.DROITE);
+		
+		//gauche
+		tmpPos = tmpPos.add(Direction.GAUCHE);
+		if ((inGrille(tmpPos) && (this.config.get(tmpPos).getType().equals(Type.MUR)))){
+			gauche = true;
+		}
+		tmpPos = tmpPos.sub(Direction.GAUCHE);
+		
+		//diagonale hautgauche
+		tmpPos = tmpPos.add(Direction.HAUT).add(Direction.GAUCHE);
+		if ((inGrille(tmpPos) && (this.config.get(tmpPos).getType().equals(Type.MUR)))){
+			hautGauche = true;
+		}
+		tmpPos = tmpPos.sub(Direction.GAUCHE).sub(Direction.HAUT);
+		
+		//diagonale hautdroite
+		tmpPos = tmpPos.add(Direction.HAUT).add(Direction.DROITE);
+		if ((inGrille(tmpPos) && (this.config.get(tmpPos).getType().equals(Type.MUR)))){
+			hautDroite = true;
+		}
+		tmpPos = tmpPos.sub(Direction.DROITE).sub(Direction.HAUT);
+		
+		//diagonale basgauche
+		tmpPos = tmpPos.add(Direction.BAS).add(Direction.GAUCHE);
+		if ((inGrille(tmpPos) && (this.config.get(tmpPos).getType().equals(Type.MUR)))){
+			basGauche = true;
+		}
+		tmpPos = tmpPos.sub(Direction.GAUCHE).sub(Direction.BAS);
+		
+		//diagonale basdroite
+		tmpPos = tmpPos.add(Direction.BAS).add(Direction.DROITE);
+		if ((inGrille(tmpPos) && (this.config.get(tmpPos).getType().equals(Type.MUR)))){
+			basDroite = true;
+		}
+		tmpPos = tmpPos.sub(Direction.DROITE).sub(Direction.BAS);
+		
+		if (haut && bas && droite && gauche) {
+			res = "inter_4";
+		} else if (haut && bas && droite) {
+			res = "inter_3_droite";
+		} else if (bas && droite && gauche) {
+			res = "inter_3_bas";
+		} else if (haut && bas && gauche) {
+			res = "inter_3_gauche";
+		} else if (haut && droite && gauche) {
+			res = "inter_3_haut";
+		} else if (haut && bas) {
+			res = "mur_vertical";
+		} else if (gauche && droite) {
+			res = "mur_horizontal";
+		} else if (haut && droite) {
+			res = "coin_bas_gauche";
+		} else if (haut && gauche) {
+			res = "coin_bas_droite";
+		} else if (bas && gauche) {
+			res = "coin_haut_droite";
+		} else if (bas && droite) {
+			res = "coin_haut_gauche";
+		} else if (bas) {
+			res = "bout_haut";
+		} else if (haut) {
+			res = "bout_bas";
+		} else if (gauche) {
+			res = "bout_droite";
+		} else if (droite) {
+			res = "bout_gauche";
+		}
+		
+		return res;
+	}
 
 	private void saveScore() {
 		//Creation du stage de sauvegarde de score 
@@ -369,17 +511,17 @@ public class Niveau extends Application {
 		});
 		saveBt.setOnAction(e -> {
 			try {
-				//Connection à la BDD des scores
+				//Connection ï¿½ la BDD des scores
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con=DriverManager.getConnection("jdbc:mysql://e90653-mysql.services.easyname.eu/u143161db7","u143161db7","ProjetGL2");
 				//Creation de la variable de requete
 				Statement stmt=con.createStatement();
-				//Création de la variable de resultat et recuperation du resultat de la requete
+				//Crï¿½ation de la variable de resultat et recuperation du resultat de la requete
 				int status =stmt.executeUpdate("INSERT INTO HighScore VALUES('"+pseudoTF.getText()+"',"+this.nivSelec+","+this.config.getJoueur().getHisto().size()+")"); 
 				//Creation du label de fin de sauvegarde
 				Label saveLabel = new Label();
 				if (status == 1) {
-					saveLabel.setText("Votre score a bien été sauvegarde!");
+					saveLabel.setText("Votre score a bien ï¿½tï¿½ sauvegarde!");
 				} else {
 					saveLabel.setText("Desole, il semblerait que l'application n'arrive pas a sauvegarder votre score. Merci de verifier votre connexion internet.");
 				}
@@ -387,7 +529,7 @@ public class Niveau extends Application {
 				//Actualisation des elements 
 				saveVBox.getChildren().clear();
 				saveVBox.getChildren().addAll(saveLabel,notSaveBt);
-				//On ferme la connection à la BDD
+				//On ferme la connection ï¿½ la BDD
 				con.close();
 		} catch (Exception error) {
 			System.out.println(error);

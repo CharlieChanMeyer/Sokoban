@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Joueur extends Mobile {
 	
     private ArrayList<Direction> histo;
+    private Direction regard = Direction.DROITE;
     private int balles;
     
     /**
@@ -78,17 +79,25 @@ public class Joueur extends Mobile {
             this.balles--;
     	}
     }
-
-	/**
-     * @return
-     */
+    
     public Direction getRegard() {
-    	Direction res = Direction.DROITE;
-        if (!this.histo.isEmpty()) {
-        	res = this.histo.get(this.histo.size()-1);
-        }
-        return res;
+    	return this.regard;
     }
+    
+    public void setRegard(Direction regard) {
+    	this.regard = regard;
+    }
+    
+//	/**
+//     * @return
+//     */
+//    public Direction getRegard() {
+//    	Direction res = Direction.DROITE;
+//        if (!this.histo.isEmpty()) {
+//        	res = this.histo.get(this.histo.size()-1);
+//        }
+//        return res;
+//    }
     
     public void addHisto(Direction dir) {
     	this.histo.add(dir);

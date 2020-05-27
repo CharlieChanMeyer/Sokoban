@@ -38,7 +38,7 @@
 }
 
 #affMur {
-	-fx-graphic: url("../img/mur.png");
+	-fx-graphic: url("../img/mur/carre.png");
 }
 
 #affDiamant {
@@ -46,7 +46,7 @@
 }
 
 #affGardien {
-	-fx-graphic: url("../img/policier.png");
+	-fx-graphic: url("../img/joueur.png");
 }
 
 #affJoueur {
@@ -54,11 +54,11 @@
 }
 
 #affCase {
-	-fx-graphic: url("../img/sol.png");
+	-fx-graphic: url("../img/mur/case.png");
 }
 
 #affEntrepot {
-	-fx-graphic: url("../img/entrepot.png");
+	-fx-graphic: url("../img/case.png");
 }
 
 #ToucheDeplacement{
