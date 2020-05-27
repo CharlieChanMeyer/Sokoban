@@ -40,6 +40,9 @@
 #affMur {
 	-fx-graphic: url("../img/mur/carre.png");
 }
+#affBalle {
+	-fx-graphic: url("../img/bullet.png");
+}
 
 #affDiamant {
 	-fx-graphic: url("../img/diamant.png");

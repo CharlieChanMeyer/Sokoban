@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 import com.sokoban.Configuration;
 import com.sokoban.Direction;
@@ -36,6 +37,8 @@ public class Niveau extends Application {
 	private Label[][] tmpGrille;
 	private Label[][] scoreLabels;
 	private GridPane score;
+	private boolean bullet = false;
+	private int pseudoTemps = 0;
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -71,7 +74,7 @@ public class Niveau extends Application {
 		Separator separator = new Separator();
 		Separator separator2 = new Separator();
 		//Actualisation de la grille
-		updateGrille();
+		updateGrille(false);
 		//Creation du label de reset
 		Label reset = new Label("Vous ï¿½tes bloque ? Appuyez sur 'R' pour reset le niveau.");
 		//Ajout des elements
@@ -92,42 +95,42 @@ public class Niveau extends Application {
 			if (key.getCode() == KeyCode.Z) {
 				config.bougerJoueurVers(Direction.HAUT);
 				config.getJoueur().setRegard(Direction.HAUT);
-				updateGrille();
+				updateGrille(false);
 				//S'il sagit de la touche S, deplacement vers le bas et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.S) {
 				config.bougerJoueurVers(Direction.BAS);
 				config.getJoueur().setRegard(Direction.BAS);
-				updateGrille();
+				updateGrille(false);
 				//S'il sagit de la touche Q, deplacement vers la gauche et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.Q) {
 				config.bougerJoueurVers(Direction.GAUCHE);
 				config.getJoueur().setRegard(Direction.GAUCHE);
-				updateGrille();
+				updateGrille(false);
 				//S'il sagit de la touche D, deplacement vers la droite et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.D) {
 				config.bougerJoueurVers(Direction.DROITE);
 				config.getJoueur().setRegard(Direction.DROITE);
-				updateGrille();
+				updateGrille(false);
 			//S'il sagit de la touche fleche du haut, tire vers le haut et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.UP) {
 				config.getJoueur().tirer(Direction.HAUT);
 				config.getJoueur().setRegard(Direction.HAUT);
-				updateGrille();
+				updateGrille(false);
 			//S'il sagit de la touche fleche du bas, tire vers le bas et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.DOWN) {
 				config.getJoueur().tirer(Direction.BAS);
 				config.getJoueur().setRegard(Direction.BAS);
-				updateGrille();
+				updateGrille(false);
 			//S'il sagit de la touche fleche de gauche, tire vers la gauche et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.LEFT) {
 				config.getJoueur().tirer(Direction.GAUCHE);
 				config.getJoueur().setRegard(Direction.GAUCHE);
-				updateGrille();
+				updateGrille(false);
 			//S'il sagit de la touche fleche de droite, tire vers la droite et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.RIGHT) {
 				config.getJoueur().tirer(Direction.DROITE);
 				config.getJoueur().setRegard(Direction.DROITE);
-				updateGrille();
+				updateGrille(false);
 				//S'il sagit de la touche R, reset la configuration du niveau et actualise l'affichage
 			} else if (key.getCode() == KeyCode.R) {
 				try {
@@ -135,7 +138,7 @@ public class Niveau extends Application {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				updateGrille();
+				updateGrille(true);
 			}
 			;
 		});
@@ -231,7 +234,9 @@ public class Niveau extends Application {
 		}
 	}
 	
-	private void updateGrille() {
+	private void updateGrille(boolean reset) {
+		//Variable de "probabilite" du pop d'une balle
+		int randomNum;
 		//Variables de deplacement
 		int i;
 		int j;
@@ -247,6 +252,11 @@ public class Niveau extends Application {
 		Position posP;
 		//Variable direction du policier
 		Direction dirP;
+		//Reset du compteur pour le pop de balle si reset == true
+		if (reset) {
+			this.bullet = false;
+			this.pseudoTemps = 0;
+		}
 		//Pour chaque label de tmpGrille
 		for (i=0;i<x;i++) {
 			for (j=0;j<y;j++) {
@@ -254,20 +264,44 @@ public class Niveau extends Application {
 				//S'il sagit d'un mur, change sa class en mur
 				if (this.config.get(tmpPos).getType().equals(Type.MUR)) {
 					tmpGrille[i][j].getStyleClass().clear();
-					System.out.println(getMur(tmpPos));
 					tmpGrille[i][j].getStyleClass().add(getMur(tmpPos));
 				//S'il sagit d'un joueur, change sa class en joueur
 				} else if (this.config.get(tmpPos).getType().equals(Type.JOUEUR)) {
+					//S'il passe sur une balle, rajoute la balle a son pistolet et reset pseudoTemps et bullet
+					if (tmpGrille[i][j].getStyleClass().contains("bullet")) {
+						this.config.getJoueur().addBalle();
+						this.bullet = false;
+						this.pseudoTemps = 0;
+					}
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add(this.getRegard());
 				//S'il sagit d'un diamant, change sa class en diamant
 				} else if (this.config.get(tmpPos).getType().equals(Type.DIAMANT)) {
+					//S'il passe sur une balle, rajoute la balle a son pistolet et reset pseudoTemps et bullet
+					if (tmpGrille[i][j].getStyleClass().contains("bullet")) {
+						this.config.getJoueur().addBalle();
+						this.bullet = false;
+						this.pseudoTemps = 0;
+					}
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("diamant");
 				//S'il sagit d'une case, change sa class en case
 				} else if (this.config.get(tmpPos).getType().equals(Type.CASE)) {
-					tmpGrille[i][j].getStyleClass().clear();
-					tmpGrille[i][j].getStyleClass().add("case");
+					//Prends le prochain nombre random entre 1 et 20 compris.
+					randomNum = ThreadLocalRandom.current().nextInt(1,21);
+					//Si une balle n'est pas déjà sur la grille, que le nombre random est egal a 1, qut le pseudoTemps est egal à 5 et que la pos n'est pas une cible
+					//Ou si la case contenait deja une balle et que ce n'est pas un reset
+					if ((!this.bullet && this.pseudoTemps == 5 && randomNum==1 && !this.config.getNiveau().getCibles().contains(tmpPos)) || (tmpGrille[i][j].getStyleClass().contains("bullet") && !reset)) {
+						//Met this.bullet sur true
+						this.bullet = true;
+						//Cha,gement la class pour bullet
+						tmpGrille[i][j].getStyleClass().clear();
+						tmpGrille[i][j].getStyleClass().add("bullet");
+					} else {
+						//Sinon, change la class pour case
+						tmpGrille[i][j].getStyleClass().clear();
+						tmpGrille[i][j].getStyleClass().add("case");
+					}
 				//S'il sagit d'un policier, change sa class en policier
 				} else if (this.config.get(tmpPos).getType().equals(Type.POLICIER)) {
 					tmpGrille[i][j].getStyleClass().clear();
@@ -292,6 +326,10 @@ public class Niveau extends Application {
 				cp++;
 			}
 		}
+		//Augmente le pseudo temps de 1 s'il est inferieur à 5 et qu'il n'y a pas deja une balle sur la grille
+		if (!this.bullet && this.pseudoTemps<5) {
+			this.pseudoTemps++;
+		}
 		//Reset la grille d'affichage
 		this.affGrille.getChildren().clear();
 		//Pour chaque case, ajoute le label correspondant
@@ -300,6 +338,8 @@ public class Niveau extends Application {
 				this.affGrille.add(tmpGrille[i][j], j, i);
 			}
 		}
+		//Variable verif mur
+		boolean mur = false;
 		//Pour chaque policier
 		for(i=0;i<this.config.getPoliciers().size();i++) {
 			//On recupere la position et la vision du policier
@@ -310,7 +350,8 @@ public class Niveau extends Application {
 				//on actualise la position verifie
 				posP = posP.add(dirP);
 				//Si on est pas dï¿½jï¿½ mort
-				if (!mort) {
+				if (!mort && !mur) {
+					mur = this.config.get(posP).getType().equals(Type.MUR);
 					//Le booleen mort prend la valeur de l'egalite (positionJoueur == positionVeirifier)
 					mort = this.config.getJoueur().getPosition().equals(posP);
 				}
@@ -344,7 +385,7 @@ public class Niveau extends Application {
 				} catch (IOException error) {
 					error.printStackTrace();
 				}
-				updateGrille();
+				updateGrille(true);
 			});
 			
 		}
@@ -505,7 +546,7 @@ public class Niveau extends Application {
 				error.printStackTrace();
 			}
 			//Actualise la grille
-			updateGrille();
+			updateGrille(true);
 			//Actualise le score
 			updatescore();
 		});

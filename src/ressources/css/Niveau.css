@@ -73,6 +73,11 @@
 	-fx-graphic: url("../img/mur/case.png");
 }
 
+.bullet {
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/bullet.png");
+}
+
 .entrepot {
 	-fx-graphic: url("../img/case.png");
 }
