@@ -271,6 +271,7 @@
     <end type="TARGET" refId="4"/>  
   </generalization>  
   <association id="55">    
+    <bendpoint x="63" y="1385"/>    
     <end type="SOURCE" refId="1" navigable="false">      
       <attribute id="56" name="histo"/>      
       <multiplicity id="57" minimum="0" maximum="2147483647"/>    
