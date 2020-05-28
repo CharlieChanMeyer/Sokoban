@@ -10,6 +10,7 @@ public class Astar {
 		//création de l'openList
 		OpenList openList = new OpenList(matrice.getDepart());
 		//initialisation du l'indice du point avec le meilleur potentiel
+		matrice.afficher();
 		int meilleur =0 ;
 		// ajout a l'openList du point de depart
 		Point pointEtudie = openList.getListe().get(0);
@@ -26,11 +27,17 @@ public class Astar {
 		// on verifier si la boucle c'est arrété car tout les points on été étudier
 		if ((openList.getListe().isEmpty()) && (!pointEtudie.equal(matrice.getArrive()))) {
 			//on renvoie null car il n'y a pas de chemin.
+			System.out.println("y'a pas cheh");
 			return null;
 		// il y a donc un chemin possible
 		} else {
 			// on prends la liste des parents du point d'arrivé
 			ArrayList<Position> chemin = pointEtudie.getParents();
+			System.out.println(chemin.size());
+			if (chemin.size() == 1) {
+				Direction direction = chemin.get(0).directionVers(matrice.getArrive().getPos());
+				return direction;
+			}
 			// on calcule la direction à suivre en fonction du point de depart et le suivant dans le chemin
 			Direction direction = chemin.get(0).directionVers(chemin.get(1));
 			// on renvoie la direction à suivre

@@ -12,7 +12,7 @@ public class Policier extends Mobile {
     /**
      * 
      */
-    public ArrayList<Direction> histo;
+    public Direction regard;
     public boolean etatAlerte;
 
     /**
@@ -21,7 +21,7 @@ public class Policier extends Mobile {
      */
     public Policier(Configuration conf, Position position) {
         super(Type.POLICIER,conf,position);
-        this.histo = new ArrayList<Direction>();
+        this.regard = Direction.HAUT;
         this.etatAlerte = false;
     }
 
@@ -29,15 +29,20 @@ public class Policier extends Mobile {
      * @return
      */
     public Direction getRegard() {
-    	Direction res = Direction.DROITE;
-        if (!this.histo.isEmpty()) {
-        	res = this.histo.get(this.histo.size()-1);
-        }
-        return res;
+        return this.regard;
+    }
+    
+    public void setRegard(Direction regard) {
+		this.regard = regard;
+	}
+    
+    public Boolean getEtatAlerte(){
+    	return this.etatAlerte;
     }
     
     public Direction deplacementPolicier() {
     	//si le policier n'est pas en alerte, on regarde s'il le deviens ce tour
+    	Direction direction = null;
     	if (!this.etatAlerte) {
     		int xPolicier=this.getPosition().getX();
     		int yPolicier=this.getPosition().getY();
@@ -51,30 +56,36 @@ public class Policier extends Mobile {
     	//si le policier est en alerte, il poursuit le joueur
     	if (this.etatAlerte) {
     		// ajout des mobiles sur la map pour l'application de A*
-    		Matrice newMap=this.getConfig().getNiveau().getMatrice().ajoutDesMobiles(this.getConfig());
+    		Matrice newMap= new Matrice(this.getConfig().getNiveau().getMatrice());
+    		newMap.ajoutDesMobiles(this.getConfig());
     		//ajout du point de depart
     		newMap.setDepart(this.getPosition());
     		//ajout du point d'arrive
     		newMap.setArrive(this.getConfig().getJoueur().getPosition());
     		//application du code A*
-    		Direction direction = Astar.aStar(newMap);
+    		direction = Astar.aStar(newMap);
+    		//changement du regard du policier
+    		if (direction != null) {
+    			this.regard = direction;
+    		}
     		//renvoie de la direction à suivre
+    		if (this.getConfig().getJoueur().getPosition().equals(this.getPosition().add(direction))) {
+    			return null;
+    		}
     		return direction;
     	//le policier n'est pas en alerte
     	} else {
-    		// le policier ce deplace en fonction de la derniere direction
-    		Direction direction = histo.get(histo.size()-1);
+    		// le policier ce deplace en fonction de son regard
     		//si le policier peut se deplacer dans cette direction, il le fait
-    		if (this.bougerVers(direction)) {
+    		if (this.bougerVers(this.regard)) {
     			//renvoie de la direction à suivre
-    			return (direction);
+    			return (this.regard);
     		//sinon il fait demi-tour
     		} else {
     			// inversion de la direction
-    			direction.setDx(-1*direction.getDx());
-    			direction.setDy(-1*direction.getDy());
+    			this.setRegard(this.regard.oppose());
     			//renvoie la direction à suivre
-    			return (direction);
+    			return (this.regard);
     		}
     	}
     }

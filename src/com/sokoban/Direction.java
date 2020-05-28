@@ -46,4 +46,16 @@ public enum Direction {
 	public ArrayList<Direction> getDirections(){
 		return directions;
 	}
+	
+	public Direction oppose() {
+		if ((this.dx == -1 ) && (this.dy == 0)) {
+			return BAS;
+		} else if ((this.dx == 1) && (this.dy == 0)) {
+			return HAUT;
+		} else if ((this.dx == 0) && (this.dy == -1)) {
+			return DROITE;
+		} else {
+			return GAUCHE;
+		}
+	}
 }

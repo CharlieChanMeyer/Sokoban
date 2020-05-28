@@ -23,26 +23,31 @@ public class Matrice {
 	public Matrice(Matrice map) {
 		this.depart = null;
 		this.arrive = null;
-		this.matrice= map.getMatrice();
+		int maxX = map.getMatrice().length;
+		int maxY = map.getMatrice()[0].length;
+		Point [][] newMatrice = new Point[maxX][maxY];
+		for (int x=0;x<maxX;x++) {
+			for (int y=0;y<maxY;y++) {
+				newMatrice[x][y] = new Point(map.getMatrice()[x][y].getValeur(),x,y);
+			}
+		}
+		this.matrice = newMatrice;
 	}
 	
-	public Matrice ajoutDesMobiles(Configuration conf) {
-		//création de la matrice à modifier
-		Matrice newMap = new Matrice(conf.getNiveau().getMatrice());
+	public void ajoutDesMobiles(Configuration conf) {
 		//création du raccourci pour la liste des diamant
 		ArrayList <Diamant> listeDiamant = conf.getDiamants();
 		//prise en compte de diamants en tant que mur pour A*
 		for (int i=0;i<listeDiamant.size()-1;i++) {
-			newMap.setValeur(1, listeDiamant.get(i).getPosition());
+			this.setValeur(1, listeDiamant.get(i).getPosition());
 		}
 		//création du raccourci pour la liste des policiers
 		ArrayList <Policier> listePolicier = conf.getPoliciers();
 		//prise en compte des policiers en tant de mur pour A*
 		for (int i=0;i<listePolicier.size()-1;i++) {
-			newMap.setValeur(1, listePolicier.get(i).getPosition());
+			this.setValeur(1, listePolicier.get(i).getPosition());
 		}
 		//on renvoie la carte la carte avec tout les murs initialisés
-		return newMap;
 	}
 	
 	public Matrice(Immobile [][] m){
@@ -66,7 +71,7 @@ public class Matrice {
 	//fonction de debbugage		
 	public void afficher() {
 		int maxX = this.matrice.length;
-		int maxY = 6;
+		int maxY = this.matrice[0].length;
 		for (int x=0;x<maxX;x++) {
 			for (int y=0;y<maxY;y++) {
 				if (this.matrice[x][y].getValeur() == 0) {

@@ -177,7 +177,7 @@ public class Niveau extends Application {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			//System.out.println(e);
 		}
 	}
 	
@@ -247,6 +247,17 @@ public class Niveau extends Application {
 		Position posP;
 		//Variable direction du policier
 		Direction dirP;
+		
+		
+		//Pour chaque policiers
+		for(i=0;i<this.config.getPoliciers().size();i++) {
+			Direction direction = this.config.getPoliciers().get(i).deplacementPolicier();
+			Position newPos = this.config.getPoliciers().get(i).getPosition().add(direction);
+			this.config.getPoliciers().get(i).setPosition(newPos);
+		}
+		
+		
+		
 		//Pour chaque label de tmpGrille
 		for (i=0;i<x;i++) {
 			for (j=0;j<y;j++) {
@@ -254,7 +265,7 @@ public class Niveau extends Application {
 				//S'il sagit d'un mur, change sa class en mur
 				if (this.config.get(tmpPos).getType().equals(Type.MUR)) {
 					tmpGrille[i][j].getStyleClass().clear();
-					System.out.println(getMur(tmpPos));
+					////System.out.println(getMur(tmpPos));
 					tmpGrille[i][j].getStyleClass().add(getMur(tmpPos));
 				//S'il sagit d'un joueur, change sa class en joueur
 				} else if (this.config.get(tmpPos).getType().equals(Type.JOUEUR)) {
