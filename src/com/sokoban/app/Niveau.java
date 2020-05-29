@@ -43,17 +43,20 @@ public class Niveau extends Application {
 	private Label[][] scoreLabels;
 	private GridPane score;
 	private Timeline  timeline = new Timeline();
+	private Timeline  timeline2 = new Timeline();
 	
 	private Timeline smoothJoueur = new Timeline();
 	private Timeline smoothPolicier = new Timeline();
+	private String classDirectionJoueur = "";
 	
 	private boolean bullet = false;
 	private int pseudoTemps = 0;
 	private boolean spawnBullet = false;
 	private int pseudoTempsSpawn = 0;
 	private Position spawnPos;
-	
+
 	private int duree = 100;
+	private int dureeDeplacementJoueur = 10;
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -108,24 +111,16 @@ public class Niveau extends Application {
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
 			//S'il sagit de la touche Z, deplacement vers le haut et actualisation de l'affichage
 			if (key.getCode() == KeyCode.Z) {
-				config.bougerJoueurVers(Direction.HAUT);
-				config.getJoueur().setRegard(Direction.HAUT);
-				updateGrille(false);
+				this.bougerJoueur(Direction.HAUT);
 				//S'il sagit de la touche S, deplacement vers le bas et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.S) {
-				config.bougerJoueurVers(Direction.BAS);
-				config.getJoueur().setRegard(Direction.BAS);
-				updateGrille(false);
+				this.bougerJoueur(Direction.BAS);
 				//S'il sagit de la touche Q, deplacement vers la gauche et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.Q) {
-				config.bougerJoueurVers(Direction.GAUCHE);
-				config.getJoueur().setRegard(Direction.GAUCHE);
-				updateGrille(false);
+				this.bougerJoueur(Direction.GAUCHE);
 				//S'il sagit de la touche D, deplacement vers la droite et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.D) {
-				config.bougerJoueurVers(Direction.DROITE);
-				config.getJoueur().setRegard(Direction.DROITE);
-				updateGrille(false);
+				this.bougerJoueur(Direction.DROITE);
 			//S'il sagit de la touche fleche du haut, tire vers le haut et actualisation de l'affichage
 			} else if (key.getCode() == KeyCode.UP) {
 				this.tirer(Direction.HAUT);
@@ -348,6 +343,93 @@ public class Niveau extends Application {
 		}
 	}
 	
+	private void bougerJoueur(Direction dir) {
+		//on change le regard du joueur
+		config.getJoueur().setRegard(dir);
+		//sauvegarde de la derniere position du joueur
+		Position pos = this.config.getJoueur().getPosition();
+		//le joueur change de position
+		config.bougerJoueurVers(dir);
+		//sauvegarde de la nouvelle position du joueur
+		Position newPos = this.config.getJoueur().getPosition();
+		
+		if(pos!=newPos) {
+			this.smoothJoueur.stop();
+			this.timeline.stop();
+			this.timeline2.stop();
+			
+	
+			//on défini la variable qui contiendra la class css qui sera utilisé pour la direction
+			this.classDirectionJoueur = "";
+			if(dir.equals(Direction.GAUCHE)) {
+				this.classDirectionJoueur = "gauche";
+				
+			} else if(dir.equals(Direction.HAUT)) {
+				this.classDirectionJoueur = "haut";
+				
+			} else if(dir.equals(Direction.BAS)) {
+				this.classDirectionJoueur = "bas";
+			}
+			this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().clear();
+			KeyFrame key0 = new KeyFrame(Duration.millis(0), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_0","fond_case", this.classDirectionJoueur));
+			KeyFrame key1 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_1","fond_case", this.classDirectionJoueur));
+			KeyFrame key2 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*2), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_2","fond_case", this.classDirectionJoueur));
+			KeyFrame key3 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*3), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_3","fond_case", this.classDirectionJoueur));
+			KeyFrame key4 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*4), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_4","fond_case", this.classDirectionJoueur));
+			KeyFrame key5 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*5), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_5","fond_case", this.classDirectionJoueur));
+			KeyFrame key6 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*6), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_6","fond_case", this.classDirectionJoueur));
+			KeyFrame key7 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*7), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_7","fond_case", this.classDirectionJoueur));
+			KeyFrame key8 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*8), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_8","fond_case", this.classDirectionJoueur));
+			KeyFrame key9 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*9), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_9","fond_case", this.classDirectionJoueur));
+			KeyFrame key10 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*10), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_10","fond_case", this.classDirectionJoueur));
+			KeyFrame key11 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*11), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_11","fond_case", this.classDirectionJoueur));
+			KeyFrame key12 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*12), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_12","fond_case", this.classDirectionJoueur));
+			KeyFrame key13 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*13), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_13","fond_case", this.classDirectionJoueur));
+			KeyFrame key14 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*14), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_14","fond_case", this.classDirectionJoueur));
+			KeyFrame key15 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*15), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_15","fond_case", this.classDirectionJoueur));
+			KeyFrame key16 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*16), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_16","fond_case", this.classDirectionJoueur));
+			KeyFrame key17 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*17), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_17","fond_case", this.classDirectionJoueur));
+			KeyFrame key18 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*18), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().addAll("joueur_move_1_18","fond_case", this.classDirectionJoueur));
+			this.timeline.getKeyFrames().setAll(key0,key1,key2,key3,key4,key5,key6,key7,key8,key9,key10,key11,key12,key13,key14,key15,key16,key17,key18);
+			this.timeline.setOnFinished(e -> {
+				this.timeline.getKeyFrames().removeAll(key0,key1,key2,key3,key4,key5,key6,key7,key8,key9,key10,key11,key12,key13,key14,key15,key16,key17,key18);
+			});
+			
+			this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().clear();
+			KeyFrame newKey0 = new KeyFrame(Duration.millis(0), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_0","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey1 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_1","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey2 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*2), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_2","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey3 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*3), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_3","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey4 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*4), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_4","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey5 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*5), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_5","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey6 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*6), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_6","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey7 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*7), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_7","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey8 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*8), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_8","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey9 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*9), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_9","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey10 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*10), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_10","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey11 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*11), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_11","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey12 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*12), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_12","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey13 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*13), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_13","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey14 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*14), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_14","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey15 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*15), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_15","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey16 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*16), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_16","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey17 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*17), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_17","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey18 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*18), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_18","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey19 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*19), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_19","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey20 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*20), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_20","fond_case", this.classDirectionJoueur));
+			KeyFrame newKey21 = new KeyFrame(Duration.millis(this.dureeDeplacementJoueur*21), e -> this.tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().addAll("joueur_move_2_21","fond_case", this.classDirectionJoueur));
+			this.timeline2.getKeyFrames().setAll(newKey0,newKey1,newKey2,newKey3,newKey4,newKey5,newKey6,newKey7,newKey8,newKey9,newKey10,newKey11,newKey12,newKey13,newKey14,newKey15,newKey16,newKey17,newKey18,newKey19,newKey20,newKey21);
+			this.timeline2.setOnFinished(e -> {
+				updateGrille(false);
+				this.timeline2.getKeyFrames().removeAll(newKey0,newKey1,newKey2,newKey3,newKey4,newKey5,newKey6,newKey7,newKey8,newKey9,newKey10,newKey11,newKey12,newKey13,newKey14,newKey15,newKey16,newKey17,newKey18,newKey19,newKey20,newKey21);
+			});
+			
+			this.timeline.play();
+			this.timeline2.play();
+		}
+		
+	}
+	
 	private void attack(Direction dir, Position pos) {
 		if (dir.equals(Direction.DROITE)) {
 			KeyFrame k = new KeyFrame(Duration.millis(0), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("policier_droite"));
@@ -363,6 +445,7 @@ public class Niveau extends Application {
 			this.timeline.getKeyFrames().addAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
 			this.timeline.setOnFinished(e -> {
 				this.timeline.getKeyFrames().removeAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
+				updateGrille(false);
 			});
 		} else if (dir.equals(Direction.GAUCHE)) {
 			KeyFrame k = new KeyFrame(Duration.millis(0), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("policier_gauche"));
@@ -378,6 +461,7 @@ public class Niveau extends Application {
 			this.timeline.getKeyFrames().addAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
 			this.timeline.setOnFinished(e -> {
 				this.timeline.getKeyFrames().removeAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
+				updateGrille(false);
 			});
 		} else if (dir.equals(Direction.BAS)) {
 			KeyFrame k = new KeyFrame(Duration.millis(0), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("policier_bas"));
@@ -393,6 +477,7 @@ public class Niveau extends Application {
 			this.timeline.getKeyFrames().addAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
 			this.timeline.setOnFinished(e -> {
 				this.timeline.getKeyFrames().removeAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
+				updateGrille(false);
 			});
 		} else if (dir.equals(Direction.HAUT)) {
 			KeyFrame k = new KeyFrame(Duration.millis(0), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("policier_haut"));
@@ -408,6 +493,7 @@ public class Niveau extends Application {
 			this.timeline.getKeyFrames().addAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
 			this.timeline.setOnFinished(e -> {
 				this.timeline.getKeyFrames().removeAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
+				updateGrille(false);
 			});
 		}
 		
