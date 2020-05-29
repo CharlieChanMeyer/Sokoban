@@ -47,8 +47,14 @@ public class Position {
      * @return
      */
     public Position add(Direction dir) {
-        Position res = new Position(this.x + dir.getDx(), this.y + dir.getDy());
-        return res;
+    	if (dir != null) {
+	    	int newX = this.x + dir.getDx();
+	    	int newY = this.y + dir.getDy();
+	        Position res = new Position(newX,newY);
+	        return res;
+    	} else {
+    		return this;
+    	}
     }
 
     /**
@@ -85,5 +91,21 @@ public class Position {
 	public String toString() {
 		return "Position [x=" + x + ", y=" + y + "]";
 	}
+    
+    public Direction directionVers(Position pos) {
+    	// on regarde si il faut ce deplacer à droite
+    	if (this.x-pos.getX() == 1) {
+    		return Direction.HAUT;
+    	//on regarde si il faut ce deplacer à gauche
+    	} else if (this.x-pos.getX() == -1) {
+    		return Direction.BAS;
+    	//on regarde si il faut ce deplacer en bas
+    	} else if (this.y-pos.getY() == 1) {
+    		return Direction.GAUCHE;
+    	//il faut donc ce deplacer en haut
+    	} else {
+    		return Direction.DROITE;
+    	}
+    }
 
 }

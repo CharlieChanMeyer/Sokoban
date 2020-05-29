@@ -74,7 +74,7 @@ public class Niveau extends Application {
 		Separator separator = new Separator();
 		Separator separator2 = new Separator();
 		//Actualisation de la grille
-		updateGrille(false);
+		updateGrille(true);
 		//Creation du label de reset
 		Label reset = new Label("Vous ï¿½tes bloque ? Appuyez sur 'R' pour reset le niveau.");
 		//Ajout des elements
@@ -180,7 +180,7 @@ public class Niveau extends Application {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			//System.out.println(e);
 		}
 	}
 	
@@ -252,6 +252,16 @@ public class Niveau extends Application {
 		Position posP;
 		//Variable direction du policier
 		Direction dirP;
+		
+		if (!reset) {
+			//Pour chaque policiers
+			for(i=0;i<this.config.getPoliciers().size();i++) {
+				Direction direction = this.config.getPoliciers().get(i).deplacementPolicier();
+				Position newPos = this.config.getPoliciers().get(i).getPosition().add(direction);
+				this.config.getPoliciers().get(i).setPosition(newPos);
+			}
+		}
+		
 		//Reset du compteur pour le pop de balle si reset == true
 		if (reset) {
 			this.bullet = false;
@@ -289,7 +299,7 @@ public class Niveau extends Application {
 				} else if (this.config.get(tmpPos).getType().equals(Type.CASE)) {
 					//Prends le prochain nombre random entre 1 et 20 compris.
 					randomNum = ThreadLocalRandom.current().nextInt(1,21);
-					//Si une balle n'est pas déjà sur la grille, que le nombre random est egal a 1, qut le pseudoTemps est egal à 5 et que la pos n'est pas une cible
+					//Si une balle n'est pas dï¿½jï¿½ sur la grille, que le nombre random est egal a 1, qut le pseudoTemps est egal ï¿½ 5 et que la pos n'est pas une cible
 					//Ou si la case contenait deja une balle et que ce n'est pas un reset
 					if ((!this.bullet && this.pseudoTemps == 5 && randomNum==1 && !this.config.getNiveau().getCibles().contains(tmpPos)) || (tmpGrille[i][j].getStyleClass().contains("bullet") && !reset)) {
 						//Met this.bullet sur true
@@ -326,7 +336,7 @@ public class Niveau extends Application {
 				cp++;
 			}
 		}
-		//Augmente le pseudo temps de 1 s'il est inferieur à 5 et qu'il n'y a pas deja une balle sur la grille
+		//Augmente le pseudo temps de 1 s'il est inferieur ï¿½ 5 et qu'il n'y a pas deja une balle sur la grille
 		if (!this.bullet && this.pseudoTemps<5) {
 			this.pseudoTemps++;
 		}
