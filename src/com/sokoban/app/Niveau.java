@@ -39,6 +39,9 @@ public class Niveau extends Application {
 	private GridPane score;
 	private boolean bullet = false;
 	private int pseudoTemps = 0;
+	private boolean spawnBullet = false;
+	private int pseudoTempsSpawn = 0;
+	private Position spawnPos;
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -76,7 +79,7 @@ public class Niveau extends Application {
 		//Actualisation de la grille
 		updateGrille(true);
 		//Creation du label de reset
-		Label reset = new Label("Vous �tes bloque ? Appuyez sur 'R' pour reset le niveau.");
+		Label reset = new Label("Vous etes bloque ? Appuyez sur 'R' pour reset le niveau.");
 		//Ajout des elements
 		scoreBox.getChildren().addAll(hsLabel,score);
 		scoreBox.setId("scoreBox");
@@ -145,8 +148,6 @@ public class Niveau extends Application {
 
 		// Affiche la scene dans la nouvelle fenetre
 		primaryStage.setScene(scene);
-		// On empeche de redimmenssionner la fenetre
-		primaryStage.setResizable(false);
 		// Affiche la fenetre au centre de l'ecran
 		primaryStage.show();
 		primaryStage.centerOnScreen();
@@ -180,7 +181,7 @@ public class Niveau extends Application {
 				}
 			}
 		} catch (Exception e) {
-			//System.out.println(e);
+			System.out.println(e);
 		}
 	}
 	
@@ -221,6 +222,7 @@ public class Niveau extends Application {
 		this.score = new GridPane();
 		this.score.setId("score");
 		this.scoreLabels = new Label[6][2];
+		this.spawnPos = this.config.getJoueur().getPosition();
 	}
 	
 	private void updateLabels() {
@@ -266,6 +268,8 @@ public class Niveau extends Application {
 		if (reset) {
 			this.bullet = false;
 			this.pseudoTemps = 0;
+			this.spawnBullet = false;
+			this.pseudoTempsSpawn = 0;
 		}
 		//Pour chaque label de tmpGrille
 		for (i=0;i<x;i++) {
@@ -278,10 +282,15 @@ public class Niveau extends Application {
 				//S'il sagit d'un joueur, change sa class en joueur
 				} else if (this.config.get(tmpPos).getType().equals(Type.JOUEUR)) {
 					//S'il passe sur une balle, rajoute la balle a son pistolet et reset pseudoTemps et bullet
-					if (tmpGrille[i][j].getStyleClass().contains("bullet")) {
+					if (tmpGrille[i][j].getStyleClass().contains("bullet") && !reset) {
 						this.config.getJoueur().addBalle();
-						this.bullet = false;
-						this.pseudoTemps = 0;
+						if (this.spawnPos.equals(tmpPos)) {
+							this.pseudoTempsSpawn = 0;
+							this.spawnBullet = false;
+						} else {
+							this.bullet = false;
+							this.pseudoTemps = 0;
+						}
 					}
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add(this.getRegard());
@@ -290,8 +299,13 @@ public class Niveau extends Application {
 					//S'il passe sur une balle, rajoute la balle a son pistolet et reset pseudoTemps et bullet
 					if (tmpGrille[i][j].getStyleClass().contains("bullet")) {
 						this.config.getJoueur().addBalle();
-						this.bullet = false;
-						this.pseudoTemps = 0;
+						if (this.spawnPos.equals(tmpPos)) {
+							this.pseudoTempsSpawn = 0;
+							this.spawnBullet = false;
+						} else {
+							this.bullet = false;
+							this.pseudoTemps = 0;
+						}
 					}
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("diamant");
@@ -301,9 +315,16 @@ public class Niveau extends Application {
 					randomNum = ThreadLocalRandom.current().nextInt(1,21);
 					//Si une balle n'est pas d�j� sur la grille, que le nombre random est egal a 1, qut le pseudoTemps est egal � 5 et que la pos n'est pas une cible
 					//Ou si la case contenait deja une balle et que ce n'est pas un reset
-					if ((!this.bullet && this.pseudoTemps == 5 && randomNum==1 && !this.config.getNiveau().getCibles().contains(tmpPos)) || (tmpGrille[i][j].getStyleClass().contains("bullet") && !reset)) {
+					if ((!this.bullet && this.pseudoTemps == 5 && randomNum==1 && !this.config.getNiveau().getCibles().contains(tmpPos)) || (this.bullet && tmpGrille[i][j].getStyleClass().contains("bullet") && !reset)) {
 						//Met this.bullet sur true
 						this.bullet = true;
+						//Cha,gement la class pour bullet
+						tmpGrille[i][j].getStyleClass().clear();
+						tmpGrille[i][j].getStyleClass().add("bullet");
+						//Si une balle n'est pas deja sur la case de spawn et que le temps est egal a 10;
+					} else if ((!this.spawnBullet && this.pseudoTempsSpawn == 10) || (tmpGrille[i][j].getStyleClass().contains("bullet") && !reset)) {
+						//Met this.bullet sur true
+						this.spawnBullet = true;
 						//Cha,gement la class pour bullet
 						tmpGrille[i][j].getStyleClass().clear();
 						tmpGrille[i][j].getStyleClass().add("bullet");
@@ -314,6 +335,9 @@ public class Niveau extends Application {
 					}
 				//S'il sagit d'un policier, change sa class en policier
 				} else if (this.config.get(tmpPos).getType().equals(Type.POLICIER)) {
+					if (tmpGrille[i][j].getStyleClass().contains("bullet")) {
+						this.bullet = false;
+					}
 					tmpGrille[i][j].getStyleClass().clear();
 					tmpGrille[i][j].getStyleClass().add("policier");
 				}
@@ -340,6 +364,10 @@ public class Niveau extends Application {
 		if (!this.bullet && this.pseudoTemps<5) {
 			this.pseudoTemps++;
 		}
+		//Augmente le pseudo temps Spawn de 1 s'il est inferieur a 10 et qu'il n'y a pas deja une balle sur la case
+		if (!this.spawnBullet && this.pseudoTempsSpawn<10) {
+			this.pseudoTempsSpawn++;
+		}
 		//Reset la grille d'affichage
 		this.affGrille.getChildren().clear();
 		//Pour chaque case, ajoute le label correspondant
@@ -348,24 +376,15 @@ public class Niveau extends Application {
 				this.affGrille.add(tmpGrille[i][j], j, i);
 			}
 		}
-		//Variable verif mur
-		boolean mur = false;
 		//Pour chaque policier
 		for(i=0;i<this.config.getPoliciers().size();i++) {
 			//On recupere la position et la vision du policier
 			posP = this.config.getPoliciers().get(i).getPosition();
 			dirP = this.config.getPoliciers().get(i).getRegard();
-			//Pour les deux cases devant le policier
-			for (j=0;j<2;j++) {
-				//on actualise la position verifie
-				posP = posP.add(dirP);
-				//Si on est pas d�j� mort
-				if (!mort && !mur) {
-					mur = this.config.get(posP).getType().equals(Type.MUR);
-					//Le booleen mort prend la valeur de l'egalite (positionJoueur == positionVeirifier)
-					mort = this.config.getJoueur().getPosition().equals(posP);
-				}
-			}
+			//on actualise la position verifie
+			posP = posP.add(dirP);
+			//Le booleen mort prend la valeur de l'egalite (positionJoueur == positionVeirifier)
+			mort = this.config.getJoueur().getPosition().equals(posP);
 		}
 		//Update les labels d'informations
 		updateLabels();
