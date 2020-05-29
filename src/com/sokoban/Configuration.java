@@ -85,8 +85,8 @@ public class Configuration {
         		cmpLigne++;
         	}
         }
-        //Set le nombre de balle du joueur au nombre exacte de policier
-        this.joueur.setBalles(this.getPoliciers().size());
+        //Donne la premiere balle au joueur
+        this.joueur.setBalles(1);
         //Ferme le fichier
         lecteur.close();
         this.getNiveau().setMatrice();

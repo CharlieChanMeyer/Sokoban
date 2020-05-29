@@ -53,6 +53,13 @@ public class Joueur extends Mobile {
     }
     
     /**
+     * 
+     */
+    public void addBalle() {
+        this.balles++;
+    }
+    
+    /**
      * @param dir Direction du tir
      */
     public void tirer(Direction dir) {
