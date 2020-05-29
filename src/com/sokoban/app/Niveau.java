@@ -74,7 +74,7 @@ public class Niveau extends Application {
 		Separator separator = new Separator();
 		Separator separator2 = new Separator();
 		//Actualisation de la grille
-		updateGrille(false);
+		updateGrille(true);
 		//Creation du label de reset
 		Label reset = new Label("Vous �tes bloque ? Appuyez sur 'R' pour reset le niveau.");
 		//Ajout des elements
@@ -253,12 +253,13 @@ public class Niveau extends Application {
 		//Variable direction du policier
 		Direction dirP;
 		
-		
-		//Pour chaque policiers
-		for(i=0;i<this.config.getPoliciers().size();i++) {
-			Direction direction = this.config.getPoliciers().get(i).deplacementPolicier();
-			Position newPos = this.config.getPoliciers().get(i).getPosition().add(direction);
-			this.config.getPoliciers().get(i).setPosition(newPos);
+		if (!reset) {
+			//Pour chaque policiers
+			for(i=0;i<this.config.getPoliciers().size();i++) {
+				Direction direction = this.config.getPoliciers().get(i).deplacementPolicier();
+				Position newPos = this.config.getPoliciers().get(i).getPosition().add(direction);
+				this.config.getPoliciers().get(i).setPosition(newPos);
+			}
 		}
 		
 		//Reset du compteur pour le pop de balle si reset == true
