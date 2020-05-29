@@ -86,7 +86,7 @@ public class Configuration {
         	}
         }
         //Set le nombre de balle du joueur au nombre exacte de policier
-        this.joueur.setBalles(this.getPoliciers().size());
+        this.joueur.setBalles(1);
         //Ferme le fichier
         lecteur.close();
         this.getNiveau().setMatrice();
