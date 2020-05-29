@@ -30,7 +30,7 @@
 }
 
 .case {
-	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/mur/case.png");
 }
 
 .entrepot {
