@@ -6,12 +6,12 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Java FX 11">
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/data/Downloads/sql.jar">
+	<classpathentry kind="lib" path="D:/Téléchargement/mysql-connector-java-8.0.20/sql.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

@@ -68,27 +68,6 @@ public class Matrice {
 		this.arrive = null;
 		this.matrice = matrice;
 	}
-	//fonction de debbugage		
-	public void afficher() {
-		int maxX = this.matrice.length;
-		int maxY = this.matrice[0].length;
-		for (int x=0;x<maxX;x++) {
-			for (int y=0;y<maxY;y++) {
-				if (this.matrice[x][y].getValeur() == 0) {
-					System.out.print(" ");
-				} else if (this.matrice[x][y].getValeur() == 1){
-					System.out.print("x");
-				} else if (this.matrice[x][y].getValeur() == 2){
-					System.out.print("D");
-				} else if (this.matrice[x][y].getValeur() == -1){
-					System.out.print("A");
-				} else {
-					System.out.print(".");
-				}
-			}
-			System.out.println();
-		}
-	}
 	
 	public Point getDepart() {
 		return depart;
