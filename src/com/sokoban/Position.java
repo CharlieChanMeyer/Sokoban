@@ -107,5 +107,4 @@ public class Position {
     		return Direction.DROITE;
     	}
     }
-
 }

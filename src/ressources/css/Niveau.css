@@ -29,53 +29,456 @@
 	-fx-font-weight: bold;
 }
 
-.mur {
-	-fx-background-image: url("../img/sol_r.png");
-	-fx-graphic: url("../img/croisement.png");
+.bullet {
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/bullet.png");
 }
+
 
 .diamant {
 	-fx-background-image: url("../img/mur/case.png");
 	-fx-graphic: url("../img/diamant.png");
 }
 
-.policier {
-	-fx-background-image: url("../img/mur/case.png");
-	-fx-graphic: url("../img/joueur.png");
-}
-
-.joueur {
-	-fx-background-image: url("../img/mur/case.png");
-	-fx-graphic: url("../img/joueur.png");
-}
-
 .joueur_bas {
 	-fx-background-image: url("../img/mur/case.png");
-	-fx-graphic: url("../img/joueurBas.png");
+	-fx-graphic: url("../img/joueur/stand/bas/idle_handgun_0.png");
 }
 
 .joueur_haut {
 	-fx-background-image: url("../img/mur/case.png");
-	-fx-graphic: url("../img/joueurHaut.png");
-}
+	-fx-graphic: url("../img/joueur/stand/haut/idle_handgun_0.png");}
 
 .joueur_droite {
 	-fx-background-image: url("../img/mur/case.png");
-	-fx-graphic: url("../img/joueurDroit.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_0.png");
 }
 
 .joueur_gauche {
 	-fx-background-image: url("../img/mur/case.png");
-	-fx-graphic: url("../img/joueurGauche.png");
+	-fx-graphic: url("../img/joueur/stand/gauche/idle_handgun_0.png");
 }
+
+
+
+.joueur_basEntrepot {
+	-fx-background-image: url("../img/case.png");
+	-fx-graphic: url("../img/joueur/stand/bas/idle_handgun_0.png");
+}
+
+.joueur_hautEntrepot  {
+	-fx-background-image: url("../img/case.png");
+	-fx-graphic: url("../img/joueur/stand/haut/idle_handgun_0.png");}
+
+.joueur_droiteEntrepot  {
+	-fx-background-image: url("../img/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_0.png");
+}
+
+.joueur_gaucheEntrepot  {
+	-fx-background-image: url("../img/case.png");
+	-fx-graphic: url("../img/joueur/stand/gauche/idle_handgun_0.png");
+}
+
+
+
+.bas {
+	-fx-rotate: 90;
+}
+
+.haut{
+	-fx-rotate: -90;
+}
+
+.gauche{
+	-fx-rotate: 180;
+}
+
+
+.joueur_stand_droite1{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_0.png");
+}
+
+.joueur_stand_droite2{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_1.png");
+}
+
+.joueur_stand_droite3{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_2.png");
+}
+
+
+.joueur_stand_droite4{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_3.png");
+}
+
+.joueur_stand_droite5{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_4.png");
+}
+
+.joueur_stand_droite6{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_5.png");
+}
+
+.joueur_stand_droite7{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_6.png");
+}
+
+.joueur_stand_droite8{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_7.png");
+}
+
+.joueur_stand_droite9{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_8.png");
+}
+
+.joueur_stand_droite10{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_9.png");
+}
+
+.joueur_stand_droite11{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_10.png");
+}
+
+.joueur_stand_droite12{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_11.png");
+}
+
+.joueur_stand_droite13{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_12.png");
+}
+
+.joueur_stand_droite14{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_13.png");
+}
+
+.joueur_stand_droite15{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_14.png");
+}
+
+.joueur_stand_droite16{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_15.png");
+}
+
+.joueur_stand_droite17{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_16.png");
+}
+
+.joueur_stand_droite18{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_17.png");
+}
+
+.joueur_stand_droite19{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_18.png");
+}
+
+.joueur_stand_droite20{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_19.png");
+}
+
+
+
+.policier_haut{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/stand/haut/idle_0.png");	
+}
+
+.policier_bas{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/stand/bas/idle_0.png");	
+}
+
+.policier_gauche{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/stand/gauche/idle_0.png");	
+}
+
+.policier_droite{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/stand/droite/idle_0.png");	
+}
+
+
+
+
+.attack_droite1{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/droite/attack_0.png");
+}
+
+.attack_droite2{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/droite/attack_1.png");
+}
+
+.attack_droite3{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/droite/attack_2.png");
+}
+
+.attack_droite4{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/droite/attack_3.png");
+}
+
+.attack_droite5{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/droite/attack_4.png");
+}
+
+.attack_droite6{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/droite/attack_5.png");
+}
+
+.attack_droite7{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/droite/attack_6.png");
+}
+
+.attack_droite8{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/droite/attack_7.png");
+}
+
+.attack_droite9{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/droite/attack_8.png");
+}
+
+
+
+
+.attack_gauche1{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/gauche/attack_0.png");
+}
+
+.attack_gauche2{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/gauche/attack_1.png");
+}
+
+.attack_gauche3{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/gauche/attack_2.png");
+}
+
+.attack_gauche4{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/gauche/attack_3.png");
+}
+
+.attack_gauche5{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/gauche/attack_4.png");
+}
+
+.attack_gauche6{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/gauche/attack_5.png");
+}
+
+.attack_gauche7{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/gauche/attack_6.png");
+}
+
+.attack_gauche8{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/gauche/attack_7.png");
+}
+
+.attack_gauche9{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/gauche/attack_8.png");
+}
+
+
+
+
+
+.attack_bas1{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/bas/attack_0.png");
+}
+
+.attack_bas2{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/bas/attack_1.png");
+}
+
+.attack_bas3{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/bas/attack_2.png");
+}
+
+.attack_bas4{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/bas/attack_3.png");
+}
+
+.attack_bas5{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/bas/attack_4.png");
+}
+
+.attack_bas6{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/bas/attack_5.png");
+}
+
+.attack_bas7{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/bas/attack_6.png");
+}
+
+.attack_bas8{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/bas/attack_7.png");
+}
+
+.attack_bas9{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/bas/attack_8.png");
+}
+
+
+.attack_haut1{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/haut/attack_0.png");
+}
+
+.attack_haut2{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/haut/attack_1.png");
+}
+
+.attack_haut3{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/haut/attack_2.png");
+}
+
+.attack_haut4{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/haut/attack_3.png");
+}
+
+.attack_haut5{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/haut/attack_4.png");
+}
+
+.attack_haut6{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/haut/attack_5.png");
+}
+
+.attack_haut7{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/haut/attack_6.png");
+}
+
+.attack_haut8{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/haut/attack_7.png");
+}
+
+.attack_haut9{
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/zombie/attack/haut/attack_8.png");
+}
+
+
+
+
+.shoot_droite1 {
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/shoot/droite/shoot_handgun_0.png");
+}
+
+.shoot_droite2 {
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/shoot/droite/shoot_handgun_1.png");
+}
+
+.shoot_droite3 {
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/shoot/droite/shoot_handgun_2.png");
+}
+
+.shoot_gauche1 {
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/shoot/gauche/shoot_handgun_0.png");
+}
+
+.shoot_gauche2 {
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/shoot/gauche/shoot_handgun_1.png");
+}
+
+.shoot_gauche3 {
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/shoot/gauche/shoot_handgun_2.png");
+}
+
+.shoot_bas1 {
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/shoot/bas/shoot_handgun_0.png");
+}
+
+.shoot_bas2 {
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/shoot/bas/shoot_handgun_1.png");
+}
+
+.shoot_bas3 {
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/shoot/bas/shoot_handgun_2.png");
+}
+
+.shoot_haut1 {
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/shoot/haut/shoot_handgun_0.png");
+}
+
+.shoot_haut2 {
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/shoot/haut/shoot_handgun_1.png");
+}
+
+.shoot_haut3 {
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/shoot/haut/shoot_handgun_2.png");
+}
+
+
+
+
+
 
 .case {
 	-fx-graphic: url("../img/mur/case.png");
-}
-
-.bullet {
-	-fx-background-image: url("../img/mur/case.png");
-	-fx-graphic: url("../img/bullet.png");
 }
 
 .entrepot {
@@ -149,6 +552,10 @@
 
 .vide{
 	-fx-graphic: url("../img/mur/vide.png");
+}
+
+.carre{
+	-fx-graphic: url("../img/mur/carre.png");
 }
 
 .entete {

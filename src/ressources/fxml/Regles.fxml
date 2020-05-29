@@ -8,16 +8,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/Regles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity"
+	stylesheets="@../css/Regles.css"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<Label id="gameTitle" alignment="TOP_CENTER" contentDisplay="CENTER" text="Sokoban" textAlignment="CENTER">
+		<Label id="gameTitle" alignment="TOP_CENTER"
+			contentDisplay="CENTER" text="Sokoban" textAlignment="CENTER">
 		</Label>
 		<Label id="labelBut" text="Le but" />
-		<Text strokeType="OUTSIDE" strokeWidth="0.0" text="Le but de notre sokoban est de &quot;voler&quot; les diamants en les amenant à l'entrepot" />
+		<Text strokeType="OUTSIDE" strokeWidth="0.0"
+			text="Le but de notre sokoban est de &quot;voler&quot; les diamants en les amenant à l'entrepot" />
 		<Label />
 		<Separator prefWidth="200.0" />
 		<Label id="labelRegle" text="Les règles" />
-		<TextArea id="txtRegle" editable="false" text="Le joueur peut se déplacer à l'aide des Z,Q,S et D de son clavier.&#10;&#10;Il doit déplacer les diamants jusqu'à l'entrepot. Pour se faire, il peut pousser un&#10;diamant à la fois (mais pas les tirer). Le joueur doit aussi éviter les gardes qui &#10;voient jusqu'à deux cases devant eux sous peine de défaite. &#10;&#10;Le joueur peut aussi tirer sur les gardiens en appuyant sur ses touches directionnelles &#10;&#10;Pour gagner la partie, il faut réussir à rapporter tous les diamants de la map &#10;dans les entrepots sans se faire repérer par les gardiens.">
+		<TextArea id="txtRegle" editable="false"
+			text="Le joueur peut se déplacer à l'aide des Z,Q,S et D de son clavier.&#10;&#10;Il doit déplacer les diamants jusqu'à l'entrepot. Pour se faire, il peut pousser un&#10;diamant à la fois (mais pas les tirer). Le joueur doit aussi éviter les gardes qui &#10;voient jusqu'à deux cases devant eux sous peine de défaite. &#10;&#10;Le joueur peut aussi tirer sur les gardiens en appuyant sur ses touches directionnelles &#10;&#10;Pour gagner la partie, il faut réussir à rapporter tous les diamants de la map &#10;dans les entrepots sans se faire repérer par les gardiens.">
 			<VBox.margin>
 				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
 			</VBox.margin>
@@ -32,7 +39,6 @@
 				<Label id="affJoueur" text="Joueur" />
 				<Label id="affDiamant" text="Diamant" />
 				<Label id="affGardien" text="Gardien" />
-            	<Label id="affBalle" text="Les balles" />
 			</children>
 		</HBox>
 		<Separator prefWidth="200.0" />

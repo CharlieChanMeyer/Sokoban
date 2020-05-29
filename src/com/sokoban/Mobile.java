@@ -52,7 +52,7 @@ public abstract class Mobile extends Element {
 	}
 
 	public Boolean bougerVers(Direction dir) {
-		Boolean res = false;
+    	Boolean res = false;
     	Position nPos = this.position.add(dir);
     	if (this.config.get(nPos).getType().equals(Type.CASE)){
     		res = true;

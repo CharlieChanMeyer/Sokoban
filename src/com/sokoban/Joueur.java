@@ -52,9 +52,6 @@ public class Joueur extends Mobile {
         this.balles = nbBalles;
     }
     
-    /**
-     * 
-     */
     public void addBalle() {
         this.balles++;
     }
@@ -64,7 +61,7 @@ public class Joueur extends Mobile {
      */
     public void tirer(Direction dir) {
     	//Si le nombre de balle est superieur a 0
-    	if (this.balles > 0) {
+    	if (this.balles >= 0) {
     		//Recupere la position du joueur
             Position pos = this.getPosition();
             //Recupere la config

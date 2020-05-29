@@ -12,22 +12,18 @@ public class Policier extends Mobile {
     /**
      * 
      */
-    public Direction regard;
+    public ArrayList<Direction> histo;
+    public Direction regard = Direction.DROITE;
     public boolean etatAlerte;
-
     /**
      * @param Configuration 
      * @param Position
      */
     public Policier(Configuration conf, Position position) {
         super(Type.POLICIER,conf,position);
-        this.regard = Direction.HAUT;
-        this.etatAlerte = false;
+        this.histo = new ArrayList<Direction>();
     }
 
-    /**
-     * @return
-     */
     public Direction getRegard() {
         return this.regard;
     }
@@ -89,4 +85,5 @@ public class Policier extends Mobile {
     		}
     	}
     }
+
 }

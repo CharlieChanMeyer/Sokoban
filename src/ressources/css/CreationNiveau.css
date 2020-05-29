@@ -14,28 +14,25 @@
 }
 
 .mur {
-	-fx-graphic: url("../img/mur/carre.png");
+	-fx-graphic: url("../img/mur.png");
 }
 
 .diamant {
-	-fx-background-image: url("../img/mur/case.png");
-	-fx-graphic: url("../img/diamant.png");
+	-fx-graphic: url("../img/diamantSol.png");
 }
 
 .policier {
-	-fx-background-image: url("../img/mur/case.png");
-	-fx-graphic: url("../img/joueur.png");
+	-fx-graphic: url("../img/policier.png");
 }
 
 .joueur {
-	-fx-background-image: url("../img/mur/case.png");
 	-fx-graphic: url("../img/joueur.png");
 }
 
 .case {
-	-fx-graphic: url("../img/mur/case.png");
+	-fx-graphic: url("../img/sol.png");
 }
 
 .entrepot {
-	-fx-graphic: url("../img/case.png");
+	-fx-graphic: url("../img/entrepot.png");
 }
