@@ -91,7 +91,7 @@ public class Niveau extends Application {
 		//Actualisation de la grille
 		updateGrille(true);
 		//Creation du label de reset
-		Label reset = new Label("Vous �tes bloque ? Appuyez sur 'R' pour reset le niveau.");
+		Label reset = new Label("Vous etes bloque ? Appuyez sur 'R' pour reset le niveau.");
 		//Ajout des elements
 		scoreBox.getChildren().addAll(hsLabel,score);
 		scoreBox.setId("scoreBox");

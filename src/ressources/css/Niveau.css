@@ -19,7 +19,6 @@
 #gameTitle{
 	-fx-font: bold 28px Pacifico;
 	-fx-text-fill: #044E54;
-	-fx-padding: 0 0 20px 0;
 	-fx-font-weight: bold;
 }
 #hsLabel {
