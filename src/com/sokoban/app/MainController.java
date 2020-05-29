@@ -72,9 +72,9 @@ public class MainController implements Initializable {
 			//Cree un stage pour le niveau
 			Stage nivStage = new Stage();
 			//Recupere le numero du niveau selectionne
-			char nivSelect = nivSelec.charAt(nivSelec.length()-1);
+			String[] nivSelect = nivSelec.split(" ");
 			//Cree l'instance de niveau
-			Niveau niv = new Niveau(Character.getNumericValue(nivSelect));
+			Niveau niv = new Niveau(Integer.parseInt(nivSelect[1]));
 			//appel la fonction start en indiquant le numero du niveau
 			niv.start(nivStage);
 		} else { //Sinon cree une alerteBox indiquant qu'aucun niveau n'a ete selectionne, et ferme l'alerteBox apres 2 secondes 
