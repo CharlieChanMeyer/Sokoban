@@ -359,7 +359,6 @@ public class Niveau extends Application {
 		
 		if(pos!=newPos) {
 			this.smoothJoueur.stop();
-			this.timeline.stop();
 			this.timelineJoueur.stop();
 			this.timelineJoueur2.stop();
 	
@@ -602,8 +601,7 @@ public class Niveau extends Application {
 			Position pos = zombie.getPosition();
 			Direction direction = zombie.deplacementPolicier();
 			Position newPos = zombie.getPosition().add(direction);
-			zombie.setPosition(newPos);
-			if(pos != newPos) {
+			if(zombie.setPosition(newPos)) {
 				Timeline timelineZomb1 = new Timeline();
 				Timeline timelineZomb2 = new Timeline();
 				String directionString = "";
@@ -762,6 +760,10 @@ public class Niveau extends Application {
 					if (tmpGrille[i][j].getStyleClass().contains("bullet")) {
 						this.bullet = false;
 					}
+					if (reset) {
+						tmpGrille[i][j].getStyleClass().clear();
+						tmpGrille[i][j].getStyleClass().add(getRegardPolicier(tmpPos));
+					}
 				}
 			}
 		}
@@ -861,17 +863,18 @@ public class Niveau extends Application {
             }
         }
 	    
-		String res = "";
+        String res = "";
 		if (dir.equals(Direction.DROITE)) {
-			res = "";
+			res = "policier_droite";
 		}else if(dir.equals(Direction.GAUCHE)) {
-			res = "gauche";
+			res = "policier_gauche";
 		}else if(dir.equals(Direction.HAUT)) {
-			res = "haut";
+			res = "policier_haut";
 		}else if(dir.equals(Direction.BAS)) {
-			res = "bas";
+			res = "policier_bas";
 		}
 		return res;
+
 	}
 	
 	private String getRegard() {
