@@ -97,6 +97,114 @@
 	-fx-background-image: url("../img/mur/case.png");
 }
 
+.zombie_move_1_0{
+	-fx-graphic: url("../img/zombie/move/move_1_0.png");
+}
+
+.zombie_move_1_1{
+	-fx-graphic: url("../img/zombie/move/move_1_1.png");
+}
+
+.zombie_move_1_2{
+	-fx-graphic: url("../img/zombie/move/move_1_2.png");
+}
+
+.zombie_move_1_3{
+	-fx-graphic: url("../img/zombie/move/move_1_3.png");
+}
+
+.zombie_move_1_4{
+	-fx-graphic: url("../img/zombie/move/move_1_4.png");
+}
+
+.zombie_move_1_5{
+	-fx-graphic: url("../img/zombie/move/move_1_5.png");
+}
+
+.zombie_move_1_6{
+	-fx-graphic: url("../img/zombie/move/move_1_6.png");
+}
+
+.zombie_move_1_7{
+	-fx-graphic: url("../img/zombie/move/move_1_7.png");
+}
+
+.zombie_move_1_8{
+	-fx-graphic: url("../img/zombie/move/move_1_8.png");
+}
+
+.zombie_move_1_9{
+	-fx-graphic: url("../img/zombie/move/move_1_9.png");
+}
+
+.zombie_move_1_10{
+	-fx-graphic: url("../img/zombie/move/move_1_10.png");
+}
+
+.zombie_move_1_11{
+	-fx-graphic: url("../img/zombie/move/move_1_11.png");
+}
+
+.zombie_move_1_12{
+	-fx-graphic: url("../img/zombie/move/move_1_12.png");
+}
+
+.zombie_move_2_0{
+	-fx-graphic: url("../img/zombie/move/move_2_0.png");
+}
+
+.zombie_move_2_1{
+	-fx-graphic: url("../img/zombie/move/move_2_1.png");
+}
+
+.zombie_move_2_2{
+	-fx-graphic: url("../img/zombie/move/move_2_2.png");
+}
+
+.zombie_move_2_3{
+	-fx-graphic: url("../img/zombie/move/move_2_3.png");
+}
+
+.zombie_move_2_4{
+	-fx-graphic: url("../img/zombie/move/move_2_4.png");
+}
+
+.zombie_move_2_5{
+	-fx-graphic: url("../img/zombie/move/move_2_5.png");
+}
+
+.zombie_move_2_6{
+	-fx-graphic: url("../img/zombie/move/move_2_6.png");
+}
+
+.zombie_move_2_7{
+	-fx-graphic: url("../img/zombie/move/move_2_7.png");
+}
+
+.zombie_move_2_8{
+	-fx-graphic: url("../img/zombie/move/move_2_8.png");
+}
+
+.zombie_move_2_9{
+	-fx-graphic: url("../img/zombie/move/move_2_9.png");
+}
+
+.zombie_move_2_10{
+	-fx-graphic: url("../img/zombie/move/move_2_10.png");
+}
+
+.zombie_move_2_11{
+	-fx-graphic: url("../img/zombie/move/move_2_11.png");
+}
+
+.zombie_move_2_12{
+	-fx-graphic: url("../img/zombie/move/move_2_12.png");
+}
+
+.zombie_move_2_13{
+	-fx-graphic: url("../img/zombie/move/move_2_13.png");
+}
+
 .joueur_move_1_0{
 	-fx-graphic: url("../img/joueur/move/move_handgun_1_0.png");
 }
@@ -736,4 +844,3 @@
 	-fx-border-intsets: 5;
 	-fx-border-radius: 5;
 }
-
