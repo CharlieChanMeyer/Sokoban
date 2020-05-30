@@ -417,11 +417,8 @@ public class Niveau extends Application {
 	private void updatescore() {
 		try {
 			//Connection � la BDD des scores
-			System.out.println("Avant");
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			System.out.println("Milieu");
-			Connection con=DriverManager.getConnection("jdbc:mysql://e90653-mysql.services.easyname.eu/u143161db7","u143161db7","ProjetGL2");
-			System.out.println("Apres");
+			Connection con=DriverManager.getConnection("jdbc:mysql://e90653-mysql.services.easyname.eu/u143161db7?autoReconnect=true&useSSL=false","u143161db7","ProjetGL2");
 			//Creation de la variable de requete
 			Statement stmt=con.createStatement();
 			//Cr�ation de la variable de resultat et recuperation du resultat de la requete
@@ -445,6 +442,7 @@ public class Niveau extends Application {
 			}
 		} catch (Exception e) {
 			score.add(new Label("La communication avec le serveur est impossible actuellement"), 1, 1);
+			e.printStackTrace();
 		}
 	}
 	
