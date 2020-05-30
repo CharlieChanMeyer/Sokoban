@@ -442,7 +442,6 @@ public class Niveau extends Application {
 			}
 		} catch (Exception e) {
 			score.add(new Label("La communication avec le serveur est impossible actuellement"), 1, 1);
-			e.printStackTrace();
 		}
 	}
 	
