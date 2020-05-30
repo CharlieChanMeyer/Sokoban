@@ -662,15 +662,11 @@ public class Niveau extends Application {
 			//On recupere la position et la vision du policier
 			posP = this.config.getPoliciers().get(i).getPosition();
 			dirP = this.config.getPoliciers().get(i).getRegard();
-			//Pour les deux cases devant le policier modifi√©
-			int k = 0;
-			while(!(k==1)&&(!mort)) {
-				posP = posP.add(dirP);
+			//On ajoute la direction ‡ la position actuel
+			posP = posP.add(dirP);
+			//On verifie la mort du joueur
+			if (!mort) {
 				mort = this.config.getJoueur().getPosition().equals(posP);
-				k++;
-				if(mort) {
-					savePos = posP.sub(dirP);
-				}
 			}
 		}
 		//Update les labels d'informations
@@ -688,7 +684,7 @@ public class Niveau extends Application {
 		//Sinon, si on est mort
 		} else if (mort) {
 			//bug
-			attack(Direction.DROITE,savePos);
+			//attack(Direction.DROITE,savePos);
 			//Cree et affiche une alerteBox indiquant la defaite
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Sokoban - Niveau "+this.nivSelec);
