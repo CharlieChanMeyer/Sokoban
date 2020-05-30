@@ -73,7 +73,7 @@ public class Policier extends Mobile {
     	} else {
     		// le policier ce deplace en fonction de son regard
     		//si le policier peut se deplacer dans cette direction, il le fait
-    		if (this.bougerVers(this.regard)) {
+    		if ((this.bougerVers(this.regard)) && (!this.getConfig().estCible(this.getPosition().add(this.regard)))) {
     			//renvoie de la direction à suivre
     			return (this.regard);
     		//sinon il fait demi-tour

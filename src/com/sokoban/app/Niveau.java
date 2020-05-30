@@ -417,8 +417,11 @@ public class Niveau extends Application {
 	private void updatescore() {
 		try {
 			//Connection � la BDD des scores
+			System.out.println("Avant");
 			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("Milieu");
 			Connection con=DriverManager.getConnection("jdbc:mysql://e90653-mysql.services.easyname.eu/u143161db7","u143161db7","ProjetGL2");
+			System.out.println("Apres");
 			//Creation de la variable de requete
 			Statement stmt=con.createStatement();
 			//Cr�ation de la variable de resultat et recuperation du resultat de la requete

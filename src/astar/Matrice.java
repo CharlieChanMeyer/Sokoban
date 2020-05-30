@@ -38,13 +38,13 @@ public class Matrice {
 		//création du raccourci pour la liste des diamant
 		ArrayList <Diamant> listeDiamant = conf.getDiamants();
 		//prise en compte de diamants en tant que mur pour A*
-		for (int i=0;i<listeDiamant.size()-1;i++) {
+		for (int i=0;i<listeDiamant.size();i++) {
 			this.setValeur(1, listeDiamant.get(i).getPosition());
 		}
 		//création du raccourci pour la liste des policiers
 		ArrayList <Policier> listePolicier = conf.getPoliciers();
 		//prise en compte des policiers en tant de mur pour A*
-		for (int i=0;i<listePolicier.size()-1;i++) {
+		for (int i=0;i<listePolicier.size();i++) {
 			this.setValeur(1, listePolicier.get(i).getPosition());
 		}
 		//on renvoie la carte la carte avec tout les murs initialisés

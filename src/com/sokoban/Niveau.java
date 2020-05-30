@@ -135,6 +135,7 @@ public class Niveau {
         	if (this.getCibles().get(i).equals(pos)) {
         		res = true;
         	}
+        	i++;
         }
         return res;
     }
