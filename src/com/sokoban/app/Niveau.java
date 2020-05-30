@@ -441,7 +441,7 @@ public class Niveau extends Application {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			score.add(new Label("La communication avec le serveur est impossible actuellement"), 1, 1);
 		}
 	}
 	
@@ -684,7 +684,7 @@ public class Niveau extends Application {
 		//Sinon, si on est mort
 		} else if (mort) {
 			//bug
-			//attack(Direction.DROITE,savePos);
+			attack(Direction.DROITE,savePos);
 			//Cree et affiche une alerteBox indiquant la defaite
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Sokoban - Niveau "+this.nivSelec);
