@@ -3,12 +3,12 @@ package com.sokoban;
 /**
  * 
  */
-public class Diamant extends Mobile {
+public class Seringue extends Mobile {
     /**
      * @param Configuration 
      * @param Position
      */
-    public Diamant(Configuration config,Position position) {
+    public Seringue(Configuration config,Position position) {
         super(Type.DIAMANT,config,position);
     }
 

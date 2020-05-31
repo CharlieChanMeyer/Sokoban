@@ -2,12 +2,12 @@ package astar;
 
 import com.sokoban.Position;
 import com.sokoban.Immobile;
-import com.sokoban.Policier;
+import com.sokoban.Zombie;
 
 import java.util.ArrayList;
 
 import com.sokoban.Configuration;
-import com.sokoban.Diamant;
+import com.sokoban.Seringue;
 
 
 public class Matrice {
@@ -35,17 +35,17 @@ public class Matrice {
 	}
 	
 	public void ajoutDesMobiles(Configuration conf) {
-		//création du raccourci pour la liste des diamant
-		ArrayList <Diamant> listeDiamant = conf.getDiamants();
-		//prise en compte de diamants en tant que mur pour A*
-		for (int i=0;i<listeDiamant.size();i++) {
-			this.setValeur(1, listeDiamant.get(i).getPosition());
+		//création du raccourci pour la liste des seringue
+		ArrayList <Seringue> listeSeringue = conf.getSeringues();
+		//prise en compte de seringues en tant que mur pour A*
+		for (int i=0;i<listeSeringue.size();i++) {
+			this.setValeur(1, listeSeringue.get(i).getPosition());
 		}
-		//création du raccourci pour la liste des policiers
-		ArrayList <Policier> listePolicier = conf.getPoliciers();
-		//prise en compte des policiers en tant de mur pour A*
-		for (int i=0;i<listePolicier.size();i++) {
-			this.setValeur(1, listePolicier.get(i).getPosition());
+		//création du raccourci pour la liste des zombies
+		ArrayList <Zombie> listeZombie = conf.getZombies();
+		//prise en compte des zombies en tant de mur pour A*
+		for (int i=0;i<listeZombie.size();i++) {
+			this.setValeur(1, listeZombie.get(i).getPosition());
 		}
 		//on renvoie la carte la carte avec tout les murs initialisés
 	}

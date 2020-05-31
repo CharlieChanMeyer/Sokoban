@@ -36,7 +36,7 @@ public class CreationNiveau extends Application {
 	private TextField longueurTF;
 	private boolean joueur = false;
 	private int nbEntrepot = 0;
-	private int nbDiamant = 0;
+	private int nbSeringue = 0;
 	private String posJoueur;
 
 	@Override
@@ -152,8 +152,8 @@ public class CreationNiveau extends Application {
 				alert.setContentText("Merci de placer un joueur");
 				break;
 			case 2:
-				alert.setHeaderText("Probleme de diamant ou d'entrepot");
-				alert.setContentText("Merci de placer autant de diamant que d'entrepot ( Au minimum un de chaque)");
+				alert.setHeaderText("Probleme de seringue ou d'entrepot");
+				alert.setContentText("Merci de placer autant de seringue que d'entrepot ( Au minimum un de chaque)");
 				break;
 			case 4:
 				alert.setHeaderText("Probleme de dimensions");
@@ -181,7 +181,7 @@ public class CreationNiveau extends Application {
 		ArrayList<String> lignes = new ArrayList<String>();
  		if (!this.joueur) {
 			erreur(1);
-		} else if ((this.nbDiamant != this.nbEntrepot) || (this.nbDiamant == 0)) {
+		} else if ((this.nbSeringue != this.nbEntrepot) || (this.nbSeringue == 0)) {
 			erreur(2);
 		} else {
 			File niveau = new File("src/ressources/niveaux/"+this.numeroNiveau+".txt");
@@ -206,14 +206,14 @@ public class CreationNiveau extends Application {
 						//s'il sagit d'un joueur ou d'une case, on ajoute un 0 à tmp
 						} else if ((this.tmpGrille[i][j].getStyleClass().get(0) == "case") || (this.tmpGrille[i][j].getStyleClass().get(0) == "joueur")) {
 							tmp += "0";
-						//s'il sagit d'un diamant, on ajoute un 3 à tmp
-						} else if (this.tmpGrille[i][j].getStyleClass().get(0) == "diamant") {
+						//s'il sagit d'un seringue, on ajoute un 3 à tmp
+						} else if (this.tmpGrille[i][j].getStyleClass().get(0) == "seringue") {
 							tmp += "3";
 						//s'il sagit d'un entrepot, on ajoute un 2 à tmp
 						} else if (this.tmpGrille[i][j].getStyleClass().get(0) == "entrepot") {
 							tmp += "2";
-						//s'il sagit d'un policier, on ajoute un 4 à tmp
-						} else if (this.tmpGrille[i][j].getStyleClass().get(0) == "policier") {
+						//s'il sagit d'un zombie, on ajoute un 4 à tmp
+						} else if (this.tmpGrille[i][j].getStyleClass().get(0) == "zombie") {
 							tmp += "4";
 						}
 					}
@@ -246,20 +246,20 @@ public class CreationNiveau extends Application {
 				this.joueur = true;
 				this.posJoueur = Integer.toString(i)+","+Integer.toString(j);
 			} else {
-				this.tmpGrille[i][j].getStyleClass().add("diamant");
-				tmpGrille[i][j].setOnMouseClicked(event -> changeClass("diamant",i,j));
-				this.nbDiamant++;
+				this.tmpGrille[i][j].getStyleClass().add("seringue");
+				tmpGrille[i][j].setOnMouseClicked(event -> changeClass("seringue",i,j));
+				this.nbSeringue++;
 			}
 		} else if (styleClass.equals("joueur")) {
 			this.joueur = false;
-			this.tmpGrille[i][j].getStyleClass().add("diamant");
-			tmpGrille[i][j].setOnMouseClicked(event -> changeClass("diamant",i,j));
-			this.nbDiamant++;
-		} else if (styleClass.equals("diamant")) {
-			this.nbDiamant--;
-			this.tmpGrille[i][j].getStyleClass().add("policier");
-			tmpGrille[i][j].setOnMouseClicked(event -> changeClass("policier",i,j));
-		} else if (styleClass.equals("policier")) {
+			this.tmpGrille[i][j].getStyleClass().add("seringue");
+			tmpGrille[i][j].setOnMouseClicked(event -> changeClass("seringue",i,j));
+			this.nbSeringue++;
+		} else if (styleClass.equals("seringue")) {
+			this.nbSeringue--;
+			this.tmpGrille[i][j].getStyleClass().add("zombie");
+			tmpGrille[i][j].setOnMouseClicked(event -> changeClass("zombie",i,j));
+		} else if (styleClass.equals("zombie")) {
 			this.tmpGrille[i][j].getStyleClass().add("entrepot");
 			tmpGrille[i][j].setOnMouseClicked(event -> changeClass("entrepot",i,j));
 			this.nbEntrepot++;

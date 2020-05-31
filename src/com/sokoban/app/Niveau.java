@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import com.sokoban.Configuration;
 import com.sokoban.Direction;
-import com.sokoban.Policier;
+import com.sokoban.Zombie;
 import com.sokoban.Position;
 import com.sokoban.Type;
 
@@ -454,7 +454,7 @@ public class Niveau extends Application {
 			directionString = "bas";
 		}
 		final String classDirectionZombie = directionString;
-		KeyFrame k = new KeyFrame(Duration.millis(0), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().setAll("policier_droite",classDirectionZombie));
+		KeyFrame k = new KeyFrame(Duration.millis(0), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().setAll("zombie_droite",classDirectionZombie));
 		KeyFrame key = new KeyFrame(Duration.millis(this.duree), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().setAll("attack_droite1",classDirectionZombie));
 		KeyFrame key1 = new KeyFrame(Duration.millis(this.duree*2), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().setAll("attack_droite2",classDirectionZombie));
 		KeyFrame key2 = new KeyFrame(Duration.millis(this.duree*3), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().setAll("attack_droite3",classDirectionZombie));
@@ -574,10 +574,10 @@ public class Niveau extends Application {
 	private void bougerZombies() {
 		this.timelineZombie.clear();
 		this.timelineZombie2.clear();
-		//Pour chaque policiers
-		for(Policier zombie : this.config.getPoliciers()) {
+		//Pour chaque zombies
+		for(Zombie zombie : this.config.getZombies()) {
 			Position pos = zombie.getPosition();
-			Direction direction = zombie.deplacementPolicier();
+			Direction direction = zombie.deplacementZombie();
 			Position newPos = zombie.getPosition().add(direction);
 			if(zombie.setPosition(newPos)) {
 				Timeline timelineZomb1 = new Timeline();
@@ -650,9 +650,9 @@ public class Niveau extends Application {
 		
 		Position tmpPos;
 		
-		//Variable position du policier
+		//Variable position du zombie
 		Position posP;
-		//Variable direction du policier
+		//Variable direction du zombie
 		Direction dirP;
 		
 		if (!reset) {
@@ -682,7 +682,7 @@ public class Niveau extends Application {
 						tmpGrille[i][j].getStyleClass().add(this.getRegard());
 					}
 					smoothingJoueur();
-				//S'il sagit d'un diamant, change sa class en diamant
+				//S'il sagit d'un seringue, change sa class en seringue
 				} else if (this.config.get(tmpPos).getType().equals(Type.DIAMANT)) {
 					//S'il passe sur une balle, rajoute la balle a son pistolet et reset pseudoTemps et bullet
 					if (tmpGrille[i][j].getStyleClass().contains("bullet")) {
@@ -696,7 +696,7 @@ public class Niveau extends Application {
 						}
 					}
 					tmpGrille[i][j].getStyleClass().clear();
-					tmpGrille[i][j].getStyleClass().add("diamant");
+					tmpGrille[i][j].getStyleClass().add("seringue");
 				//S'il sagit d'une case, change sa class en case
 				} else if (this.config.get(tmpPos).getType().equals(Type.CASE)) {
 					//Prends le prochain nombre random entre 1 et 20 compris.
@@ -721,14 +721,14 @@ public class Niveau extends Application {
 						tmpGrille[i][j].getStyleClass().clear();
 						tmpGrille[i][j].getStyleClass().add("case");
 					}
-				//S'il sagit d'un policier, change sa class en policier
+				//S'il sagit d'un zombie, change sa class en zombie
 				} else if (this.config.get(tmpPos).getType().equals(Type.POLICIER)) {
 					if (tmpGrille[i][j].getStyleClass().contains("bullet")) {
 						this.bullet = false;
 					}
 					if (reset) {
 						tmpGrille[i][j].getStyleClass().clear();
-						tmpGrille[i][j].getStyleClass().add(getRegardPolicier(tmpPos));
+						tmpGrille[i][j].getStyleClass().add(getRegardZombie(tmpPos));
 					}
 				}
 			}
@@ -739,14 +739,14 @@ public class Niveau extends Application {
 		int cp = 0;
 		//Pour chaque cible
 		for (Position cible : cibles) {
-			//Si il n'y a pas de diamant, ni de joueur dessus, change sa class en entrepot
+			//Si il n'y a pas de seringue, ni de joueur dessus, change sa class en entrepot
 			if (!this.config.get(cible).getType().equals(Type.DIAMANT) && !this.config.get(cible).getType().equals(Type.JOUEUR)) {
 				tmpGrille[cible.getX()][cible.getY()].getStyleClass().clear();
 				tmpGrille[cible.getX()][cible.getY()].getStyleClass().add("entrepot");
-			//S'il y a un diamant dessus, change sa class en diamantEntrepot et increment le compteur
+			//S'il y a un seringue dessus, change sa class en seringueEntrepot et increment le compteur
 			} else if (this.config.get(cible).getType().equals(Type.DIAMANT)) {
 				tmpGrille[cible.getX()][cible.getY()].getStyleClass().clear();
-				tmpGrille[cible.getX()][cible.getY()].getStyleClass().add("diamantEntrepot");
+				tmpGrille[cible.getX()][cible.getY()].getStyleClass().add("seringueEntrepot");
 				cp++;
 			} else if (this.config.get(cible).getType().equals(Type.JOUEUR)){
 				tmpGrille[cible.getX()][cible.getY()].getStyleClass().clear();
@@ -770,11 +770,11 @@ public class Niveau extends Application {
 			}
 		}
 		Position savePos;
-		//Pour chaque policier
-		for(Policier policier : this.config.getPoliciers()) {
-			//On recupere la position et la vision du policier
-			savePos = policier.getPosition();
-			dirP = policier.getRegard();
+		//Pour chaque zombie
+		for(Zombie zombie : this.config.getZombies()) {
+			//On recupere la position et la vision du zombie
+			savePos = zombie.getPosition();
+			dirP = zombie.getRegard();
 			//On ajoute la direction à la position actuel
 			posP = savePos.add(dirP);
 			//On verifie la mort du joueur
@@ -785,8 +785,8 @@ public class Niveau extends Application {
 				}
 			}
 		}
-		//Si le compteur est egal au nombre de diamant du niveau
-		if (cp == this.config.getDiamants().size()) {
+		//Si le compteur est egal au nombre de seringue du niveau
+		if (cp == this.config.getSeringues().size()) {
 			//Cree et affiche une alerteBox indiquant la victoire
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Sokoban - Niveau "+this.nivSelec);
@@ -801,7 +801,7 @@ public class Niveau extends Application {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Sokoban - Niveau "+this.nivSelec);
 			alert.setHeaderText("Defaite");
-			alert.setContentText("Dommage, vous avez perdu le niveau "+this.nivSelec+". Vous avez etes reperer par un policier.");
+			alert.setContentText("Dommage, vous avez perdu le niveau "+this.nivSelec+". Vous avez etes reperer par un zombie.");
 			alert.show();
 			//Lors de la fermeture de l'alerteBox
 			alert.setOnCloseRequest(e -> {
@@ -818,23 +818,23 @@ public class Niveau extends Application {
 		updateLabels();
 	}
 	
-	private String getRegardPolicier( Position pos) {
+	private String getRegardZombie( Position pos) {
         Direction dir = Direction.DROITE;
-        for(int k = 0 ; k < this.config.getPoliciers().size(); k++) {
-            if ( this.config.getPoliciers().get(k).getPosition().equals(pos)) {
-                dir = this.config.getPoliciers().get(k).getRegard();
+        for(int k = 0 ; k < this.config.getZombies().size(); k++) {
+            if ( this.config.getZombies().get(k).getPosition().equals(pos)) {
+                dir = this.config.getZombies().get(k).getRegard();
             }
         }
 	    
         String res = "";
 		if (dir.equals(Direction.DROITE)) {
-			res = "policier_droite";
+			res = "zombie_droite";
 		}else if(dir.equals(Direction.GAUCHE)) {
-			res = "policier_gauche";
+			res = "zombie_gauche";
 		}else if(dir.equals(Direction.HAUT)) {
-			res = "policier_haut";
+			res = "zombie_haut";
 		}else if(dir.equals(Direction.BAS)) {
-			res = "policier_bas";
+			res = "zombie_bas";
 		}
 		return res;
 

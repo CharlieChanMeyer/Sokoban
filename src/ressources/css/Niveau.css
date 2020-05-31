@@ -38,7 +38,7 @@
 }
 
 
-.diamant {
+.seringue {
 	-fx-background-image: url("../img/mur/case.png");
 	-fx-graphic: url("../img/diamant.png");
 }
@@ -476,22 +476,22 @@
 
 
 
-.policier_haut{
+.zombie_haut{
 	-fx-background-image: url("../img/mur/case.png");
 	-fx-graphic: url("../img/zombie/stand/haut/idle_0.png");	
 }
 
-.policier_bas{
+.zombie_bas{
 	-fx-background-image: url("../img/mur/case.png");
 	-fx-graphic: url("../img/zombie/stand/bas/idle_0.png");	
 }
 
-.policier_gauche{
+.zombie_gauche{
 	-fx-background-image: url("../img/mur/case.png");
 	-fx-graphic: url("../img/zombie/stand/gauche/idle_0.png");	
 }
 
-.policier_droite{
+.zombie_droite{
 	-fx-background-image: url("../img/mur/case.png");
 	-fx-graphic: url("../img/zombie/stand/droite/idle_0.png");	
 }
@@ -763,7 +763,7 @@
 	-fx-graphic: url("../img/case.png");
 }
 
-.diamantEntrepot {
+.seringueEntrepot {
 	-fx-background-image: url("../img/case.png");
 	-fx-graphic: url("../img/diamant_e.png");
 }

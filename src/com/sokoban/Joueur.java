@@ -68,16 +68,16 @@ public class Joueur extends Mobile {
             Configuration config = this.getConfig();
             //Recupere l'element a la position
             Element e = config.get(pos);
-            //Tant que l'element n'est ni un mur, ni un policier, ni un diamant
+            //Tant que l'element n'est ni un mur, ni un zombie, ni un seringue
             while (!e.getType().equals(Type.MUR) && (!e.getType().equals(Type.POLICIER)) && (!e.getType().equals(Type.DIAMANT))){
             	//Recupere la position suivante dans la direction du tir
             	pos = pos.add(dir);
             	//Recupere l'element a la position
             	e = config.get(pos);
             }
-            //Si le tir s'est arete sur un policier, le retire de la liste des policier
+            //Si le tir s'est arete sur un zombie, le retire de la liste des zombie
             if(e.getType().equals(Type.POLICIER)) {
-            	config.removePolicier(pos);
+            	config.removeZombie(pos);
             }
             //Retire une balle au joueur
             this.balles--;

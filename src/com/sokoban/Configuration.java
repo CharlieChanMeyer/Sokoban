@@ -10,8 +10,8 @@ import java.util.ArrayList;
  * 
  */
 public class Configuration {
-	private ArrayList<Diamant> diamants;
-	private ArrayList<Policier> policiers;
+	private ArrayList<Seringue> seringues;
+	private ArrayList<Zombie> zombies;
     private Joueur joueur;
     private Niveau niveau;
 
@@ -29,10 +29,10 @@ public class Configuration {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        this.diamants = new ArrayList<Diamant>();
-        this.policiers = new ArrayList<Policier>();
+        this.seringues = new ArrayList<Seringue>();
+        this.zombies = new ArrayList<Zombie>();
         
-        //lecture des diamants et policiers
+        //lecture des seringues et zombies
         try {
         	//Essaye de lire le fichier du niveau
 			lecteur = new BufferedReader(new FileReader("src/ressources/niveaux/"+numNiv+".txt"));
@@ -73,19 +73,19 @@ public class Configuration {
         		for (int j=0;j<ligne.length();j++) {
         			//Stock le caractere
         			char verif = ligne.charAt(j);
-        			//S'il sagit d'un 3, creer un diamant
+        			//S'il sagit d'un 3, creer un seringue
         			if (Character.getNumericValue(verif) == 3) {
-        				this.getDiamants().add(new Diamant(this, new Position(cmpLigne-3, j)));
-        			//Sinon, s'il sagit d'un 4, créer un policier
+        				this.getSeringues().add(new Seringue(this, new Position(cmpLigne-3, j)));
+        			//Sinon, s'il sagit d'un 4, créer un zombie
         			} else if (Character.getNumericValue(verif) == 4){
-        				this.getPoliciers().add(new Policier(this, new Position(cmpLigne-3, j)));
+        				this.getZombies().add(new Zombie(this, new Position(cmpLigne-3, j)));
         			}
         		}
         		//Incremente le nombre de ligne lu
         		cmpLigne++;
         	}
         }
-        //Set le nombre de balle du joueur au nombre exacte de policier
+        //Set le nombre de balle du joueur au nombre exacte de zombie
         this.joueur.setBalles(1);
         //Ferme le fichier
         lecteur.close();
@@ -96,8 +96,8 @@ public class Configuration {
      * @param config
      */
     public Configuration(Configuration config) {
-    	this.diamants = config.getDiamants();
-    	this.policiers = config.getPoliciers();
+    	this.seringues = config.getSeringues();
+    	this.zombies = config.getZombies();
     	this.joueur = config.getJoueur();
     	this.niveau = config.getNiveau();
     }
@@ -123,19 +123,19 @@ public class Configuration {
      * @return l'element contenu a la position donnee
      */
     public Element get(Position pos) {
-        //Pour chaque diamant, on verifie sa position
-        for (Diamant diamant : this.getDiamants()) {
-        	if (diamant.getPosition().equals(pos)) {
+        //Pour chaque seringue, on verifie sa position
+        for (Seringue seringue : this.getSeringues()) {
+        	if (seringue.getPosition().equals(pos)) {
         		//Si la position se trouve a notre emplacement de verification, on le retourne
-        		return diamant;
+        		return seringue;
         	}
         }
         
-        //Pour chaque diamant, on verifie sa position
-        for (Policier policier : this.getPoliciers()) {
-        	if (policier.getPosition().equals(pos)) {
+        //Pour chaque seringue, on verifie sa position
+        for (Zombie zombie : this.getZombies()) {
+        	if (zombie.getPosition().equals(pos)) {
         		//Si la position se trouve a notre emplacement de verification, on le retourne
-        		return policier;
+        		return zombie;
         	}
         }
         
@@ -150,16 +150,16 @@ public class Configuration {
 
     /**
      * @param pos Position de la case a verifier 
-     * @return Vrai si la position contient un diamant et est une cible
+     * @return Vrai si la position contient un seringue et est une cible
      */
     public boolean estVide(Position pos) {
-    	for (Diamant diamant : this.getDiamants()) {
-        	if (diamant.getPosition().equals(pos)) {
+    	for (Seringue seringue : this.getSeringues()) {
+        	if (seringue.getPosition().equals(pos)) {
         		//Si la position se trouve a notre emplacement de verification, on le retourne
         		return false;
         	}
         }
-        return (this.getNiveau().getCibles().contains(pos) /**&& this.getDiamants().contains(pos)**/);
+        return (this.getNiveau().getCibles().contains(pos) /**&& this.getSeringues().contains(pos)**/);
     }
 
     /**
@@ -185,8 +185,8 @@ public class Configuration {
     			Position newPos1 = newPos.add(dir);
 
     		    
-    			this.diamants.remove(this.diamants.get(diamants.indexOf(this.get(newPos))));
-    			this.diamants.add(new Diamant(this,newPos1));
+    			this.seringues.remove(this.seringues.get(seringues.indexOf(this.get(newPos))));
+    			this.seringues.add(new Seringue(this,newPos1));
     			
     			res = this.joueur.setPosition(newPos);
     	    	this.joueur.addHisto(dir);
@@ -199,20 +199,20 @@ public class Configuration {
      * @return
      */
     public boolean victoire() {
-    	//on parcours tous les diamants
-    	for(Diamant diamant : this.getDiamants()) {
+    	//on parcours tous les seringues
+    	for(Seringue seringue : this.getSeringues()) {
     		//si un diament n'est pas sur une cible
-    		if(!this.estCible(diamant.getPosition())){
+    		if(!this.estCible(seringue.getPosition())){
     			//on retourne false
     			return false;
     		}
     	}
-    	//si tous les diamant sont sur des cibles on retourne true
+    	//si tous les seringue sont sur des cibles on retourne true
         return true;
     }
 
-	public ArrayList<Diamant> getDiamants() {
-		return diamants;
+	public ArrayList<Seringue> getSeringues() {
+		return seringues;
 	}
 
 	public Joueur getJoueur() {
@@ -223,18 +223,18 @@ public class Configuration {
 		return niveau;
 	}
 
-	public ArrayList<Policier> getPoliciers() {
-		return policiers;
+	public ArrayList<Zombie> getZombies() {
+		return zombies;
 	}
 	
-	public void removePolicier(Position pos) {
-		Policier remove = null;
-		for (Policier policier : this.policiers) {
-			if (policier.getPosition().equals(pos)) {
-				remove = policier;
+	public void removeZombie(Position pos) {
+		Zombie remove = null;
+		for (Zombie zombie : this.zombies) {
+			if (zombie.getPosition().equals(pos)) {
+				remove = zombie;
 			}
 		}
-		this.policiers.remove(remove);
+		this.zombies.remove(remove);
 	}
 
 }

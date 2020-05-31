@@ -3,9 +3,9 @@ package com.sokoban;
 public enum Type {
 	MUR("Mur",1),
 	CASE("Case",0),
-	DIAMANT("Diamant",3),
+	DIAMANT("Seringue",3),
 	JOUEUR("Joueur",2),
-	POLICIER("Policier",4);
+	POLICIER("Zombie",4);
 	
 	private String sType;
 	private int iType;
