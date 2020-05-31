@@ -27,7 +27,8 @@ public class Niveau {
 		this.matrice = new Matrice(this.grille);
 	}
 
-    public Matrice getMatrice() {
+    @SuppressWarnings("exports")
+	public Matrice getMatrice() {
 		return matrice;
 	}
 

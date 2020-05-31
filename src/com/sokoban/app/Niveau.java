@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.sokoban.Configuration;
@@ -49,7 +48,6 @@ public class Niveau extends Application {
 	private ArrayList<Timeline>  timelineZombie2 = new ArrayList<Timeline>();
 	
 	private Timeline smoothJoueur = new Timeline();
-	private Timeline smoothPolicier = new Timeline();
 	private String classDirectionJoueur = "";
 	
 	private boolean bullet = false;
@@ -873,10 +871,10 @@ public class Niveau extends Application {
 		boolean bas = false;
 		boolean gauche = false;
 		boolean droite = false;
-		boolean hautDroite = false;
-		boolean hautGauche = false;
-		boolean basGauche = false;
-		boolean basDroite = false;
+//		boolean hautDroite = false;
+//		boolean hautGauche = false;
+//		boolean basGauche = false;
+//		boolean basDroite = false;
 		
 		Position tmpPos = new Position(pos);
 		
@@ -911,28 +909,28 @@ public class Niveau extends Application {
 		//diagonale hautgauche
 		tmpPos = tmpPos.add(Direction.HAUT).add(Direction.GAUCHE);
 		if ((inGrille(tmpPos) && (this.config.get(tmpPos).getType().equals(Type.MUR)))){
-			hautGauche = true;
+//			hautGauche = true;
 		}
 		tmpPos = tmpPos.sub(Direction.GAUCHE).sub(Direction.HAUT);
 		
 		//diagonale hautdroite
 		tmpPos = tmpPos.add(Direction.HAUT).add(Direction.DROITE);
 		if ((inGrille(tmpPos) && (this.config.get(tmpPos).getType().equals(Type.MUR)))){
-			hautDroite = true;
+//			hautDroite = true;
 		}
 		tmpPos = tmpPos.sub(Direction.DROITE).sub(Direction.HAUT);
 		
 		//diagonale basgauche
 		tmpPos = tmpPos.add(Direction.BAS).add(Direction.GAUCHE);
 		if ((inGrille(tmpPos) && (this.config.get(tmpPos).getType().equals(Type.MUR)))){
-			basGauche = true;
+//			basGauche = true;
 		}
 		tmpPos = tmpPos.sub(Direction.GAUCHE).sub(Direction.BAS);
 		
 		//diagonale basdroite
 		tmpPos = tmpPos.add(Direction.BAS).add(Direction.DROITE);
 		if ((inGrille(tmpPos) && (this.config.get(tmpPos).getType().equals(Type.MUR)))){
-			basDroite = true;
+//			basDroite = true;
 		}
 		tmpPos = tmpPos.sub(Direction.DROITE).sub(Direction.BAS);
 		
