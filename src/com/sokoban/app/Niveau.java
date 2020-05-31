@@ -502,7 +502,11 @@ public class Niveau extends Application {
 				}
 			}
 		} catch (Exception e) {
-			score.add(new Label("La communication avec le serveur est impossible actuellement"), 1, 1);
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Sokoban - Niveau "+this.nivSelec);
+			alert.setHeaderText("Probleme avec le serveur");
+			alert.setContentText("Il semblerait que l'application n'arrive pas à se connecter au serveur des scores. Merci de verifier votre connexion internet ou vous ne pourrez pas sauvegarder vos scores.");
+			alert.show();
 		}
 	}
 	
@@ -1011,7 +1015,7 @@ public class Niveau extends Application {
 				//Creation du label de fin de sauvegarde
 				Label saveLabel = new Label();
 				if (status == 1) {
-					saveLabel.setText("Votre score a bien ï¿½tï¿½ sauvegarde!");
+					saveLabel.setText("Votre score a bien ete sauvegarde!");
 				} else {
 					saveLabel.setText("Desole, il semblerait que l'application n'arrive pas a sauvegarder votre score. Merci de verifier votre connexion internet.");
 				}
