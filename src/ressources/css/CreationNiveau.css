@@ -9,6 +9,7 @@
 #gameTitle{
 	-fx-font: bold 28px Pacifico;
 	-fx-text-fill: #044E54;
+	-fx-padding: 0 0 40px 0;
 	-fx-font-weight: bold;
 }
 
@@ -17,16 +18,18 @@
 }
 
 .diamant {
+	-fx-background-image: url("../img/mur/case.png");
 	-fx-graphic: url("../img/diamant.png");
 }
 
 .policier {
 	-fx-background-image: url("../img/mur/case.png");
-	-fx-graphic: url("../img/zombie/stand/haut/idle_0.png");	
+	-fx-graphic: url("../img/zombie/stand/droite/idle_0.png");	
 }
 
 .joueur {
-	-fx-graphic: url("../img/joueur.png");
+	-fx-background-image: url("../img/mur/case.png");
+	-fx-graphic: url("../img/joueur/stand/droite/idle_handgun_0.png");
 }
 
 .case {

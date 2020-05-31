@@ -503,7 +503,7 @@ public class Niveau extends Application {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Sokoban - Niveau "+this.nivSelec);
 			alert.setHeaderText("Probleme avec le serveur");
-			alert.setContentText("Il semblerait que l'application n'arrive pas à se connecter au serveur des scores. Merci de verifier votre connexion internet ou vous ne pourrez pas sauvegarder vos scores.");
+			alert.setContentText("Il semblerait que l'application n'arrive pas ï¿½ se connecter au serveur des scores. Merci de verifier votre connexion internet ou vous ne pourrez pas sauvegarder vos scores.");
 			alert.show();
 		}
 	}
@@ -871,10 +871,6 @@ public class Niveau extends Application {
 		boolean bas = false;
 		boolean gauche = false;
 		boolean droite = false;
-//		boolean hautDroite = false;
-//		boolean hautGauche = false;
-//		boolean basGauche = false;
-//		boolean basDroite = false;
 		
 		Position tmpPos = new Position(pos);
 		
@@ -905,34 +901,6 @@ public class Niveau extends Application {
 			gauche = true;
 		}
 		tmpPos = tmpPos.sub(Direction.GAUCHE);
-		
-		//diagonale hautgauche
-		tmpPos = tmpPos.add(Direction.HAUT).add(Direction.GAUCHE);
-		if ((inGrille(tmpPos) && (this.config.get(tmpPos).getType().equals(Type.MUR)))){
-//			hautGauche = true;
-		}
-		tmpPos = tmpPos.sub(Direction.GAUCHE).sub(Direction.HAUT);
-		
-		//diagonale hautdroite
-		tmpPos = tmpPos.add(Direction.HAUT).add(Direction.DROITE);
-		if ((inGrille(tmpPos) && (this.config.get(tmpPos).getType().equals(Type.MUR)))){
-//			hautDroite = true;
-		}
-		tmpPos = tmpPos.sub(Direction.DROITE).sub(Direction.HAUT);
-		
-		//diagonale basgauche
-		tmpPos = tmpPos.add(Direction.BAS).add(Direction.GAUCHE);
-		if ((inGrille(tmpPos) && (this.config.get(tmpPos).getType().equals(Type.MUR)))){
-//			basGauche = true;
-		}
-		tmpPos = tmpPos.sub(Direction.GAUCHE).sub(Direction.BAS);
-		
-		//diagonale basdroite
-		tmpPos = tmpPos.add(Direction.BAS).add(Direction.DROITE);
-		if ((inGrille(tmpPos) && (this.config.get(tmpPos).getType().equals(Type.MUR)))){
-//			basDroite = true;
-		}
-		tmpPos = tmpPos.sub(Direction.DROITE).sub(Direction.BAS);
 		
 		if (haut && bas && droite && gauche) {
 			res = "inter_4";

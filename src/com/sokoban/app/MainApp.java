@@ -16,7 +16,7 @@ public class MainApp extends Application{
 		//Charge le fichier Main.xml dans un parent
 		Parent root = FXMLLoader.load(getClass().getResource("/ressources/fxml/Main.fxml"));  
 		//Charge une scene � partir du parent
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root, 1280, 720);
 		//Affiche la scene dans la fenetre
 		primaryStage.setScene(scene);
 		//Affiche la fenetre

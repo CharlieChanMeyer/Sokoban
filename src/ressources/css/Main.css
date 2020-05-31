@@ -6,13 +6,6 @@
 	-fx-padding: 15px;
 }
 
-#gameTitle{
-	-fx-font: bold 28px Pacifico;
-	-fx-text-fill: #044E54;
-	-fx-padding: 0 0 40px 0;
-	-fx-font-weight: bold;
-}
-
 #regleButton{
 	-fx-font: 16px "Comic Sans MS";
 	-fx-background-color: #E66A6A;
@@ -38,4 +31,8 @@
 	-fx-text-fill: #fff;
 	-fx-padding: 8px;
 	-fx-font-weight: bold;
+}
+
+#main{
+	-fx-background-image:url("../img/background_home.png");
 }
