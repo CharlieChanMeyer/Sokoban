@@ -283,7 +283,7 @@ public class Niveau extends Application {
 	}
 	
 	private void tirer(Direction dir) {		
-		if (config.getJoueur().getBalles() >= 0) {
+		if (config.getJoueur().getBalles() > 0) {
 			this.smoothJoueur.stop();
 			this.timeline.stop();
 
