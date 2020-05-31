@@ -1002,7 +1002,7 @@ public class Niveau extends Application {
 			try {
 				//Connection � la BDD des scores
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection con=DriverManager.getConnection("jdbc:mysql://e90653-mysql.services.easyname.eu/u143161db7","u143161db7","ProjetGL2");
+				Connection con=DriverManager.getConnection("jdbc:mysql://e90653-mysql.services.easyname.eu/u143161db7?autoReconnect=true&useSSL=false","u143161db7","ProjetGL2");
 				//Creation de la variable de requete
 				Statement stmt=con.createStatement();
 				//Cr�ation de la variable de resultat et recuperation du resultat de la requete
