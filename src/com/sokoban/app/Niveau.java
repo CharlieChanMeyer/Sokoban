@@ -495,6 +495,7 @@ public class Niveau extends Application {
 			}
 			//On ferme la connection à la BDD
 			con.close();
+			score.getChildren().clear();
 			for (i = 0; i<6;i++) {
 				for(int j = 0; j<2;j++) {
 					score.add(scoreLabels[i][j],j,i);
