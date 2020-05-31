@@ -284,14 +284,14 @@ public class Niveau extends Application {
 		this.smoothJoueur.playFromStart();
 	}
 	
-	private void tirer(Direction dir) {
-		this.smoothJoueur.stop();
-		this.timeline.stop();
-		config.getJoueur().tirer(dir);
-		config.getJoueur().setRegard(dir);
-		Position pos = this.config.getJoueur().getPosition();
-		
+	private void tirer(Direction dir) {		
 		if (config.getJoueur().getBalles() >= 0) {
+			this.smoothJoueur.stop();
+			this.timeline.stop();
+
+			config.getJoueur().tirer(dir);
+			config.getJoueur().setRegard(dir);
+			Position pos = this.config.getJoueur().getPosition();
 			
 			if (dir.equals(Direction.DROITE)) {
 				this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().clear();
@@ -434,74 +434,37 @@ public class Niveau extends Application {
 	}
 	
 	private void attack(Direction dir, Position pos) {
-		if (dir.equals(Direction.DROITE)) {
-			KeyFrame k = new KeyFrame(Duration.millis(0), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("policier_droite"));
-			KeyFrame key = new KeyFrame(Duration.millis(this.duree), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_droite1"));
-			KeyFrame key1 = new KeyFrame(Duration.millis(this.duree*2), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_droite2"));
-			KeyFrame key2 = new KeyFrame(Duration.millis(this.duree*3), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_droite3"));
-			KeyFrame key3 = new KeyFrame(Duration.millis(this.duree*4), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_droite4"));
-			KeyFrame key4 = new KeyFrame(Duration.millis(this.duree*5), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_droite5"));
-			KeyFrame key5 = new KeyFrame(Duration.millis(this.duree*6), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_droite6"));
-			KeyFrame key6 = new KeyFrame(Duration.millis(this.duree*7), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_droite7"));
-			KeyFrame key7 = new KeyFrame(Duration.millis(this.duree*8), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_droite8"));
-			KeyFrame key8 = new KeyFrame(Duration.millis(this.duree*9), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_droite9"));
-			this.timeline.getKeyFrames().addAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
-			this.timeline.setOnFinished(e -> {
-				this.timeline.getKeyFrames().removeAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
-			});
-		} else if (dir.equals(Direction.GAUCHE)) {
-			KeyFrame k = new KeyFrame(Duration.millis(0), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("policier_gauche"));
-			KeyFrame key = new KeyFrame(Duration.millis(this.duree), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_gauche1"));
-			KeyFrame key1 = new KeyFrame(Duration.millis(this.duree*2), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_gauche2"));
-			KeyFrame key2 = new KeyFrame(Duration.millis(this.duree*3), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_gauche3"));
-			KeyFrame key3 = new KeyFrame(Duration.millis(this.duree*4), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_gauche4"));
-			KeyFrame key4 = new KeyFrame(Duration.millis(this.duree*5), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_gauche5"));
-			KeyFrame key5 = new KeyFrame(Duration.millis(this.duree*6), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_gauche6"));
-			KeyFrame key6 = new KeyFrame(Duration.millis(this.duree*7), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_gauche7"));
-			KeyFrame key7 = new KeyFrame(Duration.millis(this.duree*8), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_gauche8"));
-			KeyFrame key8 = new KeyFrame(Duration.millis(this.duree*9), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_gauche9"));
-			this.timeline.getKeyFrames().addAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
-			this.timeline.setOnFinished(e -> {
-				this.timeline.getKeyFrames().removeAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
-			});
-		} else if (dir.equals(Direction.BAS)) {
-			KeyFrame k = new KeyFrame(Duration.millis(0), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("policier_bas"));
-			KeyFrame key = new KeyFrame(Duration.millis(this.duree), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_bas1"));
-			KeyFrame key1 = new KeyFrame(Duration.millis(this.duree*2), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_bas2"));
-			KeyFrame key2 = new KeyFrame(Duration.millis(this.duree*3), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_bas3"));
-			KeyFrame key3 = new KeyFrame(Duration.millis(this.duree*4), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_bas4"));
-			KeyFrame key4 = new KeyFrame(Duration.millis(this.duree*5), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_bas5"));
-			KeyFrame key5 = new KeyFrame(Duration.millis(this.duree*6), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_bas6"));
-			KeyFrame key6 = new KeyFrame(Duration.millis(this.duree*7), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_bas7"));
-			KeyFrame key7 = new KeyFrame(Duration.millis(this.duree*8), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_bas8"));
-			KeyFrame key8 = new KeyFrame(Duration.millis(this.duree*9), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_bas9"));
-			this.timeline.getKeyFrames().addAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
-			this.timeline.setOnFinished(e -> {
-				this.timeline.getKeyFrames().removeAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
-			});
-		} else if (dir.equals(Direction.HAUT)) {
-			KeyFrame k = new KeyFrame(Duration.millis(0), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("policier_haut"));
-			KeyFrame key = new KeyFrame(Duration.millis(this.duree), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_haut1"));
-			KeyFrame key1 = new KeyFrame(Duration.millis(this.duree*2), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_haut2"));
-			KeyFrame key2 = new KeyFrame(Duration.millis(this.duree*3), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_haut3"));
-			KeyFrame key3 = new KeyFrame(Duration.millis(this.duree*4), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_haut4"));
-			KeyFrame key4 = new KeyFrame(Duration.millis(this.duree*5), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_haut5"));
-			KeyFrame key5 = new KeyFrame(Duration.millis(this.duree*6), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_haut6"));
-			KeyFrame key6 = new KeyFrame(Duration.millis(this.duree*7), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_haut7"));
-			KeyFrame key7 = new KeyFrame(Duration.millis(this.duree*8), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_haut8"));
-			KeyFrame key8 = new KeyFrame(Duration.millis(this.duree*9), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().add("attack_haut9"));
-			this.timeline.getKeyFrames().addAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
-			this.timeline.setOnFinished(e -> {
-				this.timeline.getKeyFrames().removeAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
-			});
+		String directionString = "";
+		//on défini la variable qui contiendra la class css qui sera utilisé pour la direction
+		if(dir.equals(Direction.GAUCHE)) {
+			directionString = "gauche";
+		} else if(dir.equals(Direction.HAUT)) {
+			directionString = "haut";
+		} else if(dir.equals(Direction.BAS)) {
+			directionString = "bas";
 		}
+		final String classDirectionZombie = directionString;
+		KeyFrame k = new KeyFrame(Duration.millis(0), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().setAll("policier_droite",classDirectionZombie));
+		KeyFrame key = new KeyFrame(Duration.millis(this.duree), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().setAll("attack_droite1",classDirectionZombie));
+		KeyFrame key1 = new KeyFrame(Duration.millis(this.duree*2), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().setAll("attack_droite2",classDirectionZombie));
+		KeyFrame key2 = new KeyFrame(Duration.millis(this.duree*3), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().setAll("attack_droite3",classDirectionZombie));
+		KeyFrame key3 = new KeyFrame(Duration.millis(this.duree*4), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().setAll("attack_droite4",classDirectionZombie));
+		KeyFrame key4 = new KeyFrame(Duration.millis(this.duree*5), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().setAll("attack_droite5",classDirectionZombie));
+		KeyFrame key5 = new KeyFrame(Duration.millis(this.duree*6), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().setAll("attack_droite6",classDirectionZombie));
+		KeyFrame key6 = new KeyFrame(Duration.millis(this.duree*7), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().setAll("attack_droite7",classDirectionZombie));
+		KeyFrame key7 = new KeyFrame(Duration.millis(this.duree*8), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().setAll("attack_droite8",classDirectionZombie));
+		KeyFrame key8 = new KeyFrame(Duration.millis(this.duree*9), e -> this.tmpGrille[pos.getX()][pos.getY()].getStyleClass().setAll("attack_droite9",classDirectionZombie));
+		this.timeline.getKeyFrames().addAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
+		this.timeline.setOnFinished(e -> {
+			this.timeline.getKeyFrames().removeAll(k,key,key1,key2,key3,key4,key5,key6,key7,key8);
+		});
 		
 		this.timeline.play();
 	}
 	
 	private void updatescore() {
 		try {
-			//Connection � la BDD des scores
+			//Connection à la BDD des scores
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con=DriverManager.getConnection("jdbc:mysql://e90653-mysql.services.easyname.eu/u143161db7?autoReconnect=true&useSSL=false","u143161db7","ProjetGL2");
 			//Creation de la variable de requete
@@ -510,7 +473,7 @@ public class Niveau extends Application {
 			ResultSet rs=stmt.executeQuery("SELECT pseudo,nbDeplacement FROM `HighScore` WHERE niveau = "+this.nivSelec+" ORDER BY nbDeplacement ASC LIMIT 5"); 
 			//Creation de la variable de deplacement
 			int i = 1;
-			//Tant qu'il y a un r�sultat dans rs
+			//Tant qu'il y a un résultat dans rs
 			while (rs.next()) {
 				//on modifie les labels de la ligne
 				scoreLabels[i][0].setText(rs.getString(1));
@@ -518,7 +481,7 @@ public class Niveau extends Application {
 				//On incremente le numero de la ligne
 				i++;
 			}
-			//On ferme la connection � la BDD
+			//On ferme la connection à la BDD
 			con.close();
 			for (i = 0; i<6;i++) {
 				for(int j = 0; j<2;j++) {
@@ -710,12 +673,11 @@ public class Niveau extends Application {
 							this.pseudoTemps = 0;
 						}
 					}
-					tmpGrille[i][j].getStyleClass().clear();
-					tmpGrille[i][j].getStyleClass().add(this.getRegard());
-//					this.smoothJoueur.stop();
+					if(reset) {
+						tmpGrille[i][j].getStyleClass().clear();
+						tmpGrille[i][j].getStyleClass().add(this.getRegard());
+					}
 					smoothingJoueur();
-//					tmpGrille[i][j].setMaxWidth(15);
-//					tmpGrille[i][j].setMaxHeight(15);
 				//S'il sagit d'un diamant, change sa class en diamant
 				} else if (this.config.get(tmpPos).getType().equals(Type.DIAMANT)) {
 					//S'il passe sur une balle, rajoute la balle a son pistolet et reset pseudoTemps et bullet
@@ -803,21 +765,22 @@ public class Niveau extends Application {
 				this.affGrille.add(tmpGrille[i][j], j, i);
 			}
 		}
-		Position savePos =new Position(0,0);
+		Position savePos;
 		//Pour chaque policier
-		for(i=0;i<this.config.getPoliciers().size();i++) {
+		for(Policier policier : this.config.getPoliciers()) {
 			//On recupere la position et la vision du policier
-			posP = this.config.getPoliciers().get(i).getPosition();
-			dirP = this.config.getPoliciers().get(i).getRegard();
-			//On ajoute la direction � la position actuel
-			posP = posP.add(dirP);
+			savePos = policier.getPosition();
+			dirP = policier.getRegard();
+			//On ajoute la direction à la position actuel
+			posP = savePos.add(dirP);
 			//On verifie la mort du joueur
 			if (!mort) {
 				mort = this.config.getJoueur().getPosition().equals(posP);
+				if(mort) {
+					attack(dirP,savePos);
+				}
 			}
 		}
-		//Update les labels d'informations
-		updateLabels();
 		//Si le compteur est egal au nombre de diamant du niveau
 		if (cp == this.config.getDiamants().size()) {
 			//Cree et affiche une alerteBox indiquant la victoire
@@ -830,8 +793,6 @@ public class Niveau extends Application {
 			saveScore();
 		//Sinon, si on est mort
 		} else if (mort) {
-			//bug
-			attack(Direction.DROITE,savePos);
 			//Cree et affiche une alerteBox indiquant la defaite
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Sokoban - Niveau "+this.nivSelec);
@@ -849,6 +810,8 @@ public class Niveau extends Application {
 				updateGrille(true);
 			});
 		}
+		//Update les labels d'informations
+		updateLabels();
 	}
 	
 	private String getRegardPolicier( Position pos) {
