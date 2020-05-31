@@ -361,6 +361,18 @@ public class Niveau extends Application {
 			this.smoothJoueur.stop();
 			this.timelineJoueur.stop();
 			this.timelineJoueur2.stop();
+			
+			//S'il passe sur une balle, rajoute la balle a son pistolet et reset pseudoTemps et bullet
+			if (tmpGrille[newPos.getX()][newPos.getY()].getStyleClass().contains("bullet")) {
+				this.config.getJoueur().addBalle();
+				if (this.spawnPos.equals(newPos)) {
+					this.pseudoTempsSpawn = 0;
+					this.spawnBullet = false;
+				} else {
+					this.bullet = false;
+					this.pseudoTemps = 0;
+				}
+			}
 	
 			//on défini la variable qui contiendra la class css qui sera utilisé pour la direction
 			this.classDirectionJoueur = "";
@@ -662,17 +674,6 @@ public class Niveau extends Application {
 					tmpGrille[i][j].getStyleClass().add(getMur(tmpPos));
 				//S'il sagit d'un joueur, change sa class en joueur
 				} else if (this.config.get(tmpPos).getType().equals(Type.JOUEUR)) {
-					//S'il passe sur une balle, rajoute la balle a son pistolet et reset pseudoTemps et bullet
-					if (tmpGrille[i][j].getStyleClass().contains("bullet") && !reset) {
-						this.config.getJoueur().addBalle();
-						if (this.spawnPos.equals(tmpPos)) {
-							this.pseudoTempsSpawn = 0;
-							this.spawnBullet = false;
-						} else {
-							this.bullet = false;
-							this.pseudoTemps = 0;
-						}
-					}
 					if(reset) {
 						tmpGrille[i][j].getStyleClass().clear();
 						tmpGrille[i][j].getStyleClass().add(this.getRegard());
