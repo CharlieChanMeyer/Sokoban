@@ -341,9 +341,9 @@
 											"font": "Arial;13;0",
 											"left": -144,
 											"top": -48,
-											"width": 73.67724609375,
+											"width": 101.8671875,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from Application)"
 										},
 										{
 											"_type": "LabelView",
@@ -444,7 +444,7 @@
 											"top": -32,
 											"width": 73.67724609375,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from Menu)"
 										},
 										{
 											"_type": "LabelView",
@@ -643,7 +643,7 @@
 											"top": -80,
 											"width": 73.67724609375,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from Menu)"
 										},
 										{
 											"_type": "LabelView",
@@ -842,7 +842,7 @@
 											"top": -48,
 											"width": 73.67724609375,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from Menu)"
 										},
 										{
 											"_type": "LabelView",
@@ -1039,9 +1039,9 @@
 											"font": "Arial;13;0",
 											"left": -48,
 											"top": -16,
-											"width": 73.67724609375,
+											"width": 101.8671875,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from Application)"
 										},
 										{
 											"_type": "LabelView",
@@ -1142,7 +1142,7 @@
 											"top": -48,
 											"width": 73.67724609375,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from Jeu)"
 										},
 										{
 											"_type": "LabelView",
@@ -1435,7 +1435,7 @@
 											"top": 160,
 											"width": 73.67724609375,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from Jeu)"
 										},
 										{
 											"_type": "LabelView",
@@ -2535,7 +2535,7 @@
 											"top": -80,
 											"width": 73.67724609375,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from Jeu)"
 										},
 										{
 											"_type": "LabelView",
@@ -2829,7 +2829,7 @@
 											"top": -16,
 											"width": 73.67724609375,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from Jeu)"
 										},
 										{
 											"_type": "LabelView",
@@ -3123,7 +3123,7 @@
 											"top": -48,
 											"width": 73.67724609375,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from Jeu)"
 										},
 										{
 											"_type": "LabelView",
@@ -3417,7 +3417,7 @@
 											"top": -32,
 											"width": 73.67724609375,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from Jeu)"
 										},
 										{
 											"_type": "LabelView",
@@ -3704,9 +3704,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 73.67724609375,
+											"width": 101.8671875,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from Application)"
 										},
 										{
 											"_type": "LabelView",
@@ -3803,9 +3803,9 @@
 											"font": "Arial;13;0",
 											"left": -128,
 											"top": -32,
-											"width": 73.67724609375,
+											"width": 148.83984375,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from Createur de niveau)"
 										},
 										{
 											"_type": "LabelView",
@@ -4096,9 +4096,9 @@
 											"font": "Arial;13;0",
 											"left": 288,
 											"top": -96,
-											"width": 73.67724609375,
+											"width": 148.83984375,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from Createur de niveau)"
 										},
 										{
 											"_type": "LabelView",
@@ -4390,9 +4390,9 @@
 											"font": "Arial;13;0",
 											"left": 608,
 											"top": -224,
-											"width": 73.67724609375,
+											"width": 148.83984375,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from Createur de niveau)"
 										},
 										{
 											"_type": "LabelView",
@@ -4728,303 +4728,295 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Application"
-				},
-				{
-					"_type": "UMLUseCase",
-					"_id": "AAAAAAFyZhCxFLLAVMc=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "UseCase1"
-				},
-				{
-					"_type": "UMLUseCaseSubject",
-					"_id": "AAAAAAFyZhDjM7MH5a0=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Menu"
-				},
-				{
-					"_type": "UMLUseCase",
-					"_id": "AAAAAAFyZhEAs7MjPyk=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Afficher les règles"
-				},
-				{
-					"_type": "UMLUseCase",
-					"_id": "AAAAAAFyZhEiJLNTswc=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Selectionner et lancer un niveau",
+					"name": "Application",
 					"ownedElements": [
 						{
-							"_type": "UMLAssociation",
-							"_id": "AAAAAAFyZhIsTLafj2E=",
+							"_type": "UMLUseCaseSubject",
+							"_id": "AAAAAAFyZhDjM7MH5a0=",
 							"_parent": {
-								"$ref": "AAAAAAFyZhEiJLNTswc="
+								"$ref": "AAAAAAFyZhBdz7KhYYw="
 							},
-							"end1": {
-								"_type": "UMLAssociationEnd",
-								"_id": "AAAAAAFyZhIsTLag/WM=",
-								"_parent": {
-									"$ref": "AAAAAAFyZhIsTLafj2E="
+							"name": "Menu",
+							"ownedElements": [
+								{
+									"_type": "UMLUseCase",
+									"_id": "AAAAAAFyZhEiJLNTswc=",
+									"_parent": {
+										"$ref": "AAAAAAFyZhDjM7MH5a0="
+									},
+									"name": "Selectionner et lancer un niveau",
+									"ownedElements": [
+										{
+											"_type": "UMLAssociation",
+											"_id": "AAAAAAFyZhIsTLafj2E=",
+											"_parent": {
+												"$ref": "AAAAAAFyZhEiJLNTswc="
+											},
+											"end1": {
+												"_type": "UMLAssociationEnd",
+												"_id": "AAAAAAFyZhIsTLag/WM=",
+												"_parent": {
+													"$ref": "AAAAAAFyZhIsTLafj2E="
+												},
+												"reference": {
+													"$ref": "AAAAAAFyZhEiJLNTswc="
+												}
+											},
+											"end2": {
+												"_type": "UMLAssociationEnd",
+												"_id": "AAAAAAFyZhIsTLahO4M=",
+												"_parent": {
+													"$ref": "AAAAAAFyZhIsTLafj2E="
+												},
+												"reference": {
+													"$ref": "AAAAAAFyZhIPg7XO+DU="
+												}
+											}
+										}
+									]
 								},
-								"reference": {
-									"$ref": "AAAAAAFyZhEiJLNTswc="
-								}
-							},
-							"end2": {
-								"_type": "UMLAssociationEnd",
-								"_id": "AAAAAAFyZhIsTLahO4M=",
-								"_parent": {
-									"$ref": "AAAAAAFyZhIsTLafj2E="
+								{
+									"_type": "UMLUseCase",
+									"_id": "AAAAAAFyZhFtnbOGUAo=",
+									"_parent": {
+										"$ref": "AAAAAAFyZhDjM7MH5a0="
+									},
+									"name": "Ouvrir le createur de niveau"
 								},
-								"reference": {
-									"$ref": "AAAAAAFyZhIPg7XO+DU="
+								{
+									"_type": "UMLUseCase",
+									"_id": "AAAAAAFyZhEAs7MjPyk=",
+									"_parent": {
+										"$ref": "AAAAAAFyZhDjM7MH5a0="
+									},
+									"name": "Afficher les règles"
 								}
-							}
-						}
-					]
-				},
-				{
-					"_type": "UMLUseCase",
-					"_id": "AAAAAAFyZhFtnbOGUAo=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Ouvrir le createur de niveau"
-				},
-				{
-					"_type": "UMLUseCaseSubject",
-					"_id": "AAAAAAFyZhHtGrTQ+fU=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Jeu"
-				},
-				{
-					"_type": "UMLUseCase",
-					"_id": "AAAAAAFyZhIPg7XO+DU=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Se deplacer",
-					"ownedElements": [
-						{
-							"_type": "UMLDependency",
-							"_id": "AAAAAAFyZhJRubeTgBY=",
-							"_parent": {
-								"$ref": "AAAAAAFyZhIPg7XO+DU="
-							},
-							"source": {
-								"$ref": "AAAAAAFyZhIPg7XO+DU="
-							},
-							"target": {
-								"$ref": "AAAAAAFyZhEiJLNTswc="
-							}
+							]
 						},
 						{
-							"_type": "UMLInclude",
-							"_id": "AAAAAAFyZhPvwL5znLc=",
+							"_type": "UMLUseCaseSubject",
+							"_id": "AAAAAAFyZhHtGrTQ+fU=",
 							"_parent": {
-								"$ref": "AAAAAAFyZhIPg7XO+DU="
+								"$ref": "AAAAAAFyZhBdz7KhYYw="
 							},
-							"source": {
-								"$ref": "AAAAAAFyZhIPg7XO+DU="
-							},
-							"target": {
-								"$ref": "AAAAAAFyZhPvS74Hvio="
-							}
-						}
-					]
-				},
-				{
-					"_type": "UMLUseCase",
-					"_id": "AAAAAAFyZhKIprfjBTE=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Tirer",
-					"ownedElements": [
+							"name": "Jeu",
+							"ownedElements": [
+								{
+									"_type": "UMLUseCase",
+									"_id": "AAAAAAFyZhIPg7XO+DU=",
+									"_parent": {
+										"$ref": "AAAAAAFyZhHtGrTQ+fU="
+									},
+									"name": "Se deplacer",
+									"ownedElements": [
+										{
+											"_type": "UMLDependency",
+											"_id": "AAAAAAFyZhJRubeTgBY=",
+											"_parent": {
+												"$ref": "AAAAAAFyZhIPg7XO+DU="
+											},
+											"source": {
+												"$ref": "AAAAAAFyZhIPg7XO+DU="
+											},
+											"target": {
+												"$ref": "AAAAAAFyZhEiJLNTswc="
+											}
+										},
+										{
+											"_type": "UMLInclude",
+											"_id": "AAAAAAFyZhPvwL5znLc=",
+											"_parent": {
+												"$ref": "AAAAAAFyZhIPg7XO+DU="
+											},
+											"source": {
+												"$ref": "AAAAAAFyZhIPg7XO+DU="
+											},
+											"target": {
+												"$ref": "AAAAAAFyZhPvS74Hvio="
+											}
+										}
+									]
+								},
+								{
+									"_type": "UMLUseCase",
+									"_id": "AAAAAAFyZhKIprfjBTE=",
+									"_parent": {
+										"$ref": "AAAAAAFyZhHtGrTQ+fU="
+									},
+									"name": "Tirer",
+									"ownedElements": [
+										{
+											"_type": "UMLDependency",
+											"_id": "AAAAAAFyZhKnd7i0o+Y=",
+											"_parent": {
+												"$ref": "AAAAAAFyZhKIprfjBTE="
+											},
+											"source": {
+												"$ref": "AAAAAAFyZhKIprfjBTE="
+											},
+											"target": {
+												"$ref": "AAAAAAFyZhEiJLNTswc="
+											}
+										}
+									]
+								},
+								{
+									"_type": "UMLUseCase",
+									"_id": "AAAAAAFyZhPvS74Hvio=",
+									"_parent": {
+										"$ref": "AAAAAAFyZhHtGrTQ+fU="
+									},
+									"name": "Deplacer une seringue"
+								},
+								{
+									"_type": "UMLUseCase",
+									"_id": "AAAAAAFyZhQ3VMACdy0=",
+									"_parent": {
+										"$ref": "AAAAAAFyZhHtGrTQ+fU="
+									},
+									"name": "Gagner",
+									"ownedElements": [
+										{
+											"_type": "UMLExtend",
+											"_id": "AAAAAAFyZhQ3vcBucpg=",
+											"_parent": {
+												"$ref": "AAAAAAFyZhQ3VMACdy0="
+											},
+											"source": {
+												"$ref": "AAAAAAFyZhQ3VMACdy0="
+											},
+											"target": {
+												"$ref": "AAAAAAFyZhPvS74Hvio="
+											}
+										}
+									]
+								},
+								{
+									"_type": "UMLUseCase",
+									"_id": "AAAAAAFyZhSDPMMelwE=",
+									"_parent": {
+										"$ref": "AAAAAAFyZhHtGrTQ+fU="
+									},
+									"name": "Reset un niveau",
+									"ownedElements": [
+										{
+											"_type": "UMLDependency",
+											"_id": "AAAAAAFyZhSj98PvTls=",
+											"_parent": {
+												"$ref": "AAAAAAFyZhSDPMMelwE="
+											},
+											"source": {
+												"$ref": "AAAAAAFyZhSDPMMelwE="
+											},
+											"target": {
+												"$ref": "AAAAAAFyZhEiJLNTswc="
+											}
+										}
+									]
+								},
+								{
+									"_type": "UMLUseCase",
+									"_id": "AAAAAAFyZhRPbcFHFbc=",
+									"_parent": {
+										"$ref": "AAAAAAFyZhHtGrTQ+fU="
+									},
+									"name": "Mourir",
+									"ownedElements": [
+										{
+											"_type": "UMLExtend",
+											"_id": "AAAAAAFyZhRP1sGzRp8=",
+											"_parent": {
+												"$ref": "AAAAAAFyZhRPbcFHFbc="
+											},
+											"source": {
+												"$ref": "AAAAAAFyZhRPbcFHFbc="
+											},
+											"target": {
+												"$ref": "AAAAAAFyZhIPg7XO+DU="
+											}
+										}
+									]
+								}
+							]
+						},
 						{
-							"_type": "UMLDependency",
-							"_id": "AAAAAAFyZhKnd7i0o+Y=",
+							"_type": "UMLUseCaseSubject",
+							"_id": "AAAAAAFyZhTHZ8Q/JNw=",
 							"_parent": {
-								"$ref": "AAAAAAFyZhKIprfjBTE="
+								"$ref": "AAAAAAFyZhBdz7KhYYw="
 							},
-							"source": {
-								"$ref": "AAAAAAFyZhKIprfjBTE="
-							},
-							"target": {
-								"$ref": "AAAAAAFyZhEiJLNTswc="
-							}
-						}
-					]
-				},
-				{
-					"_type": "UMLUseCase",
-					"_id": "AAAAAAFyZhMQybrmmuE=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "UseCase2"
-				},
-				{
-					"_type": "UMLUseCase",
-					"_id": "AAAAAAFyZhPvS74Hvio=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Deplacer une seringue"
-				},
-				{
-					"_type": "UMLUseCase",
-					"_id": "AAAAAAFyZhQ3VMACdy0=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Gagner",
-					"ownedElements": [
-						{
-							"_type": "UMLExtend",
-							"_id": "AAAAAAFyZhQ3vcBucpg=",
-							"_parent": {
-								"$ref": "AAAAAAFyZhQ3VMACdy0="
-							},
-							"source": {
-								"$ref": "AAAAAAFyZhQ3VMACdy0="
-							},
-							"target": {
-								"$ref": "AAAAAAFyZhPvS74Hvio="
-							}
-						}
-					]
-				},
-				{
-					"_type": "UMLUseCase",
-					"_id": "AAAAAAFyZhRPbcFHFbc=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Mourir",
-					"ownedElements": [
-						{
-							"_type": "UMLExtend",
-							"_id": "AAAAAAFyZhRP1sGzRp8=",
-							"_parent": {
-								"$ref": "AAAAAAFyZhRPbcFHFbc="
-							},
-							"source": {
-								"$ref": "AAAAAAFyZhRPbcFHFbc="
-							},
-							"target": {
-								"$ref": "AAAAAAFyZhIPg7XO+DU="
-							}
-						}
-					]
-				},
-				{
-					"_type": "UMLUseCase",
-					"_id": "AAAAAAFyZhSDPMMelwE=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Reset un niveau",
-					"ownedElements": [
-						{
-							"_type": "UMLDependency",
-							"_id": "AAAAAAFyZhSj98PvTls=",
-							"_parent": {
-								"$ref": "AAAAAAFyZhSDPMMelwE="
-							},
-							"source": {
-								"$ref": "AAAAAAFyZhSDPMMelwE="
-							},
-							"target": {
-								"$ref": "AAAAAAFyZhEiJLNTswc="
-							}
-						}
-					]
-				},
-				{
-					"_type": "UMLUseCaseSubject",
-					"_id": "AAAAAAFyZhTHZ8Q/JNw=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Createur de niveau"
-				},
-				{
-					"_type": "UMLUseCase",
-					"_id": "AAAAAAFyZhTonsSz1E0=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Saisir la taille du niveau",
-					"ownedElements": [
-						{
-							"_type": "UMLDependency",
-							"_id": "AAAAAAFyZhUfkMWod28=",
-							"_parent": {
-								"$ref": "AAAAAAFyZhTonsSz1E0="
-							},
-							"source": {
-								"$ref": "AAAAAAFyZhTonsSz1E0="
-							},
-							"target": {
-								"$ref": "AAAAAAFyZhFtnbOGUAo="
-							}
-						}
-					]
-				},
-				{
-					"_type": "UMLUseCase",
-					"_id": "AAAAAAFyZhUsnMYcgVA=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Placer les éléments du niveau",
-					"ownedElements": [
-						{
-							"_type": "UMLExtend",
-							"_id": "AAAAAAFyZhUtCsaIpX8=",
-							"_parent": {
-								"$ref": "AAAAAAFyZhUsnMYcgVA="
-							},
-							"source": {
-								"$ref": "AAAAAAFyZhUsnMYcgVA="
-							},
-							"target": {
-								"$ref": "AAAAAAFyZhTonsSz1E0="
-							}
-						}
-					]
-				},
-				{
-					"_type": "UMLUseCase",
-					"_id": "AAAAAAFyZhVypsf0xnI=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Sauvegarder le niveau",
-					"ownedElements": [
-						{
-							"_type": "UMLExtend",
-							"_id": "AAAAAAFyZhVzLshgISo=",
-							"_parent": {
-								"$ref": "AAAAAAFyZhVypsf0xnI="
-							},
-							"source": {
-								"$ref": "AAAAAAFyZhVypsf0xnI="
-							},
-							"target": {
-								"$ref": "AAAAAAFyZhUsnMYcgVA="
-							}
+							"name": "Createur de niveau",
+							"ownedElements": [
+								{
+									"_type": "UMLUseCase",
+									"_id": "AAAAAAFyZhTonsSz1E0=",
+									"_parent": {
+										"$ref": "AAAAAAFyZhTHZ8Q/JNw="
+									},
+									"name": "Saisir la taille du niveau",
+									"ownedElements": [
+										{
+											"_type": "UMLDependency",
+											"_id": "AAAAAAFyZhUfkMWod28=",
+											"_parent": {
+												"$ref": "AAAAAAFyZhTonsSz1E0="
+											},
+											"source": {
+												"$ref": "AAAAAAFyZhTonsSz1E0="
+											},
+											"target": {
+												"$ref": "AAAAAAFyZhFtnbOGUAo="
+											}
+										}
+									]
+								},
+								{
+									"_type": "UMLUseCase",
+									"_id": "AAAAAAFyZhUsnMYcgVA=",
+									"_parent": {
+										"$ref": "AAAAAAFyZhTHZ8Q/JNw="
+									},
+									"name": "Placer les éléments du niveau",
+									"ownedElements": [
+										{
+											"_type": "UMLExtend",
+											"_id": "AAAAAAFyZhUtCsaIpX8=",
+											"_parent": {
+												"$ref": "AAAAAAFyZhUsnMYcgVA="
+											},
+											"source": {
+												"$ref": "AAAAAAFyZhUsnMYcgVA="
+											},
+											"target": {
+												"$ref": "AAAAAAFyZhTonsSz1E0="
+											}
+										}
+									]
+								},
+								{
+									"_type": "UMLUseCase",
+									"_id": "AAAAAAFyZhVypsf0xnI=",
+									"_parent": {
+										"$ref": "AAAAAAFyZhTHZ8Q/JNw="
+									},
+									"name": "Sauvegarder le niveau",
+									"ownedElements": [
+										{
+											"_type": "UMLExtend",
+											"_id": "AAAAAAFyZhVzLshgISo=",
+											"_parent": {
+												"$ref": "AAAAAAFyZhVypsf0xnI="
+											},
+											"source": {
+												"$ref": "AAAAAAFyZhVypsf0xnI="
+											},
+											"target": {
+												"$ref": "AAAAAAFyZhUsnMYcgVA="
+											}
+										}
+									]
+								}
+							]
 						}
 					]
 				}
