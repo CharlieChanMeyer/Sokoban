@@ -479,7 +479,7 @@ public class Niveau extends Application {
 			Connection con=DriverManager.getConnection("jdbc:mysql://e90653-mysql.services.easyname.eu/u143161db7?autoReconnect=true&useSSL=false","u143161db7","ProjetGL2");
 			//Creation de la variable de requete
 			Statement stmt=con.createStatement();
-			//Cr�ation de la variable de resultat et recuperation du resultat de la requete
+			//Creation de la variable de resultat et recuperation du resultat de la requete
 			ResultSet rs=stmt.executeQuery("SELECT pseudo,nbDeplacement FROM `HighScore` WHERE niveau = "+this.nivSelec+" ORDER BY nbDeplacement ASC LIMIT 5"); 
 			//Creation de la variable de deplacement
 			int i = 1;
@@ -503,7 +503,7 @@ public class Niveau extends Application {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Sokoban - Niveau "+this.nivSelec);
 			alert.setHeaderText("Probleme avec le serveur");
-			alert.setContentText("Il semblerait que l'application n'arrive pas � se connecter au serveur des scores. Merci de verifier votre connexion internet ou vous ne pourrez pas sauvegarder vos scores.");
+			alert.setContentText("Il semblerait que l'application n'arrive pas a se connecter au serveur des scores. Merci de verifier votre connexion internet ou vous ne pourrez pas sauvegarder vos scores.");
 			alert.show();
 		}
 	}
@@ -701,7 +701,7 @@ public class Niveau extends Application {
 				} else if (this.config.get(tmpPos).getType().equals(Type.CASE)) {
 					//Prends le prochain nombre random entre 1 et 20 compris.
 					randomNum = ThreadLocalRandom.current().nextInt(1,21);
-					//Si une balle n'est pas d�j� sur la grille, que le nombre random est egal a 1, qut le pseudoTemps est egal � 5 et que la pos n'est pas une cible
+					//Si une balle n'est pas deja sur la grille, que le nombre random est egal a 1, qut le pseudoTemps est egal a 5 et que la pos n'est pas une cible
 					//Ou si la case contenait deja une balle et que ce n'est pas un reset
 					if ((!this.bullet && this.pseudoTemps == 5 && randomNum==1 && !this.config.getNiveau().getCibles().contains(tmpPos)) || (this.bullet && tmpGrille[i][j].getStyleClass().contains("bullet") && !reset)) {
 						//Met this.bullet sur true
@@ -753,7 +753,7 @@ public class Niveau extends Application {
 				tmpGrille[cible.getX()][cible.getY()].getStyleClass().add(getRegard()+"Entrepot");
 			}
 		}
-		//Augmente le pseudo temps de 1 s'il est inferieur � 5 et qu'il n'y a pas deja une balle sur la grille
+		//Augmente le pseudo temps de 1 s'il est inferieur a 5 et qu'il n'y a pas deja une balle sur la grille
 		if (!this.bullet && this.pseudoTemps<5) {
 			this.pseudoTemps++;
 		}
@@ -971,12 +971,12 @@ public class Niveau extends Application {
 		});
 		saveBt.setOnAction(e -> {
 			try {
-				//Connection � la BDD des scores
+				//Connection a la BDD des scores
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con=DriverManager.getConnection("jdbc:mysql://e90653-mysql.services.easyname.eu/u143161db7?autoReconnect=true&useSSL=false","u143161db7","ProjetGL2");
 				//Creation de la variable de requete
 				Statement stmt=con.createStatement();
-				//Cr�ation de la variable de resultat et recuperation du resultat de la requete
+				//Creation de la variable de resultat et recuperation du resultat de la requete
 				int status =stmt.executeUpdate("INSERT INTO HighScore VALUES('"+pseudoTF.getText()+"',"+this.nivSelec+","+this.config.getJoueur().getHisto().size()+")"); 
 				//Creation du label de fin de sauvegarde
 				Label saveLabel = new Label();
@@ -989,7 +989,7 @@ public class Niveau extends Application {
 				//Actualisation des elements 
 				saveVBox.getChildren().clear();
 				saveVBox.getChildren().addAll(saveLabel,notSaveBt);
-				//On ferme la connection � la BDD
+				//On ferme la connection a la BDD
 				con.close();
 		} catch (Exception error) {
 			System.out.println(error);
